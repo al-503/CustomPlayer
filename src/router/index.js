@@ -1,11 +1,17 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import PlayerView from '@/views/PlayerView.vue'
+import ErrorMessageView from '@/views/ErrorMessageView.vue'
 
 const routes = [
   {
     path: '/',
     name: 'PlayerView',
     component: PlayerView
+  }, 
+  {
+    path: '/error',
+    name: 'ErrorMessage',
+    component: ErrorMessageView
   }
   // {
   //   // path: '/about',
