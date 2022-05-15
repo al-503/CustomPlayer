@@ -7,10 +7,12 @@
 <script>
 // @ is an alias to /src
 import CustomPlayer from '@/components/CustomPlayer.vue'
+import CurrentHour from '@/components/CurrentHour.vue'
 
 export default {
   components: {
-    CustomPlayer
+    CustomPlayer,
+    CurrentHour
   }
 }
 </script>
