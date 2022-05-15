@@ -324,7 +324,7 @@
     ]
   },
 
-  { "name": "RMC sport",
+  { "name": "RMC story",
     "number": 23,
     "favoris": false,
     "logo": "",
@@ -341,7 +341,7 @@
     ]
   },
 
-  {"name": "RMC decouvrte",
+  { "name": "RMC decouvrte",
     "number": 24,
     "favoris": false,
     "logo": "",
@@ -461,7 +461,7 @@
     ]
   },
 
-  {"name": "Netflix",
+  {"name": "13 ème rue",
     "number": 82,
     "favoris": false,
     "logo": "",
@@ -479,7 +479,7 @@
     ]
   },
 
-  {"name": "Disney+",
+  {"name": "Action",
     "number": 100,
     "favoris": false,
     "logo": "",
@@ -497,7 +497,7 @@
     ]
   },
 
-  {"name": "La 216",
+  {"name": "Polar +",
     "number": 216,
     "favoris": false,
     "logo": "",
