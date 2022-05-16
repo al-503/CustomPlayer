@@ -7,7 +7,6 @@
 <script>
 // @ is an alias to /src
 import CustomPlayer from '@/components/CustomPlayer.vue'
-
 export default {
   components: {
     CustomPlayer
