@@ -1,22 +1,118 @@
 <template>
-  <div class="custom-player">
-    <video controls loop autoplay="true" muted>
-      <source
-        src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-        type="video/mp4"
-      />
+  <div class="custom - player">
+    <video ref="videoBalise" loop muted>
+      <source :src="videoSrc" type="video/mp4" />
     </video>
+    <div v-if="!isPlaying && replay" class="play-pause-contener">
+      <Pause :iconName="iconName" />
+    </div>
+    <transition name="fade">
+      <div v-if="isPlaying && showing" class="play-pause-contener">
+        <Play :iconName="iconName" />
+      </div>
+    </transition>
   </div>
 </template>
 
 <script>
-const videoBalise = document.getElementsByTagName('video')
-console.log(videoBalise)
+import Pause from "./Pause.vue";
+import Play from "./Play.vue";
 
-export default {}
+export default {
+  components: {
+    Pause,
+    Play,
+  },
+  props: {
+    videoURL: {
+      type: String,
+      required: true,
+    },
+    pressedKeyCode: {
+      type: Number,
+      default: null,
+    },
+  },
+
+  /* **data**
+    isPlaying: false, => passe sur true si la vidéo est jouée
+    isPlayAgain: false, => passe sur true si la video est jouée après avoir   été arrêtée
+    videoSrc: null, => contient l'url de la vidéo
+    iconName: null, => contient le nom de la font-awsome ("play" ou "pause")
+    videoBalise: null, => contient la balise <video>
+    replay: false, => passe sur true si la video est joué après avoir été arrêtée
+    showing: true, 
+    timeout: null, => contient le settime out
+   
+   */
+
+  data: () => ({
+    isPlaying: false,
+    isPlayAgain: false,
+    videoSrc: null,
+    iconName: null,
+    videoBalise: null,
+    replay: false,
+    showing: true,
+    timeout: null,
+  }),
+  mounted() {
+    this.videoSrc = this.videoURL;
+    this.$refs.videoBalise.play();
+    // On écoute ici l'ensemble des touches du clavier et on appelle la fonction qui KeyListenner qui regarde quelle touche a été appuyée
+    document.addEventListener("keyup", (e) => this.keyListenner(e));
+  },
+
+  methods: {
+    // la méthode show fait un Call back de la méthode hide au bout de 0.5 secondes
+    show() {
+      this.timeout = setTimeout(this.hide, 500);
+    },
+
+    // La méthode hide fait disparaître le composant play (elle passe this.showing sur false ce qui empeche de passer le v-if)
+    hide() {
+      this.showing = false;
+      clearTimeout(this.timeout);
+    },
+    // La méthode toggleVideoPlay regarde si la video est jouée. Si elle est joué, elle l'a met en pause et inversement
+    toggleVideoPlay() {
+      if (this.$refs?.videoBalise !== null && this.$refs?.videoBalise.paused) {
+        this.isPlaying = true;
+        this.isPlayAgain = true;
+        this.$refs.videoBalise.play();
+        this.show();
+      } else {
+        this.isPlaying = false;
+        this.isPlayAgain = false;
+        this.$refs.videoBalise.pause();
+        this.showing = true;
+      }
+      this.replay = true;
+      this.dynamicIconSetting(this.isPlayAgain);
+    },
+
+    // Cette méthode envoie dynamiquement aux enfant play/pause le nom de l'icone fontawsome à afficher
+    dynamicIconSetting(isPlayAgain) {
+      if (isPlayAgain) {
+        this.iconName = "pause";
+      } else {
+        this.iconName = "play";
+      }
+
+      console.log("icon= " + this.iconName);
+    },
+
+    // Cette méthode regarder si la touche "entrée" est appuyé et déclanche le play/pause de la video
+    keyListenner(e) {
+      if (e.key == "Enter") {
+        this.toggleVideoPlay();
+      }
+    },
+  },
+};
 </script>
 
-<style lang="scss">
+<style lang="scss" scope>
 .custom-player {
   margin: 0 auto;
   max-width: 100vw;
@@ -31,5 +127,21 @@ video {
   &::-webkit-scrollbar {
     display: none;
   }
+  position: absolute;
+  z-index: -1;
+}
+
+.testt {
+  width: 100px;
+  height: 100px;
+  background-color: white;
+}
+
+.fade-leave-active {
+  transition: opacity 1s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

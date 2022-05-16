@@ -3,11 +3,10 @@
 </template>
 
 <script>
-import Source from '../sources/sources.json'
-console.log(Source)
+import Source from "../sources/sources.json";
+console.log(Source);
 
-export default {}
-
+export default {};
 </script>
 
 <style lang="scss">
