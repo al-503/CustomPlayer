@@ -13,6 +13,10 @@ export default {
       minutes: 0,
     }
   },
+  
+  created() {
+    this.setTime()
+  },
 
   mounted() {
     setInterval(() => this.setTime(), 1000)
@@ -38,11 +42,9 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100&display=swap');
 
 .current-hour{
-  width: 300px;
-  height: 98px;
   position: absolute;
-  top: 49px;
-  left: 1594px;
+  left: 1560px;
+  top: 48px;
 }
 
 .hour{
@@ -50,6 +52,7 @@ export default {
   font-size: 85px;
   font-family: 'Inter', sans-serif;
   font-weight: 100;
-  //color: #FFFFFF;
+  line-height: 103px;
+  color: #FFFFFF;
 }
 </style>
