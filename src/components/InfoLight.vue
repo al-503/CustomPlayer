@@ -1,14 +1,14 @@
 <template>
-  <div class="info-ligth">
-    <!-- <InfoLigthHeader /> -->
-    <div class="info-ligth-header">
+  <div class="info-light">
+    <!-- <InfoLightHeader /> -->
+    <div class="info-light-header">
       <!-- ici logo de chaine -->
       <CurrentHour />
     </div>
 
       <CustomPlayer />
 
-    <div class="info-ligth-bottom">
+    <div class="info-light-bottom">
       <!-- ici info en cours -->
       <!-- ici info suivante -->
     </div>
@@ -29,7 +29,7 @@ export default {
 
 <style lang="scss">
 
-.info-ligth-header {
+.info-light-header {
   position: absolute;
   width: 1920px;
   height: 233px;
