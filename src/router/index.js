@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import PlayerView from '@/views/PlayerView.vue'
 import ErrorMessageView from '@/views/ErrorMessageView.vue'
-import InfoLigthView from '@/views/InfoLigthView.vue'
+import InfoLigth from '@/components/InfoLigth.vue'
 
 const routes = [
   {
@@ -17,7 +17,7 @@ const routes = [
   {
     path: '/devinfomin',
     name: 'InfoLigth',
-    component: InfoLigthView
+    component: InfoLigth
   }
   // {
   //   // path: '/about',
