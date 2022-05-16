@@ -13,6 +13,10 @@ export default {
       minutes: 0,
     }
   },
+  
+  created() {
+    this.setTime()
+  },
 
   mounted() {
     setInterval(() => this.setTime(), 1000)
