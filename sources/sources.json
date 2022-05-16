@@ -3,7 +3,7 @@
   { "name": "TF1",
     "number": 1,
     "favoris": false,
-    "logo": "",
+    "logo": "./ChannelsLogo/tf1.png",
     "security": false,
     "programme": [
       { "description" : "Big Buck Bunny tells the story of a giant rabbit with a heart bigger than himself. When one sunny day three rodents rudely harass him, something snaps... and the rabbit ain't no bunny anymore! In the typical cartoon tradition he prepares the nasty rodents a comical revenge.\n\nLicensed under the Creative Commons Attribution license\nhttp://www.bigbuckbunny.org",
@@ -20,7 +20,7 @@
   { "name": "France2",
     "number": 2,
     "favoris": false,
-    "logo": "",
+    "logo": "./ChannelsLogo/france2.png",
     "security": false,
     "programme" :[
       { "description" : "The first Blender Open Movie from 2006",
@@ -37,7 +37,7 @@
   { "name" : "France3",
     "number": 3,
     "favoris": false,
-    "logo": "",
+    "logo": "./ChannelsLogo/france3.png",
     "security": false,
     "programme" :[
       { "description" : "Sintel is an independently produced short film, initiated by the Blender Foundation as a means to further improve and validate the free/open source 3D creation suite Blender. With initial funding provided by 1000s of donations via the internet community, it has again proven to be a viable development model for both open 3D technology as for independent animation film.\nThis 15 minute film has been realized in the studio of the Amsterdam Blender Institute, by an international team of artists and developers. In addition to that, several crucial technical and creative targets have been realized online, by developers and artists and teams all over the world.\nwww.sintel.org",
@@ -54,7 +54,7 @@
   { "name" : "Canal+",
     "number": 4,
     "favoris": false,
-    "logo": "",
+    "logo": "./ChannelsLogo/canal+.png",
     "security": true,
     "login":"123456",
     "programme" : [
@@ -72,7 +72,7 @@
   { "name": "France5",
     "number": 5,
     "favoris": false,
-    "logo": "",
+    "logo": "./ChannelsLogo/france5.png",
     "security": false,
     "programme" : [
       { "description" : "Tears of Steel was realized with crowd-funding by users of the open source 3D creation tool Blender. Target was to improve and test a complete open and free pipeline for visual effects in film - and to make a compelling sci-fi film in Amsterdam, the Netherlands.  The film itself, and all raw material used for making it, have been released under the Creatieve Commons 3.0 Attribution license. Visit the tearsofsteel.org website to find out more about this, or to purchase the 4-DVD box with a lot of extras.  (CC) Blender Foundation - http://www.tearsofsteel.org",
@@ -89,7 +89,7 @@
   { "name": "M6",
     "number": 6,
     "favoris": false,
-    "logo": "",
+    "logo": "./ChannelsLogo/m6.png",
     "security": false,
     "programe": [
       { "description" : "The Smoking Tire heads out to Adams Motorsports Park in Riverside, CA to test the most requested car of 2010, the Volkswagen GTI. Will it beat the Mazdaspeed3's standard-setting lap time? Watch and see...",
@@ -106,7 +106,7 @@
   {"name": "Arte",
     "number": 7,
     "favoris": false,
-    "logo": "",
+    "logo": "./ChannelsLogo/arte.png",
     "security": false,
     "programme": [
       { "description" : "The Smoking Tire meets up with Chris and Jorge from CarsForAGrand.com to see just how far $1,000 can go when looking for a car.The Smoking Tire meets up with Chris and Jorge from CarsForAGrand.com to see just how far $1,000 can go when looking for a car.",
@@ -123,7 +123,7 @@
   { "name": "W9",
     "number": 9,
     "favoris": false,
-    "logo": "",
+    "logo": "./ChannelsLogo/w9.png",
     "security": false,
     "programme": [
       { "description" : "Big Buck Bunny tells the story of a giant rabbit with a heart bigger than himself. When one sunny day three rodents rudely harass him, something snaps... and the rabbit ain't no bunny anymore! In the typical cartoon tradition he prepares the nasty rodents a comical revenge.\n\nLicensed under the Creative Commons Attribution license\nhttp://www.bigbuckbunny.org",
@@ -140,7 +140,7 @@
   { "name": "TMC",
     "number": 10,
     "favoris": false,
-    "logo": "",
+    "logo": "./ChannelsLogo/tmc.png",
     "security": false,
     "programme" :[
       { "description" : "The first Blender Open Movie from 2006",
@@ -157,7 +157,7 @@
   { "name" : "TFX",
     "number": 11,
     "favoris": false,
-    "logo": "",
+    "logo": "./ChannelsLogo/tfx.png",
     "security": false,
     "programme" :[
       { "description" : "Sintel is an independently produced short film, initiated by the Blender Foundation as a means to further improve and validate the free/open source 3D creation suite Blender. With initial funding provided by 1000s of donations via the internet community, it has again proven to be a viable development model for both open 3D technology as for independent animation film.\nThis 15 minute film has been realized in the studio of the Amsterdam Blender Institute, by an international team of artists and developers. In addition to that, several crucial technical and creative targets have been realized online, by developers and artists and teams all over the world.\nwww.sintel.org",
@@ -174,7 +174,7 @@
   { "name" : "NRJ12",
     "number": 12,
     "favoris": false,
-    "logo": "",
+    "logo": "./ChannelsLogo/nrj12.png",
     "security": false,
     "programme" : [
       {"description" : "Smoking Tire takes the all-new Subaru Outback to the highest point we can find in hopes our customer-appreciation Balloon Launch will get some free T-shirts into the hands of our viewers.",
@@ -191,7 +191,7 @@
   { "name": "France4",
     "number": 14,
     "favoris": false,
-    "logo": "",
+    "logo": "./ChannelsLogo/france4.png",
     "security": false,
     "programme" : [
       { "description" : "Tears of Steel was realized with crowd-funding by users of the open source 3D creation tool Blender. Target was to improve and test a complete open and free pipeline for visual effects in film - and to make a compelling sci-fi film in Amsterdam, the Netherlands.  The film itself, and all raw material used for making it, have been released under the Creatieve Commons 3.0 Attribution license. Visit the tearsofsteel.org website to find out more about this, or to purchase the 4-DVD box with a lot of extras.  (CC) Blender Foundation - http://www.tearsofsteel.org",
@@ -208,7 +208,7 @@
   { "name": "BFM TV",
     "number": 15,
     "favoris": false,
-    "logo": "",
+    "logo": "./ChannelsLogo/bfm.png",
     "security": false,
     "programe": [
       { "description" : "The Smoking Tire heads out to Adams Motorsports Park in Riverside, CA to test the most requested car of 2010, the Volkswagen GTI. Will it beat the Mazdaspeed3's standard-setting lap time? Watch and see...",
@@ -225,7 +225,7 @@
   {"name": "Cnews",
     "number": 16,
     "favoris": false,
-    "logo": "",
+    "logo": "./ChannelsLogo/cnews.png",
     "security": false,
     "programme": [
       { "description" : "The Smoking Tire meets up with Chris and Jorge from CarsForAGrand.com to see just how far $1,000 can go when looking for a car.The Smoking Tire meets up with Chris and Jorge from CarsForAGrand.com to see just how far $1,000 can go when looking for a car.",
@@ -242,7 +242,7 @@
   { "name": "CSTAR",
     "number": 17,
     "favoris": false,
-    "logo": "",
+    "logo": "./ChannelsLogo/cstar.png",
     "security": false,
     "programme": [
       { "description" : "Big Buck Bunny tells the story of a giant rabbit with a heart bigger than himself. When one sunny day three rodents rudely harass him, something snaps... and the rabbit ain't no bunny anymore! In the typical cartoon tradition he prepares the nasty rodents a comical revenge.\n\nLicensed under the Creative Commons Attribution license\nhttp://www.bigbuckbunny.org",
@@ -259,7 +259,7 @@
   { "name": "Gulli",
     "number": 18,
     "favoris": false,
-    "logo": "",
+    "logo": "./ChannelsLogo/gulli.png",
     "security": false,
     "programme" :[
       { "description" : "The first Blender Open Movie from 2006",
@@ -276,7 +276,7 @@
   { "name" : "TF1 séries films",
     "number": 20,
     "favoris": false,
-    "logo": "",
+    "logo": "./ChannelsLogo/tf1seriesfilms.png",
     "security": false,
     "programme" :[
       { "description" : "Sintel is an independently produced short film, initiated by the Blender Foundation as a means to further improve and validate the free/open source 3D creation suite Blender. With initial funding provided by 1000s of donations via the internet community, it has again proven to be a viable development model for both open 3D technology as for independent animation film.\nThis 15 minute film has been realized in the studio of the Amsterdam Blender Institute, by an international team of artists and developers. In addition to that, several crucial technical and creative targets have been realized online, by developers and artists and teams all over the world.\nwww.sintel.org",
@@ -293,7 +293,7 @@
   { "name" : "L'Equipe",
     "number": 21,
     "favoris": false,
-    "logo": "",
+    "logo": "./ChannelsLogo/lequipe.png",
     "security": false,
     "programme" : [
       {"description" : "Smoking Tire takes the all-new Subaru Outback to the highest point we can find in hopes our customer-appreciation Balloon Launch will get some free T-shirts into the hands of our viewers.",
@@ -310,7 +310,7 @@
   { "name": "6ter",
     "number": 22,
     "favoris": false,
-    "logo": "",
+    "logo": "./ChannelsLogo/6ter.png",
     "security": false,
     "programme" : [
       { "description" : "Tears of Steel was realized with crowd-funding by users of the open source 3D creation tool Blender. Target was to improve and test a complete open and free pipeline for visual effects in film - and to make a compelling sci-fi film in Amsterdam, the Netherlands.  The film itself, and all raw material used for making it, have been released under the Creatieve Commons 3.0 Attribution license. Visit the tearsofsteel.org website to find out more about this, or to purchase the 4-DVD box with a lot of extras.  (CC) Blender Foundation - http://www.tearsofsteel.org",
@@ -327,7 +327,7 @@
   { "name": "RMC story",
     "number": 23,
     "favoris": false,
-    "logo": "",
+    "logo": "./ChannelsLogo/rmcstory.png",
     "security": false,
     "programe": [
       { "description" : "The Smoking Tire heads out to Adams Motorsports Park in Riverside, CA to test the most requested car of 2010, the Volkswagen GTI. Will it beat the Mazdaspeed3's standard-setting lap time? Watch and see...",
@@ -344,7 +344,7 @@
   { "name": "RMC découverte",
     "number": 24,
     "favoris": false,
-    "logo": "",
+    "logo": "./ChannelsLogo/rmcdecouverte.png",
     "security": false,
     "programme": [
       { "description" : "The Smoking Tire meets up with Chris and Jorge from CarsForAGrand.com to see just how far $1,000 can go when looking for a car.The Smoking Tire meets up with Chris and Jorge from CarsForAGrand.com to see just how far $1,000 can go when looking for a car.",
@@ -361,7 +361,7 @@
   { "name": "Chérie 25",
     "number": 25,
     "favoris": false,
-    "logo": "",
+    "logo": "./ChannelsLogo/cherie25.png",
     "security": false,
     "programme": [
       { "description" : "Big Buck Bunny tells the story of a giant rabbit with a heart bigger than himself. When one sunny day three rodents rudely harass him, something snaps... and the rabbit ain't no bunny anymore! In the typical cartoon tradition he prepares the nasty rodents a comical revenge.\n\nLicensed under the Creative Commons Attribution license\nhttp://www.bigbuckbunny.org",
@@ -378,7 +378,7 @@
   { "name": "LCI",
     "number": 26,
     "favoris": false,
-    "logo": "",
+    "logo": "./ChannelsLogo/lci.png",
     "security": false,
     "programme" :[
       { "description" : "The first Blender Open Movie from 2006",
@@ -395,7 +395,7 @@
   { "name" : "Franceinfo",
     "number": 27,
     "favoris": false,
-    "logo": "",
+    "logo": "./ChannelsLogo/franceinfo.png",
     "security": false,
       "programme" :[
       { "description" : "Sintel is an independently produced short film, initiated by the Blender Foundation as a means to further improve and validate the free/open source 3D creation suite Blender. With initial funding provided by 1000s of donations via the internet community, it has again proven to be a viable development model for both open 3D technology as for independent animation film.\nThis 15 minute film has been realized in the studio of the Amsterdam Blender Institute, by an international team of artists and developers. In addition to that, several crucial technical and creative targets have been realized online, by developers and artists and teams all over the world.\nwww.sintel.org",
@@ -412,7 +412,7 @@
   { "name" : "Paris Première",
     "number": 41,
     "favoris": false,
-    "logo": "",
+    "logo": "./ChannelsLogo/parispremiere.png",
     "security": false,
     "programme" : [
       {"description" : "Smoking Tire takes the all-new Subaru Outback to the highest point we can find in hopes our customer-appreciation Balloon Launch will get some free T-shirts into the hands of our viewers.",
@@ -429,7 +429,7 @@
   { "name": "Canal+ Sport",
     "number": 46,
     "favoris": false,
-    "logo": "",
+    "logo": "./ChannelsLogo/canal+sport.png",
     "security": true,
     "login":"123456",
     "programme" : [
@@ -447,7 +447,7 @@
   { "name": "Planète+",
     "number": 72,
     "favoris": false,
-    "logo": "",
+    "logo": "./ChannelsLogo/planete+.png",
     "security": false,
     "programe": [
       { "description" : "The Smoking Tire heads out to Adams Motorsports Park in Riverside, CA to test the most requested car of 2010, the Volkswagen GTI. Will it beat the Mazdaspeed3's standard-setting lap time? Watch and see...",
@@ -464,7 +464,7 @@
   {"name": "13 ème rue",
     "number": 82,
     "favoris": false,
-    "logo": "",
+    "logo": "./ChannelsLogo/13emerue.png",
     "security": true,
     "login":"123456",
     "programme": [
@@ -482,7 +482,7 @@
   {"name": "Action",
     "number": 100,
     "favoris": false,
-    "logo": "",
+    "logo": "./ChannelsLogo/action.png",
     "security": true,
     "login":"123456",
     "programme": [
@@ -500,7 +500,7 @@
   {"name": "Polar +",
     "number": 216,
     "favoris": false,
-    "logo": "",
+    "logo": "./ChannelsLogo/polar+.png",
     "security": false,
     "programme": [
       { "description" : "The Smoking Tire meets up with Chris and Jorge from CarsForAGrand.com to see just how far $1,000 can go when looking for a car.The Smoking Tire meets up with Chris and Jorge from CarsForAGrand.com to see just how far $1,000 can go when looking for a car.",
