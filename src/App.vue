@@ -3,9 +3,6 @@
 </template>
 
 <script>
-import Source from "../sources/sources.json";
-console.log(Source);
-
 export default {};
 </script>
 
