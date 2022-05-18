@@ -9,19 +9,7 @@
 import Store from '@/store'
 
 export default {
-  // props: {
-  //   src: {
-  //     type: String,
-  //     required: true
-  //   },
-
-  //   alt: {
-  //     type: String,
-  //     required: false,
-  //     default: ''
-  //   }
-  // },
-
+ 
   props: {
     name: {
       type: String,
