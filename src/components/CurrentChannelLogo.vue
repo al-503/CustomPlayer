@@ -2,7 +2,6 @@
   <div class="current-channel-logo">
     <!-- <img :src="" :alt=""> -->
     <h1>{{ name }}</h1>
-    vhbqe
   </div>
 </template>
 
