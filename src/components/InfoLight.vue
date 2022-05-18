@@ -2,7 +2,7 @@
   <div class="info-light">
     <!-- <InfoLightHeader /> -->
     <div class="info-light-header">
-      <!-- ici logo de chaine -->
+      <!-----ici heure courante------->
       <CurrentHour />
       <CurrentChannelLogo :name="channel.name"/>
     </div>
@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import Source from '../sources/sources.json'
+import Store from '@/store'
 
 import CurrentHour from "@/components/CurrentHour.vue"
 import CurrentChannelLogo from '@/components/CurrentChannelLogo.vue'
@@ -28,7 +28,7 @@ export default {
 
   computed: {
     channel: () => Source.state.firstChannel
-  }
+  },
 };
 </script>
 
