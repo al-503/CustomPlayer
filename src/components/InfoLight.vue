@@ -4,7 +4,7 @@
     <div class="info-light-header">
       <!-----ici heure courante------->
       <CurrentHour />
-      <CurrentChannelLogo :name="channel.name"/>
+      <CurrentChannelLogo :logo="channel.logo"/>
     </div>
 
     <div class="info-light-bottom">

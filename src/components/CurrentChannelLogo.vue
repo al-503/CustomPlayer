@@ -1,7 +1,8 @@
 <template>
   <div class="current-channel-logo">
-    <!-- <img :src="" :alt=""> -->
-    <h1>{{ name }}</h1>
+    <img :src="require('@/assets/sources/channelsLogo/'+ logo)"
+          alt="logo de la chaîne"
+          class="logo-image">
   </div>
 </template>
 
@@ -9,13 +10,24 @@
 
 export default {
   props: {
-    name: {
+    logo: {
       type: String,
       required: true
     }
-  }
+  },
 }
 </script>
 
 <style lang="scss">
+.current-channel-logo {
+  width: 50%;
+}
+
+.logo-image {
+  position: absolute;
+  top: 30%;
+  left: 9%;
+  transform: translate(-50%, -50%);
+  width: 230px;
+}
 </style>
