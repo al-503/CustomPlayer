@@ -1,16 +1,21 @@
 <template>
   <div class="player-view">
-    <CustomPlayer :videoURL="videoURL" />
+    <router-view />
+    <CustomPlayer :videoURL="videoURL">
+      <InfoLight />
+    </CustomPlayer>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import CustomPlayer from "@/components/CustomPlayer.vue";
+import InfoLight from "@/components/InfoLight.vue";
 
 export default {
   components: {
     CustomPlayer,
+    InfoLight,
   },
   data: () => ({
     videoURL:

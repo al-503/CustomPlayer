@@ -12,16 +12,25 @@
       </div>
     </transition>
   </div>
+  <div v-if="!isPlaying && replay">
+    <TimeBar
+      :videoCurrentTime="videoCurrentTime"
+      :videoDuration="videoDuration"
+    />
+  </div>
+  <slot></slot>
 </template>
 
 <script>
 import Pause from "./Pause.vue";
 import Play from "./Play.vue";
+import TimeBar from "./TimeBar.vue";
 
 export default {
   components: {
     Pause,
     Play,
+    TimeBar,
   },
   props: {
     videoURL: {
@@ -43,6 +52,8 @@ export default {
     replay: false, => passe sur true si la video est joué après avoir été arrêtée
     showing: true, 
     timeout: null, => contient le settime out
+    videoDuration: null, => contient la durée totale de la vidéo
+    videoCurrentTime: null, => contient l'avancement de la vidéo
    
    */
 
@@ -55,12 +66,16 @@ export default {
     replay: false,
     showing: true,
     timeout: null,
+    timebar: null,
+    videoDuration: null,
+    videoCurrentTime: null,
   }),
   mounted() {
+    //Lorsque l'élément est monté, on passe à this.videoSrc, la source de la vidéo puis on met la vidéo en play
     this.videoSrc = this.videoURL;
     this.$refs.videoBalise.play();
     // On écoute ici l'ensemble des touches du clavier et on appelle la fonction qui KeyListenner qui regarde quelle touche a été appuyée
-    document.addEventListener("keyup", (e) => this.keyListenner(e));
+    document.addEventListener("keydown", (e) => this.keyListenner(e));
   },
 
   methods: {
@@ -98,13 +113,17 @@ export default {
       } else {
         this.iconName = "play";
       }
-
-      console.log("icon= " + this.iconName);
     },
 
-    // Cette méthode regarder si la touche "entrée" est appuyé et déclanche le play/pause de la video
+    // Cette méthode regarder si la touche "entrée" est down
     keyListenner(e) {
       if (e.key == "Enter") {
+        // on met à jour les valeurs videoDuration et videoCurrentTime qui sont envoyées par la suite au composant enfant timebar
+        this.videoDuration = this.$refs.videoBalise.duration;
+        this.videoCurrentTime = this.$refs.videoBalise.currentTime;
+        console.log(this.videoDuration);
+        console.log(this.videoCurrentTime);
+        // méthode qui gère le "play/pause"
         this.toggleVideoPlay();
       }
     },

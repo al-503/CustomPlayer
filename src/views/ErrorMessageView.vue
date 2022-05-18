@@ -1,31 +1,23 @@
 <template>
- 
   <div class="player-view">
-     
-    <CustomPlayer class="customPlayerError"/>
-   
+    <CustomPlayer class="customPlayerError" />
   </div>
-  
-   <ErrorMessage />
+
+  <ErrorMessage />
 </template>
 
 <script>
 // @ is an alias to /src
-import CustomPlayer from '@/components/CustomPlayer.vue'
-import ErrorMessage from '@/components/ErrorMessage.vue'
+import CustomPlayer from "@/components/CustomPlayer.vue";
+import ErrorMessage from "@/components/ErrorMessage.vue";
 
 export default {
   components: {
     CustomPlayer,
-    ErrorMessage
-  }
-
-}
+    ErrorMessage,
+  },
+};
 </script>
 
 <style lang="scss">
-.customPlayerError{
-  
-}
-
 </style>
