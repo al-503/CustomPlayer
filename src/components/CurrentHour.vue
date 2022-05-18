@@ -42,8 +42,8 @@ export default {
 
 .current-hour {
   position: absolute;
-  left: 1560px;
-  top: 48px;
+  right: 2%;
+  top: 6%;
 }
 
 .hour {
