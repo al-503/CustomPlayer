@@ -6,8 +6,8 @@ const routes = [
   {
     path: '/',
     name: 'PlayerView',
-    component: PlayerView
-  }, 
+    component: PlayerView,
+  },
   {
     path: '/error',
     name: 'ErrorMessage',

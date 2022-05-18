@@ -6,7 +6,7 @@
       <CurrentHour />
     </div>
 
-      <CustomPlayer />
+    <CustomPlayer />
 
     <div class="info-light-bottom">
       <!-- ici info en cours -->
@@ -16,19 +16,16 @@
 </template>
 
 <script>
-import CustomPlayer from '@/components/CustomPlayer.vue'
-import CurrentHour from '@/components/CurrentHour.vue'
+import CurrentHour from "@/components/CurrentHour.vue";
 
 export default {
   components: {
-    CustomPlayer,
     CurrentHour,
-  }
-}
+  },
+};
 </script>
 
 <style lang="scss">
-
 .info-light-header {
   position: absolute;
   width: 100%;
