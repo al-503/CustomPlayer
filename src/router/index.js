@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import PlayerView from '@/views/PlayerView.vue'
 import ErrorMessageView from '@/views/ErrorMessageView.vue'
-import InfoLight from '@/components/InfoLight.vue'
 
 const routes = [
   {
@@ -14,11 +13,6 @@ const routes = [
     name: 'ErrorMessage',
     component: ErrorMessageView
   },
-  {
-    path: '/devinfomin',
-    name: 'InfoLight',
-    component: InfoLight
-  }
   // {
   //   // path: '/about',
   //   // name: 'about',
