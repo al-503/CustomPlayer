@@ -24,7 +24,7 @@ export default {
   components: {
     CurrentHour,
     CurrentChannelLogo,
-  },
+  }, 
 
   computed: {
     channel: () => Source.state.firstChannel
