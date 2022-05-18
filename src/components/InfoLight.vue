@@ -27,7 +27,7 @@ export default {
   }, 
 
   computed: {
-    channel: () => Source.state.firstChannel
+    channel: () => Store.state.firstChannel
   },
 };
 </script>

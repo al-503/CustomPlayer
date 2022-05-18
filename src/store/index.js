@@ -13,6 +13,7 @@ export default createStore({
   mutations: {
   },
   actions: {
+    //faire un commit
   },
   modules: {
   }
