@@ -1,34 +1,37 @@
-// <template>
-//   <div class="current-channel-logo">
-//     <!-- <img :src="" :alt=""> -->
-//   </div>
-// </template>
+<template>
+  <div class="current-channel-logo">
+    <!-- <img :src="" :alt=""> -->
+    <h1>{{ name }}</h1>
+    vhbqe
+  </div>
+</template>
 
-// <script>
-// import Source from '../sources/sources.json'
-// const channels = Source.channels
-// console.log(Source)
+<script>
+import Store from '@/store'
 
-// export default {
-//   data: {
-    
-//   },
+export default {
+  // props: {
+  //   src: {
+  //     type: String,
+  //     required: true
+  //   },
 
-//   props: {
-//     src: {
-//       type: String,
-//       required: true
-//     },
+  //   alt: {
+  //     type: String,
+  //     required: false,
+  //     default: ''
+  //   }
+  // },
 
-//     alt: {
-//       type: String,
-//       required: false,
-//       default: ''
-//     }
-//   }
-// }
-// </script>
+  props: {
+    name: {
+      type: String,
+      required: true
+    }
+  },
+}
+</script>
 
-// <style lang="scss">
+<style lang="scss">
 
-// </style>
+</style>

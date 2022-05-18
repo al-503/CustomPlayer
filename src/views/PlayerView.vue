@@ -1,6 +1,7 @@
 <template>
   <div class="player-view">
-    <CustomPlayer />
+    <!-- <CustomPlayer /> -->
+    <CurrentChannelLogo/>
   </div>
 </template>
 
