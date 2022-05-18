@@ -4,6 +4,7 @@
     <div class="info-light-header">
       <!-- ici logo de chaine -->
       <CurrentHour />
+      <!-- <CurrentChannelLogo :src="" :alt=""/> -->
     </div>
 
       <CustomPlayer />
@@ -18,11 +19,13 @@
 <script>
 import CustomPlayer from '@/components/CustomPlayer.vue'
 import CurrentHour from '@/components/CurrentHour.vue'
+import CurrentChannelLogo from '@/components/CurrentChannelLogo.vue'
 
 export default {
   components: {
     CustomPlayer,
     CurrentHour,
+    CurrentChannelLogo
   }
 }
 </script>

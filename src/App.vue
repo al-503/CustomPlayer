@@ -3,8 +3,14 @@
 </template>
 
 <script>
-import Source from '../sources/sources.json'
-console.log(Source)
+// import Source from '../sources/sources.json'
+// const channels = Source.channels[0]
+// console.log(channels)
+
+import Store from '@/store'
+
+console.log(Store.state.allChannel)
+console.log(Store.state.firstChannel)
 
 export default {}
 
