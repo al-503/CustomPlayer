@@ -1,6 +1,6 @@
 <template>
   <div class="custom - player">
-    <video ref="videoBalise" loop muted>
+    <video ref="videoBalise" controls loop muted>
       <source :src="videoSrc" type="video/mp4" />
     </video>
     <div v-if="!isPlaying && replay" class="play-pause-contener">
@@ -18,6 +18,10 @@
       :videoDuration="videoDuration"
     />
   </div>
+  <div class="audioControls">
+    <!-- <AudioControls :videoAudio="$refs" /> -->
+    <AudioControls />
+  </div>
   <slot></slot>
 </template>
 
@@ -25,12 +29,20 @@
 import Pause from "./Pause.vue";
 import Play from "./Play.vue";
 import TimeBar from "./TimeBar.vue";
+import AudioControls from "@/components/AudioControls.vue";
 
 export default {
+  // name: "CustomPlayer",
+  // computed: {
+  //   videoElement() {
+  //     return this.$refs.videoBalise;
+  //   },
+  // },
   components: {
     Pause,
     Play,
     TimeBar,
+    AudioControls,
   },
   props: {
     videoURL: {
@@ -74,8 +86,12 @@ export default {
     //Lorsque l'élément est monté, on passe à this.videoSrc, la source de la vidéo puis on met la vidéo en play
     this.videoSrc = this.videoURL;
     this.$refs.videoBalise.play();
+    // console.log("Le volume est égale à " + this.$refs.videoBalise.volume);
+
+    this.$refs.videoBalise.muted = !this.$refs.videoBalise.muted;
     // On écoute ici l'ensemble des touches du clavier et on appelle la fonction qui KeyListenner qui regarde quelle touche a été appuyée
     document.addEventListener("keydown", (e) => this.keyListenner(e));
+    document.addEventListener("keydown", (e) => this.volumeKeyListener(e));
   },
 
   methods: {
@@ -127,6 +143,25 @@ export default {
         this.toggleVideoPlay();
       }
     },
+    //
+    // Audio
+    //
+    alterVolume(dir) {
+      const currentVolume = Math.floor(this.$refs.videoBalise.volume * 10) / 10;
+      if (dir === "+") {
+        if (currentVolume < 1) this.$refs.videoBalise.volume += 0.05;
+      } else if (dir === "-") {
+        if (currentVolume > 0) this.$refs.videoBalise.volume -= 0.05;
+      }
+    },
+    volumeKeyListener(e) {
+      if (e.key === "+") {
+        this.alterVolume("+");
+      }
+      if (e.key === "-") {
+        this.alterVolume("-");
+      }
+    },
   },
 };
 </script>
@@ -162,5 +197,12 @@ video {
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
+}
+
+.audioControls {
+  position: absolute;
+  bottom: 25%;
+  right: 5%;
+  z-index: 1;
 }
 </style>
