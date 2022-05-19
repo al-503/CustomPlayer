@@ -1,6 +1,6 @@
 <template>
   <div class="custom - player">
-    <video ref="videoBalise" controls loop muted>
+    <video ref="videoBalise" loop muted>
       <source :src="videoSrc" type="video/mp4" />
     </video>
     <div v-if="!isPlaying && replay" class="play-pause-contener">
@@ -19,8 +19,10 @@
     />
   </div>
   <div class="audioControls">
-    <!-- <AudioControls :videoAudio="$refs" /> -->
-    <AudioControls />
+    <AudioControls
+      :currentVolumeLevel="currentVolumeLevel"
+      :maxVolumeLevel="maxVolumeLevel"
+    />
   </div>
   <slot></slot>
 </template>
@@ -32,12 +34,6 @@ import TimeBar from "./TimeBar.vue";
 import AudioControls from "@/components/AudioControls.vue";
 
 export default {
-  // name: "CustomPlayer",
-  // computed: {
-  //   videoElement() {
-  //     return this.$refs.videoBalise;
-  //   },
-  // },
   components: {
     Pause,
     Play,
@@ -81,6 +77,8 @@ export default {
     timebar: null,
     videoDuration: null,
     videoCurrentTime: null,
+    currentVolumeLevel: null,
+    maxVolumeLevel: null,
   }),
   mounted() {
     //Lorsque l'élément est monté, on passe à this.videoSrc, la source de la vidéo puis on met la vidéo en play
@@ -89,6 +87,7 @@ export default {
     // console.log("Le volume est égale à " + this.$refs.videoBalise.volume);
 
     this.$refs.videoBalise.muted = !this.$refs.videoBalise.muted;
+    this.$refs.videoBalise.volume = 0.5;
     // On écoute ici l'ensemble des touches du clavier et on appelle la fonction qui KeyListenner qui regarde quelle touche a été appuyée
     document.addEventListener("keydown", (e) => this.keyListenner(e));
     document.addEventListener("keydown", (e) => this.volumeKeyListener(e));
@@ -161,6 +160,7 @@ export default {
       if (e.key === "-") {
         this.alterVolume("-");
       }
+      this.currentVolumeLevel = this.$refs.videoBalise.volume;
     },
   },
 };
@@ -201,8 +201,8 @@ video {
 
 .audioControls {
   position: absolute;
-  bottom: 25%;
-  right: 5%;
+  bottom: 50%;
+  right: -150px;
   z-index: 1;
 }
 </style>

@@ -1,8 +1,6 @@
   <template>
   <div class="audio-controls">
     <div class="volumeBarContainer">
-      <!-- <div class="volumeBar" ref="volumeBar"></div>
-      <div class="currentVolume" ref="currentVolume"></div> -->
       <progress class="volumeBar" ref="volumeBar" value="0" min="0">
         <span class="currentVolume" ref="currentVolume"></span>
       </progress>
@@ -11,7 +9,7 @@
 </template>
 
 <script>
-var video = document.getElementsByTagName("video");
+// var video = document.getElementsByTagName("video");
 export default {
   props: {
     currentVolumeLevel: {
@@ -30,30 +28,39 @@ export default {
   mounted() {
     this.volumeBar = this.$refs.volumeBar;
     this.currentVolume = this.$refs.currentVolume;
+    this.volumeBar.value = 0.5;
     document.addEventListener("keyup", (e) => this.volumeKeyListener(e));
   },
 
   methods: {
-    volumeProgress() {
-      if (this.$ref.volumeBar != null) {
-        this.$refs.volumeBar.setAttribute("max", this.maxVolumeLevel);
-        this.volumeBar.value = this.currentVolumeLevel;
-        this.currentVolume.style.height =
-          Math.floor((this.videoCurrentTime / this.videoDuration) * 100) + "%";
+    volumeChange() {
+      this.$refs.volumeBar.setAttribute("max", this.maxVolumeLevel);
+      this.volumeBar.value = this.currentVolumeLevel;
+      this.currentVolume.style.width =
+        Math.floor((this.currentVolumeLevel / this.maxVolumeLevel) * 100) + "%";
+    },
+
+    volumeKeyListener(e) {
+      if (e.key === "+" || e.key === "-") {
+        this.volumeChange();
       }
-      // this.height = video.volume * 500;
-      // console.log(this.height);
-      // return (progressBar.style.height = this.height + "px");
     },
   },
 };
 </script>
 
 <style lang="scss">
+.volumeBar {
+  position: relative;
+  width: 500px;
+  border: solid 3px rgb(255, 255, 255);
+  border-radius: 15px;
+  transform: rotate(270deg);
+}
+
 .volumeBar[value] {
   position: relative;
-  width: 20px;
-  height: 500px;
+  height: 20px;
   border: solid 3px rgb(255, 255, 255);
   border-radius: 15px;
 }
@@ -66,7 +73,7 @@ export default {
 .volumeBar[value]::-webkit-progress-value {
   background-image: linear-gradient(
     90deg,
-    rgb(65, 71, 197) 43.75%,
+    rgb(65, 71, 197) 30%,
     rgb(0, 178, 241) 100%
   );
   border-radius: 40px;
