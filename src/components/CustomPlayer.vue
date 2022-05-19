@@ -198,11 +198,4 @@ video {
 .fade-leave-to {
   opacity: 0;
 }
-
-.audioControls {
-  position: absolute;
-  bottom: 50%;
-  right: -150px;
-  z-index: 1;
-}
 </style>

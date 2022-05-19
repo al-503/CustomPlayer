@@ -7,6 +7,7 @@
       <!-- <fa class="volume-icon" :icon="volumeIcon" /> -->
     </div>
   </div>
+  <div class="greyBackground"></div>
 </template>
 
 <script>
@@ -67,12 +68,20 @@ export default {
 </script>
 
 <style lang="scss">
+.volumeBarContainer {
+  position: absolute;
+  bottom: 50%;
+  right: -150px;
+  // z-index: 1;
+}
+
 .volumeBar {
   position: relative;
   width: 500px;
   border: solid 3px rgb(255, 255, 255);
   border-radius: 15px;
   transform: rotate(270deg);
+  z-index: 1;
 }
 
 .volumeBar[value] {
@@ -97,6 +106,21 @@ export default {
 }
 .currentVolume {
   border-radius: 15px;
+}
+
+.greyBackground {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(132, 132, 132, 0) 0%,
+    rgba(69, 69, 69, 0.4) 51.56%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+  border-radius: 2px;
 }
 // .volume-icon {
 // }

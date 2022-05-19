@@ -71,6 +71,7 @@ export default {
   align-items: center;
   justify-content: center;
   background-color: rgba(63, 62, 62, 0.69);
+  z-index: 1;
 }
 
 #progress {

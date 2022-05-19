@@ -38,7 +38,12 @@ export default {
   position: absolute;
   width: 100%;
   height: 28%;
-  background: linear-gradient(0deg, rgba(132, 132, 132, 0) 0%, rgba(69, 69, 69, 0.5) 51.56%, rgba(0, 0, 0, 0.75) 100%);
+  background: linear-gradient(
+    0deg,
+    rgba(132, 132, 132, 0) 0%,
+    rgba(69, 69, 69, 0.5) 51.56%,
+    rgba(0, 0, 0, 0.75) 100%
+  );
   border-radius: 2px;
 }
 </style>
