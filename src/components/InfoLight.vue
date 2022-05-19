@@ -4,6 +4,7 @@
     <div class="info-light-header">
       <!-----ici heure courante------->
       <CurrentHour />
+      <!-----ici logo courante------->
       <CurrentChannelLogo :logo="channel.logo"/>
     </div>
 
