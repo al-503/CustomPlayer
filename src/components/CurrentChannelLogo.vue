@@ -25,9 +25,9 @@ export default {
 
 .logo-image {
   position: absolute;
-  top: 30%;
-  left: 9%;
+  width: 120px;
+  top: 26%;
+  left: 6%;
   transform: translate(-50%, -50%);
-  width: 230px;
 }
 </style>
