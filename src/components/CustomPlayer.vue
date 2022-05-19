@@ -1,5 +1,5 @@
 <template>
-  <div class="custom - player">
+  <div class="custom-player">
     <video ref="videoBalise" loop muted>
       <source :src="videoSrc" type="video/mp4" />
     </video>
@@ -84,12 +84,12 @@ export default {
     //Lorsque l'élément est monté, on passe à this.videoSrc, la source de la vidéo puis on met la vidéo en play
     this.videoSrc = this.videoURL;
     this.$refs.videoBalise.play();
-    // console.log("Le volume est égale à " + this.$refs.videoBalise.volume);
 
     this.$refs.videoBalise.muted = !this.$refs.videoBalise.muted;
     this.$refs.videoBalise.volume = 0.5;
     // On écoute ici l'ensemble des touches du clavier et on appelle la fonction qui KeyListenner qui regarde quelle touche a été appuyée
     document.addEventListener("keydown", (e) => this.keyListenner(e));
+
     document.addEventListener("keydown", (e) => this.volumeKeyListener(e));
   },
 
