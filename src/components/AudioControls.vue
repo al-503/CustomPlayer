@@ -1,9 +1,10 @@
   <template>
   <div class="audio-controls">
     <div class="volumeBarContainer">
-      <progress class="volumeBar" ref="volumeBar" value="0" min="0">
+      <progress class="volumeBar" ref="volumeBar" value="0" min="0" max="1">
         <span class="currentVolume" ref="currentVolume"></span>
       </progress>
+      <fa class="volume-icon" :icon="volumeIcon" />
     </div>
   </div>
 </template>
@@ -12,6 +13,10 @@
 // var video = document.getElementsByTagName("video");
 export default {
   props: {
+    volumeIcon: {
+      type: String,
+      required: true,
+    },
     currentVolumeLevel: {
       type: Number,
       required: false,
@@ -22,6 +27,11 @@ export default {
     },
   },
   data: () => ({
+    // iconTheme1: "volume-high",
+    // iconTheme2: "volume",
+    iconTheme: "volume",
+    // iconTheme3: "volume-low",
+    // iconTheme4: "volume-slash",
     volumeBar: null,
     currentVolume: null,
   }),
@@ -30,14 +40,25 @@ export default {
     this.currentVolume = this.$refs.currentVolume;
     this.volumeBar.value = 0.5;
     document.addEventListener("keyup", (e) => this.volumeKeyListener(e));
+    // console.log(this.volumeBar.value);
+    // console.log(this.currentVolumeLevel);
   },
 
   methods: {
     volumeChange() {
+      if ((this.currentVolume.style.width = 0 + "%")) {
+        this.currentVolume.style.width = 5 + "%";
+      }
       this.$refs.volumeBar.setAttribute("max", this.maxVolumeLevel);
       this.volumeBar.value = this.currentVolumeLevel;
       this.currentVolume.style.width =
         Math.floor((this.currentVolumeLevel / this.maxVolumeLevel) * 100) + "%";
+      // if (this.currentVolume.style.width >= 90 + "%") {
+      //   this.currentVolume.style.width = 100 + "%";
+      // }
+      // if (this.currentVolume.style.width <= 5.5 + "%") {
+      //   this.currentVolume.style.width = 0 + "%";
+      // }
     },
 
     volumeKeyListener(e) {
@@ -80,5 +101,12 @@ export default {
 }
 .currentVolume {
   border-radius: 15px;
+}
+.volume-icon {
+  position: relative;
+  color: rgba(255, 255, 255, 1);
+  width: 500px;
+  height: auto;
+  // margin-left: 5px;
 }
 </style>

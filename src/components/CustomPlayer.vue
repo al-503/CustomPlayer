@@ -16,6 +16,7 @@
     <TimeBar
       :videoCurrentTime="videoCurrentTime"
       :videoDuration="videoDuration"
+      :volumeIcon="volumeIcon"
     />
   </div>
   <div class="audioControls">
@@ -70,6 +71,7 @@ export default {
     isPlayAgain: false,
     videoSrc: null,
     iconName: null,
+    volumeIcon: null,
     videoBalise: null,
     replay: false,
     showing: true,
@@ -90,7 +92,8 @@ export default {
     this.$refs.videoBalise.volume = 0.5;
     // On écoute ici l'ensemble des touches du clavier et on appelle la fonction qui KeyListenner qui regarde quelle touche a été appuyée
     document.addEventListener("keydown", (e) => this.keyListenner(e));
-    document.addEventListener("keydown", (e) => this.volumeKeyListener(e));
+    document.addEventListener("keypress", (e) => this.volumeKeyListener(e));
+    this.volumeIcon = "volume";
   },
 
   methods: {
@@ -149,9 +152,11 @@ export default {
       const currentVolume = Math.floor(this.$refs.videoBalise.volume * 10) / 10;
       if (dir === "+") {
         if (currentVolume < 1) this.$refs.videoBalise.volume += 0.05;
+        // if (currentVolume > 0.9) currentVolume = 1;
       } else if (dir === "-") {
         if (currentVolume > 0) this.$refs.videoBalise.volume -= 0.05;
       }
+      // if (currentVolume < 0.05) currentVolume = 0;
     },
     volumeKeyListener(e) {
       if (e.key === "+") {
@@ -161,6 +166,11 @@ export default {
         this.alterVolume("-");
       }
       this.currentVolumeLevel = this.$refs.videoBalise.volume;
+    },
+    dynamicIconVolume() {
+      // if (this.currentVolumeLevel >= 0.5) {
+      //   this.volumeIcon = "volume";
+      // }
     },
   },
 };
