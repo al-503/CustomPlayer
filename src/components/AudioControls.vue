@@ -4,19 +4,18 @@
       <progress class="volumeBar" ref="volumeBar" value="0" min="0" max="1">
         <span class="currentVolume" ref="currentVolume"></span>
       </progress>
-      <fa class="volume-icon" :icon="volumeIcon" />
+      <!-- <fa class="volume-icon" :icon="volumeIcon" /> -->
     </div>
   </div>
 </template>
 
 <script>
-// var video = document.getElementsByTagName("video");
 export default {
   props: {
-    volumeIcon: {
-      type: String,
-      required: true,
-    },
+    // volumeIcon: {
+    //   type: String,
+    //   required: true,
+    // },
     currentVolumeLevel: {
       type: Number,
       required: false,
@@ -29,7 +28,6 @@ export default {
   data: () => ({
     // iconTheme1: "volume-high",
     // iconTheme2: "volume",
-    iconTheme: "volume",
     // iconTheme3: "volume-low",
     // iconTheme4: "volume-slash",
     volumeBar: null,
@@ -40,8 +38,6 @@ export default {
     this.currentVolume = this.$refs.currentVolume;
     this.volumeBar.value = 0.5;
     document.addEventListener("keyup", (e) => this.volumeKeyListener(e));
-    // console.log(this.volumeBar.value);
-    // console.log(this.currentVolumeLevel);
   },
 
   methods: {
@@ -53,7 +49,7 @@ export default {
       this.volumeBar.value = this.currentVolumeLevel;
       this.currentVolume.style.width =
         Math.floor((this.currentVolumeLevel / this.maxVolumeLevel) * 100) + "%";
-      // if (this.currentVolume.style.width >= 90 + "%") {
+      // if (this.currentVolume.style.width >= 95 + "%") {
       //   this.currentVolume.style.width = 100 + "%";
       // }
       // if (this.currentVolume.style.width <= 5.5 + "%") {
@@ -102,11 +98,6 @@ export default {
 .currentVolume {
   border-radius: 15px;
 }
-.volume-icon {
-  position: relative;
-  color: rgba(255, 255, 255, 1);
-  width: 500px;
-  height: auto;
-  // margin-left: 5px;
-}
+// .volume-icon {
+// }
 </style>
