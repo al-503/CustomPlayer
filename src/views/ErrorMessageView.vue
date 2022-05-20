@@ -1,6 +1,6 @@
 <template>
   <div class="player-view">
-    <CustomPlayer class="customPlayerError" />
+    <CustomPlayer/>
   </div>
 
   <ErrorMessage />
@@ -18,6 +18,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-</style>
