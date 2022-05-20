@@ -2,7 +2,7 @@
   <div class="player-view">
     <router-view />
     <CustomPlayer :videoURL="videoURL">
-      <InfoLight v-if="false"/>
+      <InfoLight v-if="true"/>
     </CustomPlayer>
   </div>
 </template>
@@ -28,5 +28,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss"></style>
