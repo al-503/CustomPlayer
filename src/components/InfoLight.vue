@@ -10,6 +10,7 @@
 
     <div class="info-light-bottom">
       <!-- ici info en cours -->
+      <CurrentInfo />
       <!-- ici info suivante -->
     </div>
   </div>
@@ -20,11 +21,13 @@ import Store from '@/store'
 
 import CurrentHour from "@/components/CurrentHour.vue"
 import CurrentChannelLogo from '@/components/CurrentChannelLogo.vue'
+import CurrentInfo from '@/components/CurrentInfo'
 
 export default {
   components: {
     CurrentHour,
     CurrentChannelLogo,
+    CurrentInfo,
   }, 
 
   computed: {
