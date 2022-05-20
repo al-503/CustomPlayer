@@ -2,11 +2,11 @@
   <div class="info-light">
     <!-- <InfoLightHeader /> -->
     <div class="info-light-header">
-      <!-- ici logo de chaine -->
+      <!-----ici heure courante------->
       <CurrentHour />
+      <!-----ici logo courante------->
+      <CurrentChannelLogo :logo="channel.logo"/>
     </div>
-
-    <CustomPlayer />
 
     <div class="info-light-bottom">
       <!-- ici info en cours -->
@@ -16,11 +16,19 @@
 </template>
 
 <script>
-import CurrentHour from "@/components/CurrentHour.vue";
+import Store from '@/store'
+
+import CurrentHour from "@/components/CurrentHour.vue"
+import CurrentChannelLogo from '@/components/CurrentChannelLogo.vue'
 
 export default {
   components: {
     CurrentHour,
+    CurrentChannelLogo,
+  }, 
+
+  computed: {
+    channel: () => Store.state.firstChannel
   },
 };
 </script>
