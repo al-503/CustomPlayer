@@ -5,7 +5,7 @@
       <!-----ici heure courante------->
       <CurrentHour />
       <!-----ici logo courante------->
-      <CurrentChannelLogo :logo="channel.logo"/>
+      <CurrentChannelLogo :logo="currentChannel.logo"/>
     </div>
 
     <div class="info-light-bottom">
@@ -28,12 +28,33 @@ export default {
     CurrentHour,
     CurrentChannelLogo,
     CurrentProgrammeInfo,
-  }, 
+  },
+  data: () => ({
+    //currentIndex: 8,
+  }),
 
   computed: {
-    channel: () => Store.state.firstChannel,
-    programme: () => Store.state.firstChannel.programme[0]
+    currentChannel: () => Store.getters.getCurrentChannel,
+    programme: () => Store.getters.getCurrentProgramme,
   },
+  methods: {
+
+    // setInfoLIgth () {
+    //   let currentChannel = this.getCurrentChannel(currentIndex)
+    //   let CurrentProgamme = this.getCurrentProgramme()
+    // },
+      
+
+    keyRigth () {
+      // doit faire current index -1
+      // si currentIndex = 0 alors faire current index = array.length 
+    },
+
+    keyLeft () {
+      // doit faire index +1
+      // si array est a son max index alors currentIndex = 0 
+    }
+  }
 };
 </script>
 

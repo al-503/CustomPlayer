@@ -2,7 +2,7 @@
   <div class="player-view">
     <router-view />
     <CustomPlayer :videoURL="videoURL">
-      <InfoLight v-if="true"/>
+      <InfoLight v-if="true" />
     </CustomPlayer>
   </div>
 </template>
