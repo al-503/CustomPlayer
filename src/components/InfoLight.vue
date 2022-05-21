@@ -10,8 +10,9 @@
 
     <div class="info-light-bottom">
       <!-- ici info en cours -->
-      <CurrentProgrammeInfo :title="programme.title" :gender="programme.genre" :startAt="programme.startTime" :endAt="programme.endTime" />
+      <CurrentProgrammeInfo :title="programme[0].title" :gender="programme[0].genre" :startAt="programme[0].startTime" :endAt="programme[0].endTime" />
       <!-- ici info suivante -->
+      
     </div>
   </div>
 </template>
@@ -35,7 +36,7 @@ export default {
 
   computed: {
     currentChannel: () => Store.getters.getCurrentChannel,
-    programme: () => Store.getters.getCurrentProgramme,
+    programme: () => Store.getters.getProgramme,
   },
   methods: {
 

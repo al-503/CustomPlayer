@@ -8,15 +8,15 @@ export default createStore({
     // currentChannel: Sources.channels[currentIndex]
     // currentProgramme: Sources.channels[currentIndex].programme[0]
     // afterProgramme: Sources.channels[currentIndex].programme[1],
-    currentIndex: 16,
+    currentIndex: 0,
 
   },
   getters: {
     getCurrentChannel (state) {
-      return state.Channels[state.currentIndex]// [0] // renvoi un array avec toutes les chaines
+      return state.Channels[state.currentIndex]
     },
-    getCurrentProgramme (state) {
-      return state.Channels[state.currentIndex].programme[0]
+    getProgramme (state) {
+      return state.Channels[state.currentIndex].programme
       // let programme = getCurrentChannel(currentIndex).programme
       // return programme[currentIndex]
     },
