@@ -18,7 +18,7 @@
                                         des programme donc pas utile de refaire une fonction juste pour 
                                         changer un index sur une chaine qui n'a que 2 programes fixe -->
       <!-- ici info suivante -->
-      <NextProgrammeInfo :tilte="programme[1].title"
+      <NextProgrammeInfo :title="programme[1].title"
                          :startAt="programme[1].startTime" 
                          :endAt="programme[1].endTime" 
                          :resume="programme[1].description" 
@@ -42,21 +42,12 @@ export default {
     CurrentProgrammeInfo,
     NextProgrammeInfo
   },
-  data: () => ({
-    //currentIndex: 8,
-  }),
 
   computed: {
     currentChannel: () => Store.getters.getCurrentChannel,
     programme: () => Store.getters.getProgramme,
   },
   methods: {
-
-    // setInfoLIgth () {
-    //   let currentChannel = this.getCurrentChannel(currentIndex)
-    //   let CurrentProgamme = this.getCurrentProgramme()
-    // },
-      
 
     keyRigth () {
       // doit faire current index -1
@@ -94,5 +85,8 @@ export default {
   backdrop-filter: blur(20px);
 
   color:white;
+
+  display: flex;
 }
+
 </style>
