@@ -8,7 +8,7 @@ export default createStore({
     // currentChannel: Sources.channels[currentIndex]
     // currentProgramme: Sources.channels[currentIndex].programme[0]
     // afterProgramme: Sources.channels[currentIndex].programme[1],
-    currentIndex: 0,
+    currentIndex: 25,
 
   },
   getters: {

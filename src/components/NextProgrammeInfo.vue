@@ -59,6 +59,13 @@ export default {
 }
 .next-programme-img {
   width: 100%;
+  //sinon ça fait n'imp pourtant les photo ont les même dimenssions
+  min-width: 300px;
+  max-width: 300px;
+  //sinon ça fait n'imp pourtant les photo ont les même dimenssions
+  min-height: 150px;
+  min-height: 150px;
+  
   margin: 1%;
 }
 .next-programme-msg {
