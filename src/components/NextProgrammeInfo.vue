@@ -44,8 +44,8 @@ export default {
 <style lang="scss">
 .next-programme {
   font-family: "Inter", sans-serif;
-  width: 80%;
-  margin: 1.5%;
+  width: 90%;
+  margin-top: 1.5%;
 }
 .next-programme-title {
   font-size: 39px;
@@ -55,8 +55,9 @@ export default {
   font-size: 30px;
 }
 .next-programme-resume {
+  margin: 0 auto;
   font-size: 24px;
-  width: 30%;
+  width: 90%;
 }
 
 </style>
