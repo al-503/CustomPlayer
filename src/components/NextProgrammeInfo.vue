@@ -46,11 +46,16 @@ export default {
 .next-programme {
   font-family: "Inter", sans-serif;
   width: 80%;
+  margin-right: 2%;
 
   display: flex;
 }
 .next-programme-thumb,.next-programme-text {
   margin: 1%;
+}
+
+.next-programme-thumb {
+  width: 100%;
 }
 .next-programme-img {
   width: 100%;
@@ -59,7 +64,7 @@ export default {
 .next-programme-msg {
   position: absolute;
   top:60%;
-  right: 35%;
+  right: 38%;
   font-weight: 900;
   font-size: 33px;
 }
