@@ -1,9 +1,10 @@
 <template>
   <div class="next-programme">
+    <div class="next-programme-thumb">
+      <img class="next-programme-img" :src="require('@/assets/sources/programmeThumb/'+ thumb)" alt="image du programme à suivre">
+      <p class="next-programme-msg">A suivre ...</p> 
+    </div>
 
-    <!-- <img :src="require('@/assets/sources/channelsThumb/'+ thumb)" alt="image du programme à suivre">
-    <p>A suivre ...</p> -->
-    
     <div class="next-programme-text">
       <h2 class="next-programme-title">{{ title }}</h2>
       <p  class="next-programme-time">{{ startAt + "-" + endAt }}</p>
@@ -44,9 +45,25 @@ export default {
 <style lang="scss">
 .next-programme {
   font-family: "Inter", sans-serif;
-  width: 90%;
-  margin-top: 1.5%;
+  width: 80%;
+
+  display: flex;
 }
+.next-programme-thumb,.next-programme-text {
+  margin: 1%;
+}
+.next-programme-img {
+  width: 100%;
+  margin: 1%;
+}
+.next-programme-msg {
+  position: absolute;
+  top:60%;
+  right: 35%;
+  font-weight: 900;
+  font-size: 33px;
+}
+
 .next-programme-title {
   font-size: 39px;
   font-weight: 900;
@@ -56,8 +73,10 @@ export default {
 }
 .next-programme-resume {
   margin: 0 auto;
-  font-size: 24px;
-  width: 90%;
+  font-size: 20px;
+}
+.next-programme-resume,.next-programme-title,.next-programme-time {
+    padding: 2px;
 }
 
 </style>
