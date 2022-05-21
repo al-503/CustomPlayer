@@ -1,17 +1,13 @@
 <template>
   <div class="current-info">
-
-    <div class="info">
+    <div class="info-text">
       <h1 class="current-title">{{ title }}</h1>
       <p class="gender">{{ gender }}</p>
       <!-- bouton info+ -->
     </div>
-
-    <div class="info">
-      <p class="time">{{ startAt + " - "+  endAt }}</p>
-      <!-- heure de début / de fin -->
-      <!-- progress bar  -->
-    </div>
+    <p class="time">{{ startAt + " - "+  endAt }}</p>
+    <!-- heure de début / de fin -->
+    <!-- progress bar  -->
   </div>
 </template>
 
@@ -43,21 +39,25 @@ export default  {
 <style langue="scss">
 .current-info{
   font-family: "Inter", sans-serif;
+  width: 80%;
   display: flex;
 }
-.info {
-  margin: 1.5%;
+.info-text,.time {
+  padding: 1%;
+  margin: 1%;
 }
+
 .current-title {
   font-size: 64px;
   font-weight: 900;
 }
 .gender,.time {
   font-size: 31px;
-  padding: 3px;
+  margin: 2%;
 }
 .time {
-  position: relative;
-  top: 17%;
+  margin-top: 3%;
+  display: block;
+  width: 30%;
 }
 </style>
