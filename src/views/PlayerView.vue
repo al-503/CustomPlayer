@@ -1,13 +1,14 @@
 <template>
   <div class="player-view">
     <router-view />
-    <CustomPlayer :videoURL="videoURL">
+    <CustomPlayer :videoURL="programme.sources">
       <InfoLight v-if="true" />
     </CustomPlayer>
   </div>
 </template>
 
 <script>
+import Store from '@/store'
 // @ is an alias to /src
 import CustomPlayer from "@/components/CustomPlayer.vue";
 import InfoLight from "@/components/InfoLight.vue";
@@ -17,10 +18,9 @@ export default {
     CustomPlayer,
     InfoLight,
   },
-  data: () => ({
-    videoURL:
-      "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-  }),
+  computed:{
+    programme: () => Store.getters.getProgramme[0],
+  },
   methods: {
     changeVideo(url) {
       this.videoURL = url;

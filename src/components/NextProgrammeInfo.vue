@@ -53,10 +53,6 @@ export default {
 .next-programme-thumb,.next-programme-text {
   margin: 1%;
 }
-
-.next-programme-thumb {
-  width: 100%;
-}
 .next-programme-img {
   width: 100%;
   //sinon ça fait n'imp pourtant les photo ont les même dimenssions
@@ -65,7 +61,7 @@ export default {
   //sinon ça fait n'imp pourtant les photo ont les même dimenssions
   min-height: 150px;
   min-height: 150px;
-  
+
   margin: 1%;
 }
 .next-programme-msg {
