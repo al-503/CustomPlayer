@@ -1,5 +1,5 @@
 <template>
-  <div class="custom - player">
+  <div class="custom-player">
     <video ref="videoBalise" loop muted>
       <source :src="videoSrc" type="video/mp4" />
     </video>
