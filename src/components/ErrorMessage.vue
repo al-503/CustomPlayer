@@ -28,18 +28,17 @@ export default {
     box-sizing: border-box;
 }
 .errorMessageDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border: 3px solid white;
-    width: 29%;
-    height: 30%;
     position: absolute;
-    z-index: 2!important;
     background-color: #3f3f3f;
     opacity: 69%;
-    left:36%;
-    top: 35%;
-    
-
-    
+    left:50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    padding: 4%;  
 }
 
 .errorMessageText{
@@ -47,8 +46,5 @@ export default {
     font-weight: bold;
     font-size: 48px;
     text-align: center;
-    margin-top: 21%;
 }
-
-
 </style>
