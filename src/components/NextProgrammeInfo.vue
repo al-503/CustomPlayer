@@ -38,7 +38,6 @@ export default {
       require: true
     }
   }
-
 }
 </script>
 

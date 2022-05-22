@@ -42,24 +42,34 @@ export default {
     CurrentProgrammeInfo,
     NextProgrammeInfo
   },
-
+  // created () {
+  //   document.addEventListener("keydown", (e) => this.ChannelChange(e));
+  // },
   computed: {
     currentChannel: () => Store.getters.getCurrentChannel,
     programme: () => Store.getters.getProgramme,
   },
-  methods: {
-
-    keyRigth () {
-      // doit faire current index -1
-      // si currentIndex = 0 alors faire current index = array.length 
-    },
-
-    keyLeft () {
-      // doit faire index +1
-      // si array est a son max index alors currentIndex = 0 
-    }
-  }
-};
+  // methods: {
+  //   ChannelChange (e) {
+  //     if ( e.key === "PageUp") {
+  //       if ( Store.state.currentIndex === 29 ){
+  //         Store.state.currentIndex = 0
+  //       } else {
+  //         console.log(Store.state.currentIndex = Store.state.currentIndex + 1)
+  //       }
+  //     } else if ( e.key === "PageDown" ) {
+  //       if ( Store.state.currentIndex === 0){
+  //         //attention ici la valeur est en dur est doit etre remplacer avec un point length
+  //         Store.state.currentIndex = 29
+  //       } else {
+  //         console.log(Store.state.currentIndex = Store.state.currentIndex - 1)
+  //       }
+  //     }
+  //     // doit faire current index -1
+  //     // si currentIndex = 0 alors faire current index = array.length 
+  //   }
+  // }
+}
 </script>
 
 <style lang="scss">

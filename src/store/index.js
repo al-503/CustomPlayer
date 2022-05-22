@@ -13,9 +13,6 @@ export default createStore({
     getProgramme (state) {
       return state.Channels[state.currentIndex].programme
     },
-    // getNextProgramme () {
-
-    // },
   },
   mutations: {
   },
