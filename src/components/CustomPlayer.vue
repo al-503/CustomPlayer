@@ -1,5 +1,5 @@
 <template>
-  <div class="custom - player">
+  <div class="custom-player">
     <video ref="videoBalise" loop muted>
       <source :src="videoSrc" type="video/mp4" />
     </video>
@@ -18,6 +18,12 @@
       :videoDuration="videoDuration"
     />
   </div>
+  <div class="audioControls">
+    <AudioControls
+      :currentVolumeLevel="currentVolumeLevel"
+      :maxVolumeLevel="maxVolumeLevel"
+    />
+  </div>
   <slot></slot>
 </template>
 
@@ -25,12 +31,14 @@
 import Pause from "./Pause.vue";
 import Play from "./Play.vue";
 import TimeBar from "./TimeBar.vue";
+import AudioControls from "@/components/AudioControls.vue";
 
 export default {
   components: {
     Pause,
     Play,
     TimeBar,
+    AudioControls,
   },
   props: {
     videoURL: {
@@ -69,13 +77,20 @@ export default {
     timebar: null,
     videoDuration: null,
     videoCurrentTime: null,
+    currentVolumeLevel: null,
+    maxVolumeLevel: null,
   }),
   mounted() {
     //Lorsque l'élément est monté, on passe à this.videoSrc, la source de la vidéo puis on met la vidéo en play
     this.videoSrc = this.videoURL;
     this.$refs.videoBalise.play();
+
+    this.$refs.videoBalise.muted = !this.$refs.videoBalise.muted;
+    this.$refs.videoBalise.volume = 0.5;
     // On écoute ici l'ensemble des touches du clavier et on appelle la fonction qui KeyListenner qui regarde quelle touche a été appuyée
     document.addEventListener("keydown", (e) => this.keyListenner(e));
+
+    document.addEventListener("keydown", (e) => this.volumeKeyListener(e));
   },
 
   methods: {
@@ -126,6 +141,26 @@ export default {
         // méthode qui gère le "play/pause"
         this.toggleVideoPlay();
       }
+    },
+    //
+    // Audio
+    //
+    alterVolume(dir) {
+      const currentVolume = Math.floor(this.$refs.videoBalise.volume * 10) / 10;
+      if (dir === "+") {
+        if (currentVolume < 1) this.$refs.videoBalise.volume += 0.05;
+      } else if (dir === "-") {
+        if (currentVolume > 0) this.$refs.videoBalise.volume -= 0.05;
+      }
+    },
+    volumeKeyListener(e) {
+      if (e.key === "+") {
+        this.alterVolume("+");
+      }
+      if (e.key === "-") {
+        this.alterVolume("-");
+      }
+      this.currentVolumeLevel = this.$refs.videoBalise.volume;
     },
   },
 };

@@ -71,13 +71,14 @@ export default {
   align-items: center;
   justify-content: center;
   background-color: rgba(63, 62, 62, 0.69);
+  z-index: 1;
 }
 
-progress {
+#progress {
   margin: 0 100px;
 }
 
-progress[value] {
+#progress[value] {
   color: grey;
   position: relative;
   width: 1290px;
@@ -86,12 +87,12 @@ progress[value] {
   border-radius: 30px;
 }
 
-progress[value]::-webkit-progress-bar {
+#progress[value]::-webkit-progress-bar {
   background-color: grey;
   border-radius: 30px;
 }
 
-progress[value]::-webkit-progress-value {
+#progress[value]::-webkit-progress-value {
   background-image: linear-gradient(
     90deg,
     rgb(65, 71, 197) 43.75%,
