@@ -146,12 +146,25 @@ export default {
     // Audio
     //
     alterVolume(dir) {
-      const currentVolume = Math.floor(this.$refs.videoBalise.volume * 10) / 10;
+      // const currentVolume = Math.floor(this.$refs.videoBalise.volume * 10) / 10;
+      const currentVolume = parseFloat(this.$refs.videoBalise.volume).toFixed(
+        2
+      );
+      console.log("cur " + currentVolume);
       if (dir === "+") {
-        if (currentVolume < 1) this.$refs.videoBalise.volume += 0.05;
+        if (currentVolume < 0.95) {
+          this.$refs.videoBalise.volume += 0.05;
+        } else if (currentVolume == 0.95) {
+          this.$refs.videoBalise.volume = 1;
+        }
       } else if (dir === "-") {
-        if (currentVolume > 0) this.$refs.videoBalise.volume -= 0.05;
+        if (currentVolume > 0.5) {
+          this.$refs.videoBalise.volume -= 0.05;
+        } else if (currentVolume == 0.5) {
+          this.$refs.videoBalise.volume = 0;
+        }
       }
+      console.log(this.$refs.videoBalise.volume);
     },
     volumeKeyListener(e) {
       if (e.key === "+") {
