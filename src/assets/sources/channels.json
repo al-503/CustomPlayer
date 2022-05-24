@@ -36,7 +36,7 @@
     "security": false,
     "programme" :[
       { "description" : "The first Blender Open Movie from 2006",
-        "sources" : "commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+        "sources" : "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
         "subtitle" : "By Blender Foundation",
         "thumb" : "ElephantDream.jpg",
         "title" : "Elephant Dream",
@@ -65,7 +65,7 @@
     "security": false,
     "programme" :[
       { "description" : "Sintel is an independently produced short film, initiated by the Blender Foundation as a means to further improve and validate the free/open source 3D creation suite Blender. With initial funding provided by 1000s of donations via the internet community, it has again proven to be a viable development model for both open 3D technology as for independent animation film.\nThis 15 minute film has been realized in the studio of the Amsterdam Blender Institute, by an international team of artists and developers. In addition to that, several crucial technical and creative targets have been realized online, by developers and artists and teams all over the world.\nwww.sintel.org",
-        "sources" : "commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4" ,
+        "sources" : "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4" ,
         "subtitle" : "By Blender Foundation",
         "thumb" : "Sintel.jpg",
         "title" : "Sintel",
