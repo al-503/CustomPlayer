@@ -1,7 +1,7 @@
 <template>
   <div class="custom-player">
     <video ref="videoBalise" loop muted>
-      <source :src="videoURL" type="video/mp4" />
+      <source :src="programme.sources" type="video/mp4" /> <!-- ici on appelle la data -->
     </video>
     <div v-if="!isPlaying && replay" class="play-pause-contener">
       <Pause :iconName="iconName" />
@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import Store from '@/store'
 
 import Pause from "./Pause.vue";
 import Play from "./Play.vue";
@@ -42,16 +43,14 @@ export default {
     AudioControls,
   },
   props: {
-    videoURL: {
-      type: String,
-      required: true,
-    },
     pressedKeyCode: {
       type: Number,
       default: null,
     },
   },
-
+  computed:{
+     programme: () => Store.getters.getProgramme[0],// ici on récup la data du store
+  },
   /* **data**
     isPlaying: false, => passe sur true si la vidéo est jouée
     isPlayAgain: false, => passe sur true si la video est jouée après avoir   été arrêtée
@@ -63,7 +62,6 @@ export default {
     timeout: null, => contient le settime out
     videoDuration: null, => contient la durée totale de la vidéo
     videoCurrentTime: null, => contient l'avancement de la vidéo
-   
    */
 
   data: () => ({

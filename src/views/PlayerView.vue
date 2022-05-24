@@ -1,7 +1,7 @@
 <template>
   <div class="player-view">
     <router-view />
-    <CustomPlayer :videoURL="programme.sources"> <!---il prend bien celui la-->
+    <CustomPlayer> <!---il prend bien celui la-->
       <InfoLight v-if="true" />
     </CustomPlayer>
   </div>
@@ -21,14 +21,8 @@ export default {
   created () {
     document.addEventListener("keydown", (e) => this.ChannelChange(e));
   },
-  computed:{
-     programme: () => Store.getters.getProgramme[0],
-  },
-  //je ne sais pas à quoi sertt cette method - axel -
   methods: {
-    // changeVideo(url) {
-    //   this.videoURL = url;
-    // },
+//aura besoin d'un refacto et va être déplacée en parti dans le store
     ChannelChange (e) {
       if ( e.key == "PageUp" ) {
         if ( Store.state.currentIndex === 29 ){
