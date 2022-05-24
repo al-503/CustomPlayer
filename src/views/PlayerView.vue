@@ -1,11 +1,7 @@
 <template>
   <div class="player-view">
     <router-view />
-<<<<<<< HEAD
-    <CustomPlayer> <!---il prend bien celui la-->
-=======
     <CustomPlayer :videoURL="programme.sources">
->>>>>>> 85cc88cbbd0d59823f57c5fc15db4e2e9c957164
       <InfoLight v-if="true" />
     </CustomPlayer>
   </div>
