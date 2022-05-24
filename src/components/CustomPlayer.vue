@@ -1,7 +1,7 @@
 <template>
   <div class="custom-player">
     <video ref="videoBalise" loop muted>
-      <source :src="videoSrc" type="video/mp4" />
+      <source :src="videoURL" type="video/mp4" />
     </video>
     <div v-if="!isPlaying && replay" class="play-pause-contener">
       <Pause :iconName="iconName" />
@@ -28,6 +28,7 @@
 </template>
 
 <script>
+
 import Pause from "./Pause.vue";
 import Play from "./Play.vue";
 import TimeBar from "./TimeBar.vue";
@@ -68,7 +69,6 @@ export default {
   data: () => ({
     isPlaying: false,
     isPlayAgain: false,
-    videoSrc: null,
     iconName: null,
     videoBalise: null,
     replay: false,
@@ -80,9 +80,9 @@ export default {
     currentVolumeLevel: null,
     maxVolumeLevel: null,
   }),
+ 
   mounted() {
     //Lorsque l'élément est monté, on passe à this.videoSrc, la source de la vidéo puis on met la vidéo en play
-    this.videoSrc = this.videoURL;
     this.$refs.videoBalise.play();
 
     this.$refs.videoBalise.muted = !this.$refs.videoBalise.muted;

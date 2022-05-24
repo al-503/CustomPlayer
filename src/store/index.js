@@ -4,7 +4,7 @@ import Sources from '../assets/sources/channels.json'
 export default createStore({
   state: {
     Channels: Sources.channels,
-    currentIndex: 3,
+    currentIndex: 0,
   },
   getters: {
     getCurrentChannel (state) {

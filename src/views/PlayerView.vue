@@ -1,7 +1,7 @@
 <template>
   <div class="player-view">
     <router-view />
-    <CustomPlayer :videoURL="programme.sources">
+    <CustomPlayer :videoURL="programme.sources"> <!---il prend bien celui la-->
       <InfoLight v-if="true" />
     </CustomPlayer>
   </div>
@@ -22,7 +22,7 @@ export default {
     document.addEventListener("keydown", (e) => this.ChannelChange(e));
   },
   computed:{
-    programme: () => Store.getters.getProgramme[0],
+     programme: () => Store.getters.getProgramme[0],
   },
   //je ne sais pas à quoi sertt cette method - axel -
   methods: {
