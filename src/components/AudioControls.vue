@@ -4,7 +4,7 @@
       <progress class="volumeBar" ref="volumeBar" value="0" min="0" max="1">
         <span class="currentVolume" ref="currentVolume"></span>
       </progress>
-      <!-- <fa class="volume-icon" :icon="volumeIcon" /> -->
+      <!-- <fa class="volume-icon" icon="volume-high" /> -->
     </div>
   </div>
   <div class="greyBackground"></div>
@@ -103,6 +103,10 @@ export default {
     rgb(0, 178, 241) 100%
   );
   border-radius: 40px;
+}
+
+.volume-icon {
+  z-index: 1;
 }
 .currentVolume {
   border-radius: 15px;
