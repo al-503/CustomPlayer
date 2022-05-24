@@ -12,9 +12,15 @@ export default createStore({
     },
     getProgramme (state) {
       return state.Channels[state.currentIndex].programme
-    },
+    }
   },
   mutations: {
+    KeyLeft(state, n) {
+      state.currentIndex += n
+    },
+    KeyRight(state) {
+      return state.currentIndex--
+    },
   },
   actions: {
   },

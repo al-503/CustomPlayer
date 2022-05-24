@@ -1,8 +1,8 @@
 <template>
   <div class="player-view">
     <router-view />
-    <CustomPlayer :videoURL="programme.sources">
-      <InfoLight v-if="true" />
+    <CustomPlayer :currentFlux="programme[0].sources">
+      <InfoLight/>
     </CustomPlayer>
   </div>
 </template>
@@ -21,8 +21,9 @@ export default {
   created () {
     document.addEventListener("keydown", (e) => this.ChannelChange(e));
   },
-  computed:{
-    programme: () => Store.getters.getProgramme[0],
+  computed: {
+    currentChannel: () => Store.getters.getCurrentChannel,
+    programme: () => Store.getters.getProgramme,
   },
   //je ne sais pas à quoi sertt cette method - axel -
   methods: {
@@ -34,14 +35,14 @@ export default {
         if ( Store.state.currentIndex === 29 ){
           Store.state.currentIndex = 0
         } else {
-           console.log(Store.state.currentIndex = Store.state.currentIndex + 1)
+          Store.commit('KeyLeft', 1)// console.log(Store.state.currentIndex = Store.state.currentIndex + 1)
         }
       } else if ( e.key == "PageDown" ) {
         if ( Store.state.currentIndex === 0){
           //attention ici la valeur est en dur est doit etre remplacer avec un point length
           Store.state.currentIndex = 29
         } else {
-          console.log(Store.state.currentIndex = Store.state.currentIndex - 1)
+          Store.commit('KeyRight')//console.log(Store.state.currentIndex = Store.state.currentIndex - 1)
         }
       }
       // doit faire current index -1

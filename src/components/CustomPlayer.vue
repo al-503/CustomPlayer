@@ -1,7 +1,7 @@
 <template>
   <div class="custom-player">
     <video ref="videoBalise" loop muted>
-      <source :src="programme.sources" type="video/mp4" /> <!-- ici on appelle la data -->
+      <source :src="currentFlux" type="video/mp4" /> <!-- ici on appelle la data -->
     </video>
     <div v-if="!isPlaying && replay" class="play-pause-contener">
       <Pause :iconName="iconName" />
@@ -43,13 +43,14 @@ export default {
     AudioControls,
   },
   props: {
+    currentFlux: {
+      type: String,
+      require: true
+    },
     pressedKeyCode: {
       type: Number,
       default: null,
     },
-  },
-  computed:{
-     programme: () => Store.getters.getProgramme[0],// ici on récup la data du store
   },
   /* **data**
     isPlaying: false, => passe sur true si la vidéo est jouée
