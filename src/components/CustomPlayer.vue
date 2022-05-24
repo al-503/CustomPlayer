@@ -158,9 +158,9 @@ export default {
           this.$refs.videoBalise.volume = 1;
         }
       } else if (dir === "-") {
-        if (currentVolume > 0.5) {
+        if (currentVolume > 0.05) {
           this.$refs.videoBalise.volume -= 0.05;
-        } else if (currentVolume == 0.5) {
+        } else if (currentVolume == 0.05) {
           this.$refs.videoBalise.volume = 0;
         }
       }
