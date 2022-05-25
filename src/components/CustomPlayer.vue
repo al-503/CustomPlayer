@@ -76,13 +76,12 @@ export default {
     videoCurrentTime: null,
     currentVolumeLevel: null,
     maxVolumeLevel: null,
-    testflux: ""
   }),
 
   mounted() {
-    //Lorsque l'élément est monté, la source de la vidéo puis on met la vidéo en play
+    // Lorsque l'élément est monté, la source de la vidéo puis on met la vidéo en play
     this.$refs.videoBalise.play();
-    this.$refs.videoBalise.muted = !this.$refs.videoBalise.muted;
+    this.$refs.videoBalise.muted = !this.$refs.videoBalise.muted; //cette ligne empeche de lancer la vidéo en autoplay
     this.$refs.videoBalise.volume = 0.5;
     // On écoute ici l'ensemble des touches du clavier et on appelle la fonction qui KeyListenner qui regarde quelle touche a été appuyée
     document.addEventListener("keydown", (e) => this.keyListenner(e));

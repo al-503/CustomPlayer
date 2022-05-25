@@ -2,7 +2,7 @@
   <div class="player-view">
     <router-view />
     <CustomPlayer :currentFlux="programme[0].sources">
-      <InfoLight v-if="false"/>
+      <InfoLight v-if="true"/>
     </CustomPlayer>
   </div>
 </template>
