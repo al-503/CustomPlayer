@@ -1,7 +1,7 @@
 <template>
   <div class="custom-player">
     <video ref="videoBalise" loop muted>
-      <source :src="currentFlux" type="video/mp4" /> <!-- ici on appelle la data -->
+      <source :src="currentFlux" type="video/mp4" />
     </video>
     <div v-if="!isPlaying && replay" class="play-pause-contener">
       <Pause :iconName="iconName" />
@@ -28,8 +28,6 @@
 </template>
 
 <script>
-import Store from '@/store'
-
 import Pause from "./Pause.vue";
 import Play from "./Play.vue";
 import TimeBar from "./TimeBar.vue";
@@ -78,12 +76,12 @@ export default {
     videoCurrentTime: null,
     currentVolumeLevel: null,
     maxVolumeLevel: null,
+    testflux: ""
   }),
- 
-  mounted() {
-    //Lorsque l'élément est monté, on passe à this.videoSrc, la source de la vidéo puis on met la vidéo en play
-    this.$refs.videoBalise.play();
 
+  mounted() {
+    //Lorsque l'élément est monté, la source de la vidéo puis on met la vidéo en play
+    this.$refs.videoBalise.play();
     this.$refs.videoBalise.muted = !this.$refs.videoBalise.muted;
     this.$refs.videoBalise.volume = 0.5;
     // On écoute ici l'ensemble des touches du clavier et on appelle la fonction qui KeyListenner qui regarde quelle touche a été appuyée
@@ -97,12 +95,12 @@ export default {
     show() {
       this.timeout = setTimeout(this.hide, 500);
     },
-
     // La méthode hide fait disparaître le composant play (elle passe this.showing sur false ce qui empeche de passer le v-if)
     hide() {
       this.showing = false;
       clearTimeout(this.timeout);
     },
+
     // La méthode toggleVideoPlay regarde si la video est jouée. Si elle est joué, elle l'a met en pause et inversement
     toggleVideoPlay() {
       if (this.$refs?.videoBalise !== null && this.$refs?.videoBalise.paused) {
@@ -141,9 +139,11 @@ export default {
         this.toggleVideoPlay();
       }
     },
-    //
-    // Audio
-    //
+
+    ///////////
+    // Audio //
+    //////////
+
     alterVolume(dir) {
       // const currentVolume = Math.floor(this.$refs.videoBalise.volume * 10) / 10;
       const currentVolume = parseFloat(this.$refs.videoBalise.volume).toFixed(
@@ -165,6 +165,7 @@ export default {
       }
       console.log(this.$refs.videoBalise.volume);
     },
+    
     volumeKeyListener(e) {
       if (e.key === "+") {
         this.alterVolume("+");

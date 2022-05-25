@@ -15,9 +15,11 @@ export default createStore({
     }
   },
   mutations: {
-    KeyLeft(state, n) {
-      state.currentIndex += n
+    // augment le current index de 1
+    KeyLeft(state) {
+      state.currentIndex++
     },
+    // diminue le current index de -1
     KeyRight(state) {
       return state.currentIndex--
     },

@@ -1,23 +1,22 @@
 <template>
   <div class="info-light">
-    <!-- <InfoLightHeader /> -->
     <div class="info-light-header">
-      <!-----ici heure courante------->
-      <CurrentHour />
-      <!-----ici logo courante------->
+      <!-----ici heure courante: ------->
+      <CurrentHour/>
+      <!-----ici logo courante: ------->
       <CurrentChannelLogo :logo="currentChannel.logo"/>
     </div>
 
     <div class="info-light-bottom">
-      <!-- ici info en cours -->
-      <CurrentProgrammeInfo :title="programme[0].title" 
+      <!-- ici info en cours: -->
+      <CurrentProgrammeInfo :title="programme[0].title"
                             :gender="programme[0].genre" 
                             :startAt="programme[0].startTime" 
                             :endAt="programme[0].endTime" /> 
-                                        <!-- les index ici sont en dur car pas de gestions des heures 
-                                        des programme donc pas utile de refaire une fonction juste pour 
-                                        changer un index sur une chaine qui n'a que 2 programes fixe -->
-      <!-- ici info suivante -->
+      <!-- les index ici sont en dur car pas de gestions des heures --> 
+      <!-- des programme donc pas utile de refaire une fonction juste pour -->
+      <!-- changer un index sur une chaine qui n'a que 2 programes fixe -->
+      <!-- ici info suivante: -->
       <NextProgrammeInfo :title="programme[1].title"
                          :startAt="programme[1].startTime" 
                          :endAt="programme[1].endTime" 
@@ -42,33 +41,11 @@ export default {
     CurrentProgrammeInfo,
     NextProgrammeInfo
   },
-  // created () {
-  //   document.addEventListener("keydown", (e) => this.ChannelChange(e));
-  // },
+
   computed: {
     currentChannel: () => Store.getters.getCurrentChannel,
     programme: () => Store.getters.getProgramme,
-  },
-  // methods: {
-  //   ChannelChange (e) {
-  //     if ( e.key === "PageUp") {
-  //       if ( Store.state.currentIndex === 29 ){
-  //         Store.state.currentIndex = 0
-  //       } else {
-  //         console.log(Store.state.currentIndex = Store.state.currentIndex + 1)
-  //       }
-  //     } else if ( e.key === "PageDown" ) {
-  //       if ( Store.state.currentIndex === 0){
-  //         //attention ici la valeur est en dur est doit etre remplacer avec un point length
-  //         Store.state.currentIndex = 29
-  //       } else {
-  //         console.log(Store.state.currentIndex = Store.state.currentIndex - 1)
-  //       }
-  //     }
-  //     // doit faire current index -1
-  //     // si currentIndex = 0 alors faire current index = array.length 
-  //   }
-  // }
+  }
 }
 </script>
 
@@ -90,12 +67,9 @@ export default {
   width: 100%;
   height: 25%;
   top: 80%;
-
   background: rgba(63, 62, 62, 0.69);
   backdrop-filter: blur(20px);
-
   color:white;
-
   display: flex;
 }
 
