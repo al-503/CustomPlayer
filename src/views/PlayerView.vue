@@ -2,7 +2,8 @@
   <div class="player-view">
     <router-view />
     <CustomPlayer :currentFlux="programme[0].sources">
-      <InfoLight v-if="true"/>
+     <!--<InfoLight v-if="true"/>-->
+      <InfoMax v-if="true" />
     </CustomPlayer>
   </div>
 </template>
@@ -12,11 +13,13 @@ import Store from '@/store'
 
 import CustomPlayer from "@/components/CustomPlayer.vue";
 import InfoLight from "@/components/InfoLight.vue";
+import InfoMax from "@/components/InfoMax.vue"
 
 export default {
   components: {
     CustomPlayer,
     InfoLight,
+    InfoMax
   },
 
   created () {

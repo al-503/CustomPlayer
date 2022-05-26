@@ -1,5 +1,5 @@
 <template>
-     <input type="submit" value="EXIT" class="exitButtton" v-on:keyup.enter="returnToMainPage" >
+     <input type="submit" value="EXIT" class="exitButtton" v-on:keyup.esc="returnToMainPage" >
 </template>
 
 <script>
