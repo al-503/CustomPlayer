@@ -143,6 +143,12 @@ export default {
     ///////////
     // Audio //
     //////////
+    myStopFunction() {
+      clearTimeout(this.barSoundVisible);
+    },
+    disparition() {
+      this.toggleBarSoundDisplay = false;
+    },
 
     alterVolume(dir) {
       // const currentVolume = Math.floor(this.$refs.videoBalise.volume * 10) / 10;
