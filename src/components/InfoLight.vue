@@ -1,14 +1,14 @@
 <template>
   <div class="info-light">
 
-    <div class="info-light-header top-hide">
+    <div class="info-light-header">
       <!-----ici heure courante: ------->
       <CurrentHour/>
       <!-----ici logo courante: ------->
       <CurrentChannelLogo :logo="currentChannel.logo"/>
     </div>
 
-    <div class="info-light-bottom bottom-hide">
+    <div class="info-light-bottom">
       <!-- ici info en cours: -->
       <CurrentProgrammeInfo :title="programme[0].title"
                             :gender="programme[0].genre" 
@@ -28,6 +28,12 @@
 </template>
 
 <script>
+///***** Permet de récup la key d'une touche *******///
+// window.addEventListener('keydown', function(e){  ///
+//   console.log(e)                                 ///
+// });                                              ///
+///////////////////////////////////////////////////////
+
 import Store from '@/store'
 
 import CurrentHour from "@/components/CurrentHour.vue"
@@ -43,11 +49,24 @@ export default {
     NextProgrammeInfo
   },
 
+  created () {
+    document.addEventListener("keydown", (e) => this.showInfoLight(e));
+  },
+
   computed: {
     currentChannel: () => Store.getters.getCurrentChannel,
     programme: () => Store.getters.getProgramme,
+  },
+
+  methods: {
+    showInfoLight (e) {
+      if(e.key == "ArrowUp") {
+        document.getElementsByClassName(".info-light-header").classList.add("top-show");
+      }
+    }
   }
 }
+
 </script>
 
 <style lang="scss">
@@ -62,6 +81,9 @@ export default {
     rgba(0, 0, 0, 0.75) 100%
   );
   border-radius: 2px;
+
+  top: -28%;
+
 }
 .info-light-bottom {
   position: absolute;
@@ -71,6 +93,8 @@ export default {
   backdrop-filter: blur(20px);
   color:white;
   display: flex;
+
+  bottom: -20%;
 }
 
 .bottom-show {
@@ -80,14 +104,4 @@ export default {
 .top-show {
   top: 0%;
 }
-
-.bottom-hide {
-  bottom: -20%;
-}
-
-.top-hide {
-  top: -28%;
-}
-
-
 </style>

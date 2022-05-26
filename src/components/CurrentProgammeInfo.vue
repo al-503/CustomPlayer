@@ -4,6 +4,7 @@
       <h1 class="current-title">{{ title }}</h1>
       <p class="gender">{{ gender }}</p>
       <!-- bouton info+ -->
+      <div class="info-plus">INFO +</div>
     </div>
     <p class="time">{{ startAt + " - "+  endAt }}</p>
     <!-- progress bar  -->
@@ -40,9 +41,9 @@ export default  {
   display: flex;
 }
 
-.info-text,.time {
-  padding: 1%;
-  margin: 1%;
+.info-text{
+  margin-top: 2%;
+  margin-left: 3%;
 }
 
 .current-title {
@@ -59,12 +60,24 @@ export default  {
 
 .gender,.time {
   font-size: 31px;
-  margin: 2%;
+  margin: 1.5%;
 }
 
 .time {
-  margin-top: 3%;
-  display: block;
-  width: 30%;
+  margin-top: 5%;
+  text-align: center;
+}
+
+.info-plus {
+  margin-top: 2%;
+  margin-left: 2%;
+  padding: 1%;
+  width: 16%;
+  height: 17%;
+  border: 1px solid white;
+  border-radius: 12px;
+  text-align: center;
+  font-weight: 900;
+  font-style: italic;
 }
 </style>

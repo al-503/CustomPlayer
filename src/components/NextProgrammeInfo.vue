@@ -44,7 +44,7 @@ export default {
 <style lang="scss">
 .next-programme {
   font-family: "Inter", sans-serif;
-  width: 80%;
+  width: 60%;
   display: flex;
 }
 
@@ -71,7 +71,7 @@ export default {
 .next-programme-msg {
   position: absolute;
   top:73%;
-  right: 37%;
+  right: 30%;
   font-weight: 900;
   font-size: 33px;
 }
