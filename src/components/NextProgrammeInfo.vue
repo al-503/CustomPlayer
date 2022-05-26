@@ -70,8 +70,8 @@ export default {
 
 .next-programme-msg {
   position: absolute;
-  top:60%;
-  right: 38%;
+  top:73%;
+  right: 37%;
   font-weight: 900;
   font-size: 33px;
 }

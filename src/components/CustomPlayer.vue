@@ -18,8 +18,9 @@
       :videoDuration="videoDuration"
     />
   </div>
+  <!-- v-if="false" pour pouvoir faire mes anim mais c'est à enlever -->
   <div class="audioControls">
-    <AudioControls
+    <AudioControls v-if="false"
       :currentVolumeLevel="currentVolumeLevel"
       :maxVolumeLevel="maxVolumeLevel"
     />

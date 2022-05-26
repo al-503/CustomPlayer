@@ -1,13 +1,14 @@
 <template>
   <div class="info-light">
-    <div class="info-light-header">
+
+    <div class="info-light-header top-hide">
       <!-----ici heure courante: ------->
       <CurrentHour/>
       <!-----ici logo courante: ------->
       <CurrentChannelLogo :logo="currentChannel.logo"/>
     </div>
 
-    <div class="info-light-bottom">
+    <div class="info-light-bottom bottom-hide">
       <!-- ici info en cours: -->
       <CurrentProgrammeInfo :title="programme[0].title"
                             :gender="programme[0].genre" 
@@ -65,12 +66,28 @@ export default {
 .info-light-bottom {
   position: absolute;
   width: 100%;
-  height: 25%;
-  top: 80%;
+  height: 20%;
   background: rgba(63, 62, 62, 0.69);
   backdrop-filter: blur(20px);
   color:white;
   display: flex;
 }
+
+.bottom-show {
+  bottom: 0%;
+}
+
+.top-show {
+  top: 0%;
+}
+
+.bottom-hide {
+  bottom: -20%;
+}
+
+.top-hide {
+  top: -28%;
+}
+
 
 </style>
