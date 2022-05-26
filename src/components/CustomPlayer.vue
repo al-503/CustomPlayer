@@ -18,11 +18,13 @@
       :videoDuration="videoDuration"
     />
   </div>
-  <div class="audioControls">
-    <AudioControls
-      :currentVolumeLevel="currentVolumeLevel"
-      :maxVolumeLevel="maxVolumeLevel"
-    />
+  <div v-if="this.toggleBarSoundDisplay">
+    <div class="audioControls">
+      <AudioControls
+        :currentVolumeLevel="currentVolumeLevel"
+        :maxVolumeLevel="maxVolumeLevel"
+      />
+    </div>
   </div>
   <slot></slot>
 </template>
