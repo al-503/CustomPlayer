@@ -43,7 +43,7 @@ export default {
   props: {
     currentFlux: {
       type: String,
-      require: true
+      require: true,
     },
     pressedKeyCode: {
       type: Number,
@@ -76,6 +76,7 @@ export default {
     videoCurrentTime: null,
     currentVolumeLevel: null,
     maxVolumeLevel: null,
+    toggleBarSoundDisplay: false,
   }),
 
   mounted() {
@@ -164,7 +165,7 @@ export default {
       }
       console.log(this.$refs.videoBalise.volume);
     },
-    
+
     volumeKeyListener(e) {
       if (e.key === "+") {
         this.alterVolume("+");
