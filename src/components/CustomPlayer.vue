@@ -43,7 +43,7 @@ export default {
   props: {
     currentFlux: {
       type: String,
-      require: true
+      require: true,
     },
     pressedKeyCode: {
       type: Number,
@@ -85,9 +85,14 @@ export default {
     this.$refs.videoBalise.volume = 0.5;
     // On écoute ici l'ensemble des touches du clavier et on appelle la fonction qui KeyListenner qui regarde quelle touche a été appuyée
     document.addEventListener("keydown", (e) => this.keyListenner(e));
-
+    document.addEventListener("keydown", (e) => this.keyPageTurn(e));
     document.addEventListener("keydown", (e) => this.volumeKeyListener(e));
   },
+  // beforeUpdate() {
+  //   this.$refs.videoBalise.pause();
+  //   this.$refs.videoBalise.load();
+  //   this.$refs.videoBalise.play();
+  // },
 
   methods: {
     // la méthode show fait un Call back de la méthode hide au bout de 0.5 secondes
@@ -139,6 +144,15 @@ export default {
       }
     },
 
+    // keyPageTurn gère le changement de la source de la vidéo lorsque l'utilisateur change de chaîne
+    keyPageTurn(e) {
+      if (e.key == "PageUp" || e.key == "PageDown") {
+        this.$refs.videoBalise.pause();
+        this.$refs.videoBalise.load();
+        this.$refs.videoBalise.play();
+      }
+    },
+
     ///////////
     // Audio //
     //////////
@@ -164,7 +178,7 @@ export default {
       }
       console.log(this.$refs.videoBalise.volume);
     },
-    
+
     volumeKeyListener(e) {
       if (e.key === "+") {
         this.alterVolume("+");
