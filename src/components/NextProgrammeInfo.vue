@@ -51,6 +51,7 @@ export default {
 .next-programme-thumb,.next-programme-text {
   margin: 1%;
 }
+
 .next-programme-text {
   margin-top: 3%;
 }

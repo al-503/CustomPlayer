@@ -6,13 +6,11 @@
       <!-- bouton info+ -->
     </div>
     <p class="time">{{ startAt + " - "+  endAt }}</p>
-    <!-- heure de début / de fin -->
     <!-- progress bar  -->
   </div>
 </template>
 
 <script>
-
 export default  {
   props: {
     title: {
@@ -41,6 +39,7 @@ export default  {
   width: 80%;
   display: flex;
 }
+
 .info-text,.time {
   padding: 1%;
   margin: 1%;
@@ -57,10 +56,12 @@ export default  {
   -webkit-line-clamp: 1; /* number of lines to show */
   -webkit-box-orient: vertical;
 }
+
 .gender,.time {
   font-size: 31px;
   margin: 2%;
 }
+
 .time {
   margin-top: 3%;
   display: block;
