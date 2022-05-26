@@ -173,6 +173,13 @@ export default {
     },
 
     volumeKeyListener(e) {
+      if (e.key === "+" || e.key === "-") {
+        this.toggleBarSoundDisplay = true;
+        if (this.barSoundVisible != null) {
+          this.myStopFunction();
+        }
+        this.barSoundVisible = setTimeout(this.disparition, 3000);
+      }
       if (e.key === "+") {
         this.alterVolume("+");
       }
