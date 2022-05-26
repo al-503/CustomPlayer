@@ -49,6 +49,13 @@ export default  {
 .current-title {
   font-size: 64px;
   font-weight: 900;
+
+  width: 15ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* number of lines to show */
+  -webkit-box-orient: vertical;
 }
 .gender,.time {
   font-size: 31px;
