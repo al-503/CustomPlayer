@@ -5,7 +5,6 @@
 		<div class="infoMaxBody">
 			<CurrentChannelLogo :logo="currentChannel.logo" />
             
-             <p>{{programme[0].title}}</p>
             <p class="genreCreatingTimeInfoMax" >{{programme[0].genre}}</p>
             <p class="descriptionInfoMax">{{programme[0].description}}</p>
             <ExitButton />
@@ -33,9 +32,10 @@ export default {
     }
 }
 
+
 </script>
 
-<style scoped>
+<style>
 .infoMaxMainDiv{
     width: 30%;
     height: 100%;
