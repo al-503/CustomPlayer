@@ -1,16 +1,27 @@
 <template>
   <div class="info-light">
-    <!-- <InfoLightHeader /> -->
     <div class="info-light-header">
-      <!-----ici heure courante------->
-      <CurrentHour />
-      <!-----ici logo courante------->
-      <CurrentChannelLogo :logo="channel.logo"/>
+      <!-----ici heure courante: ------->
+      <CurrentHour/>
+      <!-----ici logo courante: ------->
+      <CurrentChannelLogo :logo="currentChannel.logo"/>
     </div>
 
     <div class="info-light-bottom">
-      <!-- ici info en cours -->
-      <!-- ici info suivante -->
+      <!-- ici info en cours: -->
+      <CurrentProgrammeInfo :title="programme[0].title"
+                            :gender="programme[0].genre" 
+                            :startAt="programme[0].startTime" 
+                            :endAt="programme[0].endTime" /> 
+      <!-- les index ici sont en dur car pas de gestions des heures --> 
+      <!-- des programme donc pas utile de refaire une fonction juste pour -->
+      <!-- changer un index sur une chaine qui n'a que 2 programes fixe -->
+      <!-- ici info suivante: -->
+      <NextProgrammeInfo :title="programme[1].title"
+                         :startAt="programme[1].startTime" 
+                         :endAt="programme[1].endTime" 
+                         :resume="programme[1].description" 
+                         :thumb="programme[1].thumb"/>
     </div>
   </div>
 </template>
@@ -20,17 +31,22 @@ import Store from '@/store'
 
 import CurrentHour from "@/components/CurrentHour.vue"
 import CurrentChannelLogo from '@/components/CurrentChannelLogo.vue'
+import CurrentProgrammeInfo from '@/components/CurrentProgammeInfo.vue'
+import NextProgrammeInfo from '@/components/NextProgrammeInfo.vue'
 
 export default {
   components: {
     CurrentHour,
     CurrentChannelLogo,
-  }, 
+    CurrentProgrammeInfo,
+    NextProgrammeInfo
+  },
 
   computed: {
-    channel: () => Store.state.firstChannel
-  },
-};
+    currentChannel: () => Store.getters.getCurrentChannel,
+    programme: () => Store.getters.getProgramme,
+  }
+}
 </script>
 
 <style lang="scss">
@@ -46,4 +62,15 @@ export default {
   );
   border-radius: 2px;
 }
+.info-light-bottom {
+  position: absolute;
+  width: 100%;
+  height: 25%;
+  top: 80%;
+  background: rgba(63, 62, 62, 0.69);
+  backdrop-filter: blur(20px);
+  color:white;
+  display: flex;
+}
+
 </style>

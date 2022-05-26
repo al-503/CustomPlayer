@@ -1,7 +1,7 @@
 <template>
   <div class="custom-player">
     <video ref="videoBalise" loop muted>
-      <source :src="videoSrc" type="video/mp4" />
+      <source :src="currentFlux" type="video/mp4" />
     </video>
     <div v-if="!isPlaying && replay" class="play-pause-contener">
       <Pause :iconName="iconName" />
@@ -41,16 +41,15 @@ export default {
     AudioControls,
   },
   props: {
-    videoURL: {
+    currentFlux: {
       type: String,
-      required: true,
+      require: true
     },
     pressedKeyCode: {
       type: Number,
       default: null,
     },
   },
-
   /* **data**
     isPlaying: false, => passe sur true si la vidéo est jouée
     isPlayAgain: false, => passe sur true si la video est jouée après avoir   été arrêtée
@@ -62,13 +61,11 @@ export default {
     timeout: null, => contient le settime out
     videoDuration: null, => contient la durée totale de la vidéo
     videoCurrentTime: null, => contient l'avancement de la vidéo
-   
    */
 
   data: () => ({
     isPlaying: false,
     isPlayAgain: false,
-    videoSrc: null,
     iconName: null,
     videoBalise: null,
     replay: false,
@@ -80,12 +77,11 @@ export default {
     currentVolumeLevel: null,
     maxVolumeLevel: null,
   }),
-  mounted() {
-    //Lorsque l'élément est monté, on passe à this.videoSrc, la source de la vidéo puis on met la vidéo en play
-    this.videoSrc = this.videoURL;
-    this.$refs.videoBalise.play();
 
-    this.$refs.videoBalise.muted = !this.$refs.videoBalise.muted;
+  mounted() {
+    // Lorsque l'élément est monté, la source de la vidéo puis on met la vidéo en play
+    this.$refs.videoBalise.play();
+    this.$refs.videoBalise.muted = !this.$refs.videoBalise.muted; //cette ligne empeche de lancer la vidéo en autoplay
     this.$refs.videoBalise.volume = 0.5;
     // On écoute ici l'ensemble des touches du clavier et on appelle la fonction qui KeyListenner qui regarde quelle touche a été appuyée
     document.addEventListener("keydown", (e) => this.keyListenner(e));
@@ -98,12 +94,12 @@ export default {
     show() {
       this.timeout = setTimeout(this.hide, 500);
     },
-
     // La méthode hide fait disparaître le composant play (elle passe this.showing sur false ce qui empeche de passer le v-if)
     hide() {
       this.showing = false;
       clearTimeout(this.timeout);
     },
+
     // La méthode toggleVideoPlay regarde si la video est jouée. Si elle est joué, elle l'a met en pause et inversement
     toggleVideoPlay() {
       if (this.$refs?.videoBalise !== null && this.$refs?.videoBalise.paused) {
@@ -142,9 +138,11 @@ export default {
         this.toggleVideoPlay();
       }
     },
-    //
-    // Audio
-    //
+
+    ///////////
+    // Audio //
+    //////////
+
     alterVolume(dir) {
       // const currentVolume = Math.floor(this.$refs.videoBalise.volume * 10) / 10;
       const currentVolume = parseFloat(this.$refs.videoBalise.volume).toFixed(
@@ -166,6 +164,7 @@ export default {
       }
       console.log(this.$refs.videoBalise.volume);
     },
+    
     volumeKeyListener(e) {
       if (e.key === "+") {
         this.alterVolume("+");
