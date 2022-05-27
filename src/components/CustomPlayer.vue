@@ -148,9 +148,6 @@ export default {
       if (e.key == "Enter") {
         // on met à jour les valeurs videoDuration et videoCurrentTime qui sont envoyées par la suite au composant enfant timebar
         this.videoDuration = this.$refs.videoBalise.duration;
-        this.videoCurrentTime = this.$refs.videoBalise.currentTime;
-        console.log(this.videoDuration);
-        console.log(this.videoCurrentTime);
         // méthode qui gère le "play/pause"
         this.toggleVideoPlay();
       }
