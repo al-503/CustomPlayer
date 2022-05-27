@@ -5,6 +5,7 @@ export default createStore({
   state: {
     Channels: Sources.channels,
     currentIndex: 0,
+    display: false
   },
   getters: {
     getCurrentChannel (state) {
@@ -17,12 +18,16 @@ export default createStore({
   mutations: {
     // augment le current index de 1
     KeyLeft(state) {
-      state.currentIndex++
+      return state.currentIndex++
     },
     // diminue le current index de -1
     KeyRight(state) {
       return state.currentIndex--
     },
+    // display info light
+    LightInfodisplay(state) {
+      return state.display = true
+    }
   },
   actions: {
   },

@@ -2,12 +2,15 @@
   <div class="player-view">
     <router-view />
     <CustomPlayer :currentFlux="programme[0].sources">
-      <InfoLight v-if="true"/>
+      <div v-if="infoDisplayed">
+      <InfoLight/>
+      </div>
     </CustomPlayer>
   </div>
 </template>
 
 <script>
+
 import Store from '@/store'
 
 import CustomPlayer from "@/components/CustomPlayer.vue";
@@ -20,11 +23,16 @@ export default {
   },
 
   created () {
+    // changement de chaine et des infos // 
     document.addEventListener("keydown", (e) => this.ChannelChange(e));
+    // display de l'info light //
+    document.addEventListener("keydown", (e) => this.showInfoLight(e));
   },
 
   computed: {
     programme: () => Store.getters.getProgramme,
+
+    infoDisplayed: () => Store.state.display,
   },
 
   methods: {
@@ -44,6 +52,12 @@ export default {
           //console.log(Store.state.currentIndex = Store.state.currentIndex - 1)
           Store.commit('KeyRight') 
         }
+      }
+    },
+
+    showInfoLight (e) {
+      if(e.key === "ArrowUp") {
+        Store.commit('LightInfodisplay'); 
       }
     }
   },
