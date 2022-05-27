@@ -226,6 +226,7 @@ export default {
     videoCurrentTimerefresh() {
       if (this.$refs.videoBalise != null) {
         this.videoCurrentTime = this.$refs.videoBalise.currentTime;
+        this.videoDuration = this.$refs.videoBalise.duration;
       }
     },
     timeManagement(e) {
