@@ -96,11 +96,9 @@ export default {
       1000
     );
   },
-  // beforeUpdate() {
-  //   this.$refs.videoBalise.pause();
-  //   this.$refs.videoBalise.load();
-  //   this.$refs.videoBalise.play();
-  // },
+  beforeDestroy() {
+    clearInterval(this.currentTimeTimeout);
+  },
 
   methods: {
     // la méthode show fait un Call back de la méthode hide au bout de 0.5 secondes
