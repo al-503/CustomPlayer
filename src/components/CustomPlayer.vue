@@ -12,7 +12,7 @@
       </div>
     </transition>
   </div>
-  <div v-if="!isPlaying && replay">
+  <div v-if="(!isPlaying && replay) || timeManageTimeBarDisplay">
     <TimeBar
       :videoCurrentTime="videoCurrentTime"
       :videoDuration="videoDuration"
@@ -26,6 +26,9 @@
       />
     </div>
   </div>
+  <div v-if="timeManageTimeBarDisplay">
+    <TimeManaging />
+  </div>
   <slot></slot>
 </template>
 
@@ -34,6 +37,7 @@ import Pause from "./Pause.vue";
 import Play from "./Play.vue";
 import TimeBar from "./TimeBar.vue";
 import AudioControls from "@/components/AudioControls.vue";
+import TimeManaging from "@/components/TimeManaging.vue";
 
 export default {
   components: {
@@ -41,6 +45,7 @@ export default {
     Play,
     TimeBar,
     AudioControls,
+    TimeManaging,
   },
   props: {
     currentFlux: {
@@ -79,6 +84,7 @@ export default {
     currentVolumeLevel: null,
     maxVolumeLevel: null,
     toggleBarSoundDisplay: false,
+    timeManageTimeBarDisplay: false,
   }),
 
   mounted() {
@@ -211,8 +217,7 @@ export default {
      * ---------- Time management -------------
      */
     removeTimeBar() {
-      this.timeManageSoundBarDisplay = false;
-      console.log(this.timeManageSoundBarDisplay);
+      this.timeManageTimeBarDisplay = false;
     },
 
     clearTimeBarVisibleTimeOut() {
@@ -225,8 +230,7 @@ export default {
     },
     timeManagement(e) {
       if (e.key == "p" || e.key == "n") {
-        this.timeManageSoundBarDisplay = true;
-        console.log(this.timeManageSoundBarDisplay);
+        this.timeManageTimeBarDisplay = true;
         if (this.timeBarVisible !== null) {
           this.clearTimeBarVisibleTimeOut();
         }
