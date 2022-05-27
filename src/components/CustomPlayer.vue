@@ -204,6 +204,43 @@ export default {
       }
       this.currentVolumeLevel = this.$refs.videoBalise.volume;
     },
+    /**
+     * ---------- Time management -------------
+     */
+    removeTimeBar() {
+      this.timeManageSoundBarDisplay = false;
+      console.log(this.timeManageSoundBarDisplay);
+    },
+
+    clearTimeBarVisibleTimeOut() {
+      clearTimeout(this.timeBarVisible);
+    },
+    videoCurrentTimerefresh() {
+      if (this.$refs.videoBalise != null) {
+        this.videoCurrentTime = this.$refs.videoBalise.currentTime;
+      }
+    },
+    timeManagement(e) {
+      if (e.key == "p" || e.key == "n") {
+        this.timeManageSoundBarDisplay = true;
+        console.log(this.timeManageSoundBarDisplay);
+        if (this.timeBarVisible !== null) {
+          this.clearTimeBarVisibleTimeOut();
+        }
+        this.timeBarVisible = setTimeout(this.removeTimeBar, 3000);
+      }
+
+      if (e.key == "p") {
+        if (this.$refs.videoBalise.currentTime > 10) {
+          this.$refs.videoBalise.currentTime -= 10;
+        } else {
+          this.$refs.videoBalise.currentTime = 0;
+        }
+      }
+      if (e.key == "n") {
+        this.$refs.videoBalise.currentTime += 10;
+      }
+    },
   },
 };
 </script>
