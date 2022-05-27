@@ -90,6 +90,11 @@ export default {
     document.addEventListener("keydown", (e) => this.keyListenner(e));
     document.addEventListener("keydown", (e) => this.keyPageTurn(e));
     document.addEventListener("keydown", (e) => this.volumeKeyListener(e));
+    document.addEventListener("keydown", (e) => this.timeManagement(e));
+    this.currentTimeTimeout = setInterval(
+      () => this.videoCurrentTimerefresh(),
+      1000
+    );
   },
   // beforeUpdate() {
   //   this.$refs.videoBalise.pause();
