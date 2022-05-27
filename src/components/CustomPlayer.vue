@@ -18,11 +18,13 @@
       :videoDuration="videoDuration"
     />
   </div>
-  <div class="audioControls">
-    <AudioControls
-      :currentVolumeLevel="currentVolumeLevel"
-      :maxVolumeLevel="maxVolumeLevel"
-    />
+  <div v-if="this.toggleBarSoundDisplay">
+    <div class="audioControls">
+      <AudioControls
+        :currentVolumeLevel="currentVolumeLevel"
+        :maxVolumeLevel="maxVolumeLevel"
+      />
+    </div>
   </div>
   <slot></slot>
 </template>
@@ -76,6 +78,7 @@ export default {
     videoCurrentTime: null,
     currentVolumeLevel: null,
     maxVolumeLevel: null,
+    toggleBarSoundDisplay: false,
   }),
 
   mounted() {
@@ -156,6 +159,12 @@ export default {
     ///////////
     // Audio //
     //////////
+    myStopFunction() {
+      clearTimeout(this.barSoundVisible);
+    },
+    disparition() {
+      this.toggleBarSoundDisplay = false;
+    },
 
     alterVolume(dir) {
       // const currentVolume = Math.floor(this.$refs.videoBalise.volume * 10) / 10;
@@ -180,6 +189,13 @@ export default {
     },
 
     volumeKeyListener(e) {
+      if (e.key === "+" || e.key === "-") {
+        this.toggleBarSoundDisplay = true;
+        if (this.barSoundVisible != null) {
+          this.myStopFunction();
+        }
+        this.barSoundVisible = setTimeout(this.disparition, 3000);
+      }
       if (e.key === "+") {
         this.alterVolume("+");
       }
