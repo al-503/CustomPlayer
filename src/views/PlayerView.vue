@@ -84,18 +84,8 @@ export default {
     checkingMatch(channelNumber, channelSource) {
       if (this.channelNumberInput == channelNumber) {
         this.matchSucces = true;
-        console.log("succès");
-        console.log(channelSource);
         this.$store.commit("SET_CURRENT_INDEX", this.channelNumberInput);
         this.$store.commit("SET_CHANGE_SRC", true);
-        console.log("changeSrc :" + this.changeSrc);
-
-        /**
-         *  video.pause();
-         *   source.setAttribute("src", channelSource);
-         *    video.load();
-         *     video.play();
-         */
       }
 
       this.tabOfInput = [];
