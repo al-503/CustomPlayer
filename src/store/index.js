@@ -26,7 +26,6 @@ export default createStore({
       state.changeSrc = payload
     },
     SET_CURRENT_INDEX(state, payload) {
-      console.log("payload "+payload)
       state.currentIndex = payload-1
     },
     // augment le current index de 1
