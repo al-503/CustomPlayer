@@ -29,7 +29,7 @@ export default {
 
   computed: {
     programme: () => Store.getters.getProgramme,
-    infoDisplayed: () => Store.state.display,
+    infoDisplayed: () => Store.state.defaultDisplay,
   },
 
   methods: {
@@ -52,9 +52,11 @@ export default {
       }
     },
 
+//// ici les fonctions pour faire apparaître l'info light ////
+
     showInfoLight (e) {
       if(e.key === "ArrowUp") {
-        Store.commit('LightInfodisplay');
+        Store.commit('LightInfoDisplay');
       }
     }
   },

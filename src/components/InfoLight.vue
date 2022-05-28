@@ -28,11 +28,6 @@
 </template>
 
 <script>
-///***** Permet de récup la key d'une touche *******///
-window.addEventListener('keydown', function(e){  ///
-  console.log(e)                                 ///
-});                                              ///
-///////////////////////////////////////////////////////
 
 import Store from '@/store'
 
@@ -69,9 +64,7 @@ export default {
     rgba(0, 0, 0, 0.75) 100%
   );
   border-radius: 2px;
-
   top: -28%;
-
 }
 .info-light-bottom {
   position: absolute;
@@ -81,7 +74,6 @@ export default {
   backdrop-filter: blur(20px);
   color:white;
   display: flex;
-
   bottom: -20%;
 }
 

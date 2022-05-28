@@ -5,7 +5,7 @@ export default createStore({
   state: {
     Channels: Sources.channels,
     currentIndex: 0,
-    display: false
+    defaultDisplay: false
   },
   getters: {
     getCurrentChannel (state) {
@@ -25,8 +25,12 @@ export default createStore({
       return state.currentIndex--
     },
     // display info light
-    LightInfodisplay(state) {
-      return state.display = true
+    LightInfoDisplay(state) {
+      return state.defaultDisplay = true
+    },
+    //fait disparaitre info light
+    LightInfoDefault(state) {
+      return state.defaultDisplay = false
     }
   },
   actions: {
