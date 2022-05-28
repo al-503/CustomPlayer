@@ -53,17 +53,22 @@ export default {
     },
 
 //// ici les fonctions pour faire apparaître l'info light ////
-    myStopFunction() {
+    ResetTimeoutInfoLight() {
       clearTimeout(this.infoLightVisible);
+    },
+
+    stopInfoLight() {
+      Store.commit('LightInfoDefault')
     },
 
     showInfoLight (e) {
       if(e.key === "ArrowUp") {
         Store.commit('LightInfoDisplay');
         if( this.infoLightVisible != null) {
-          this.myStopFunction();
+          console.log("info light" + this.infoLightVisible)
+          this.ResetTimeoutInfoLight();
         }
-        //this.infoLightVisible = setTimeout(Store.commit('LightInfoDefault'), 4000)
+        this.infoLightVisible = setTimeout(this.stopInfoLight, 4000);
       }
     }
   },
