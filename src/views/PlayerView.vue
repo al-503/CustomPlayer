@@ -2,7 +2,7 @@
   <div class="player-view">
     <router-view />
     <CustomPlayer :currentFlux="programme[0].sources">
-      <InfoLight v-if="true" />
+      <InfoLight v-if="infoDisplayed"/>
     </CustomPlayer>
   </div>
 </template>
@@ -20,18 +20,22 @@ export default {
   },
 
   created() {
+     // changement de chaine et des infos //
     document.addEventListener("keydown", (e) => this.ChannelChange(e));
-    document.addEventListener("keydown", (e) =>
-      this.ChannelChangeWithNumKey(e)
-    );
+     // display de l'info light //
+    document.addEventListener("keydown", (e) => this.showInfoLight(e));
+     // changement de chaine par num //
+    document.addEventListener("keydown", (e) => this.ChannelChangeWithNumKey(e));
   },
 
   computed: {
     programme: () => Store.getters.getProgramme,
+    infoDisplayed: () => Store.state.defaultDisplay,
     channels: () => Store.getters.getChannels,
     newIndex: () => Store.getters.getNewIndex,
     changeSrc: () => Store.getters.getChangeSrc,
   },
+  
   data: () => ({
     tabOfInput: [],
     channelNumberInput: null,
@@ -59,6 +63,31 @@ export default {
         }
       }
     },
+
+//// ici les fonctions pour faire apparaître l'info light ////
+
+    ResetTimeoutInfoLight() {
+      clearTimeout(this.infoLightVisible);
+    },
+
+    stopInfoLight() {
+      Store.commit('LightInfoDefault')
+    },
+
+    showInfoLight (e) {
+      if(e.key === "ArrowUp") {
+        Store.commit('LightInfoDisplay');
+        if( this.infoLightVisible != null) {
+          console.log("info light" + this.infoLightVisible)
+          this.ResetTimeoutInfoLight();
+        }
+        this.infoLightVisible = setTimeout(this.stopInfoLight, 4000);
+      }
+    }
+    //////////////////////////////////////////////////////////////////
+    
+  //// ici gestion des changement de chaîne par num ////
+    
     // manageTabOfInput() a pour but de transformer le contenu du tableau tabOfInput en nombre exploitable
     manageTabOfInput() {
       if (this.tabOfInput.length == 2) {

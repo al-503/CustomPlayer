@@ -43,15 +43,20 @@ export default {
 
 <style lang="scss">
 .next-programme {
-  font-family: "Inter", sans-serif;
-  width: 80%;
   margin-right: 2%;
-
+  font-family: "Inter", sans-serif;
+  width: 60%;
   display: flex;
 }
+
 .next-programme-thumb,.next-programme-text {
   margin: 1%;
 }
+
+.next-programme-text {
+  margin-top: 3%;
+}
+
 .next-programme-img {
   width: 100%;
   //sinon ça fait n'imp pourtant les photo ont les même dimenssions
@@ -63,10 +68,11 @@ export default {
 
   margin: 1%;
 }
+
 .next-programme-msg {
   position: absolute;
-  top:60%;
-  right: 38%;
+  top:73%;
+  right: 32%;
   font-weight: 900;
   font-size: 33px;
 }
@@ -74,14 +80,35 @@ export default {
 .next-programme-title {
   font-size: 39px;
   font-weight: 900;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* number of lines to show */
+  -webkit-box-orient: vertical;
 }
+
 .next-programme-time {
   font-size: 30px;
+  margin: 1% auto;
 }
+
 .next-programme-resume {
-  margin: 0 auto;
-  font-size: 20px;
+  margin: 1% auto;
+  width: 50ch;
+  height: 37%;
+  font-size: 18px;
+
+  word-break: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  line-height: 20px; /* définie les éspaces entre les lignes */
+  max-height: 42px; 
+  -webkit-line-clamp: 2; /* number of lines to show */
+  -webkit-box-orient: vertical;
 }
+
 .next-programme-resume,.next-programme-title,.next-programme-time {
     padding: 2px;
 }
