@@ -5,8 +5,15 @@ export default createStore({
   state: {
     Channels: Sources.channels,
     currentIndex: 0,
+    // newIndex: null,
   },
   getters: {
+    getNewIndex (state) {
+      return state.newIndex
+    },
+    getChannels (state) {
+      return state.Channels
+    },
     getCurrentChannel (state) {
       return state.Channels[state.currentIndex]
     },
@@ -15,6 +22,13 @@ export default createStore({
     }
   },
   mutations: {
+
+    // SET_NEW_INDEX(state, payload) {
+    //   state.newIndex = payload
+    // },
+    SET_CURRENT_INDEX(state, payload) {
+      state.currentIndex = payload
+    },
     // augment le current index de 1
     KeyLeft(state) {
       state.currentIndex++

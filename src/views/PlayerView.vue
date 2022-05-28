@@ -28,12 +28,15 @@ export default {
 
   computed: {
     programme: () => Store.getters.getProgramme,
+    channels: () => Store.getters.getChannels,
+    newIndex: () => Store.getters.getNewIndex,
   },
   data: () => ({
     tabOfInput: [],
     channelNumberInput: null,
     waitingNextInput: null,
     waitingChannelNumbers: null,
+    matchSucces: false,
   }),
 
   methods: {
@@ -55,39 +58,66 @@ export default {
         }
       }
     },
+    // manageTabOfInput() a pour but de transformer le contenu du tableau tabOfInput en nombre exploitable
     manageTabOfInput() {
       if (this.tabOfInput.length == 2) {
         this.channelNumberInput = this.tabOfInput[0] + "" + this.tabOfInput[1];
       } else if (this.tabOfInput.length == 1) {
         this.channelNumberInput = this.tabOfInput[0];
       }
+      this.matchSucces = false;
     },
 
+    // forEachChannel est une fonciton qui parcours toutes les channels et qui regarde si l'input de l'utilisateur et appel la fonction checkingMatch
     forEachChannel() {
-      channels.forEach((channel) =>
-        checkingMatch(channel.number, channel.sources)
+      this.channels.forEach((channel) =>
+        this.checkingMatch(channel.number, channel.programme[0].sources)
       );
+
+      // let channelsLength = this.channels.length;
+      // let i = 0;
+
+      // do {
+      //   let channelNumber = this.channels[i].number;
+      //   console.log("channelNumber " + channelNumber);
+      //   let channelSource = this.channels[i].programme[0].sources;
+      //   this.checkingMatch(channelNumber, channelSource);
+      // } while (i < channelsLength && !this.matchSucces == true);
+
+      if (this.matchSucces == false) {
+        console.log("chaine pas trouvée");
+      }
+      this.matchSucces == false;
     },
 
+    // checkinMatch() regarde si l'input de l'utilisateur match avec un numéros de chaine contenu dans channels
     checkingMatch(channelNumber, channelSource) {
       if (this.channelNumberInput == channelNumber) {
+        this.matchSucces = true;
+        console.log("succès");
+        console.log(channelSource);
+        this.$store.commit("SET_CURRENT_INDEX", this.channelNumberInput);
+        console.log(this.newIndex);
+
         /**
          *  video.pause();
          *   source.setAttribute("src", channelSource);
          *    video.load();
          *     video.play();
          */
-        this.tabOfInput = [];
-      } else {
-        console.log("chaine non trouvée");
-        this.tabOfInput = [];
       }
+
+      this.tabOfInput = [];
     },
 
     ChannelChangeWithNumKey(e) {
+      // on regarde si l'input reçu est de type Number, si oui, on rentre
       if (!isNaN(e.key)) {
+        // On regarde si le tableau tabOfInput contient moin de 2 elements, si oui on rentre
         if (this.tabOfInput.length < 2) {
+          // on met la clé de l'input reçu dans le tableau tabOfInput
           this.tabOfInput.push(e.key);
+
           this.waitingNextInput = setTimeout(this.manageTabOfInput, 3000);
           this.waitingChannelNumbers = setTimeout(this.forEachChannel, 3000);
         }
