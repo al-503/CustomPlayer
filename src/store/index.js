@@ -7,9 +7,6 @@ export default createStore({
     currentIndex: 0,
   },
   getters: {
-    getNewIndex (state) {
-      return state.newIndex
-    },
     getChannels (state) {
       return state.Channels
     },
