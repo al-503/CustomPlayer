@@ -46,10 +46,13 @@ export default {
       if ((this.currentVolume.style.width = 0 + "%")) {
         this.currentVolume.style.width = 5 + "%";
       }
-      this.$refs.volumeBar.setAttribute("max", this.maxVolumeLevel);
-      this.volumeBar.value = this.currentVolumeLevel;
-      this.currentVolume.style.width =
-        Math.floor((this.currentVolumeLevel / this.maxVolumeLevel) * 100) + "%";
+      if (this.$refs.volumeBar != null) {
+        this.$refs.volumeBar.setAttribute("max", this.maxVolumeLevel);
+        this.volumeBar.value = this.currentVolumeLevel;
+        this.currentVolume.style.width =
+          Math.floor((this.currentVolumeLevel / this.maxVolumeLevel) * 100) +
+          "%";
+      }
       // if (this.currentVolume.style.width >= 95 + "%") {
       //   this.currentVolume.style.width = 100 + "%";
       // }
