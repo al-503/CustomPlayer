@@ -30,6 +30,7 @@ export default {
     programme: () => Store.getters.getProgramme,
     channels: () => Store.getters.getChannels,
     newIndex: () => Store.getters.getNewIndex,
+    changeSrc: () => Store.getters.getChangeSrc,
   },
   data: () => ({
     tabOfInput: [],
@@ -86,7 +87,8 @@ export default {
         console.log("succès");
         console.log(channelSource);
         this.$store.commit("SET_CURRENT_INDEX", this.channelNumberInput);
-        console.log(this.newIndex);
+        this.$store.commit("SET_CHANGE_SRC", true);
+        console.log("changeSrc :" + this.changeSrc);
 
         /**
          *  video.pause();

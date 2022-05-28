@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import Store from "@/store";
 import Pause from "./Pause.vue";
 import Play from "./Play.vue";
 import TimeBar from "./TimeBar.vue";
@@ -91,11 +92,18 @@ export default {
     document.addEventListener("keydown", (e) => this.keyPageTurn(e));
     document.addEventListener("keydown", (e) => this.volumeKeyListener(e));
   },
-  // beforeUpdate() {
-  //   this.$refs.videoBalise.pause();
-  //   this.$refs.videoBalise.load();
-  //   this.$refs.videoBalise.play();
-  // },
+  beforeUpdate() {
+    if (this.changeSrc == true) {
+      this.$refs.videoBalise.pause();
+      this.$refs.videoBalise.load();
+      this.$refs.videoBalise.play();
+      this.$store.commit("SET_CHANGE_SRC", false);
+    }
+  },
+
+  computed: {
+    changeSrc: () => Store.getters.getChangeSrc,
+  },
 
   methods: {
     // la méthode show fait un Call back de la méthode hide au bout de 0.5 secondes
