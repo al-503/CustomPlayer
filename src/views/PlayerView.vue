@@ -73,17 +73,6 @@ export default {
       this.channels.forEach((channel) =>
         this.checkingMatch(channel.number, channel.programme[0].sources)
       );
-
-      // let channelsLength = this.channels.length;
-      // let i = 0;
-
-      // do {
-      //   let channelNumber = this.channels[i].number;
-      //   console.log("channelNumber " + channelNumber);
-      //   let channelSource = this.channels[i].programme[0].sources;
-      //   this.checkingMatch(channelNumber, channelSource);
-      // } while (i < channelsLength && !this.matchSucces == true);
-
       if (this.matchSucces == false) {
         console.log("chaine pas trouvée");
       }
