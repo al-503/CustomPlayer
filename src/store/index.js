@@ -5,7 +5,6 @@ export default createStore({
   state: {
     Channels: Sources.channels,
     currentIndex: 0,
-    // newIndex: null,
   },
   getters: {
     getNewIndex (state) {
@@ -23,9 +22,6 @@ export default createStore({
   },
   mutations: {
 
-    // SET_NEW_INDEX(state, payload) {
-    //   state.newIndex = payload
-    // },
     SET_CURRENT_INDEX(state, payload) {
       state.currentIndex = payload
     },
