@@ -26,7 +26,8 @@ export default createStore({
       state.changeSrc = payload
     },
     SET_CURRENT_INDEX(state, payload) {
-      state.currentIndex = payload
+      console.log("payload "+payload)
+      state.currentIndex = payload-1
     },
     // augment le current index de 1
     KeyLeft(state) {
