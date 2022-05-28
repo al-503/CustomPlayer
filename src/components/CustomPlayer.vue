@@ -12,7 +12,7 @@
       </div>
     </transition>
   </div>
-  <div v-if="!isPlaying && replay">
+  <div v-if="(!isPlaying && replay) || timeManageTimeBarDisplay">
     <TimeBar
       :videoCurrentTime="videoCurrentTime"
       :videoDuration="videoDuration"
@@ -26,6 +26,9 @@
       />
     </div>
   </div>
+  <div v-if="timeManageTimeBarDisplay">
+    <TimeManaging />
+  </div>
   <slot></slot>
 </template>
 
@@ -35,6 +38,7 @@ import Pause from "./Pause.vue";
 import Play from "./Play.vue";
 import TimeBar from "./TimeBar.vue";
 import AudioControls from "@/components/AudioControls.vue";
+import TimeManaging from "@/components/TimeManaging.vue";
 
 export default {
   components: {
@@ -42,6 +46,7 @@ export default {
     Play,
     TimeBar,
     AudioControls,
+    TimeManaging,
   },
   props: {
     currentFlux: {
@@ -80,6 +85,7 @@ export default {
     currentVolumeLevel: null,
     maxVolumeLevel: null,
     toggleBarSoundDisplay: false,
+    timeManageTimeBarDisplay: false,
   }),
 
   mounted() {
@@ -91,7 +97,16 @@ export default {
     document.addEventListener("keydown", (e) => this.keyListenner(e));
     document.addEventListener("keydown", (e) => this.keyPageTurn(e));
     document.addEventListener("keydown", (e) => this.volumeKeyListener(e));
+    document.addEventListener("keydown", (e) => this.timeManagement(e));
+    this.currentTimeTimeout = setInterval(
+      () => this.videoCurrentTimerefresh(),
+      1000
+    );
   },
+  beforeDestroy() {
+    clearInterval(this.currentTimeTimeout);
+  },
+
   beforeUpdate() {
     if (this.changeSrc == true) {
       this.$refs.videoBalise.pause();
@@ -104,6 +119,7 @@ export default {
   computed: {
     changeSrc: () => Store.getters.getChangeSrc,
   },
+
 
   methods: {
     // la méthode show fait un Call back de la méthode hide au bout de 0.5 secondes
@@ -147,9 +163,6 @@ export default {
       if (e.key == "Enter") {
         // on met à jour les valeurs videoDuration et videoCurrentTime qui sont envoyées par la suite au composant enfant timebar
         this.videoDuration = this.$refs.videoBalise.duration;
-        this.videoCurrentTime = this.$refs.videoBalise.currentTime;
-        console.log(this.videoDuration);
-        console.log(this.videoCurrentTime);
         // méthode qui gère le "play/pause"
         this.toggleVideoPlay();
       }
@@ -211,6 +224,42 @@ export default {
         this.alterVolume("-");
       }
       this.currentVolumeLevel = this.$refs.videoBalise.volume;
+    },
+    /**
+     * ---------- Time management -------------
+     */
+    removeTimeBar() {
+      this.timeManageTimeBarDisplay = false;
+    },
+
+    clearTimeBarVisibleTimeOut() {
+      clearTimeout(this.timeBarVisible);
+    },
+    videoCurrentTimerefresh() {
+      if (this.$refs.videoBalise != null) {
+        this.videoCurrentTime = this.$refs.videoBalise.currentTime;
+        this.videoDuration = this.$refs.videoBalise.duration;
+      }
+    },
+    timeManagement(e) {
+      if (e.key == "p" || e.key == "n") {
+        this.timeManageTimeBarDisplay = true;
+        if (this.timeBarVisible !== null) {
+          this.clearTimeBarVisibleTimeOut();
+        }
+        this.timeBarVisible = setTimeout(this.removeTimeBar, 3000);
+      }
+
+      if (e.key == "p") {
+        if (this.$refs.videoBalise.currentTime > 10) {
+          this.$refs.videoBalise.currentTime -= 10;
+        } else {
+          this.$refs.videoBalise.currentTime = 0;
+        }
+      }
+      if (e.key == "n") {
+        this.$refs.videoBalise.currentTime += 10;
+      }
     },
   },
 };

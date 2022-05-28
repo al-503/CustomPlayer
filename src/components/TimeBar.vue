@@ -75,7 +75,7 @@ export default {
 
     // Méthode de call back qui met à jour la progression de la time bar
     keyListenner(e) {
-      if (e.key == "Enter") {
+      if (e.key == "Enter" || e.key == "p" || e.key == "n") {
         if (this.toggle == 0) {
           this.toggle = 1;
         }
