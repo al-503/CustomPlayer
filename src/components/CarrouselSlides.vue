@@ -5,7 +5,7 @@
     <!-- logo -->
     <img class="slide-logo" :src="require('@/assets/sources/channelsLogo/'+ logo)" alt="logo de la chaîne">
     <!-- titre -->
-    <div class="slide-texte">
+    <div class="slide-text">
       <h3 class="slide-title">{{ title }}</h3>
       <!-- startTime - endTime -->
       <p class="slide-time">{{ startTime + "-" +  endTime }}</p>
@@ -62,6 +62,7 @@ export default {
   text-align: center;
   color: white;
   position: relative;
+    bottom: 38%;
 }
 
 </style>
