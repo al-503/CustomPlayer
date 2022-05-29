@@ -149,8 +149,7 @@ export default {
         );
         this.$store.commit("SET_CURRENT_INDEX", index);
         this.$store.commit("SET_CHANGE_SRC", true);
-
-        //  /!\ récupérer l'index dans channel
+        this.DisplayedInfoLight();
       }
 
       this.tabOfInput = [];
