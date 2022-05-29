@@ -5,8 +5,16 @@ export default createStore({
   state: {
     Channels: Sources.channels,
     currentIndex: 0,
+    defaultDisplay: false,
+    changeSrc: false,
   },
   getters: {
+    getChangeSrc(state) {
+      return state.changeSrc
+    },
+    getChannels (state) {
+      return state.Channels
+    },
     getCurrentChannel (state) {
       return state.Channels[state.currentIndex]
     },
@@ -15,14 +23,28 @@ export default createStore({
     }
   },
   mutations: {
+    SET_CHANGE_SRC(state, payload) {
+      state.changeSrc = payload
+    },
+    SET_CURRENT_INDEX(state, payload) {
+      state.currentIndex = payload
+    },
     // augment le current index de 1
     KeyLeft(state) {
-      state.currentIndex++
+      return state.currentIndex++
     },
     // diminue le current index de -1
     KeyRight(state) {
       return state.currentIndex--
     },
+    // display info light
+    LightInfoDisplay(state) {
+      return state.defaultDisplay = true
+    },
+    //fait disparaitre info light
+    LightInfoDefault(state) {
+      return state.defaultDisplay = false
+    }
   },
   actions: {
   },
