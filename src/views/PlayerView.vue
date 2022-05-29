@@ -4,7 +4,7 @@
     <CustomPlayer :currentFlux="programme[0].sources">
       <InfoLight v-if="infoDisplayed" />
       <transition name="fading">
-        <DisplayInputNumber v-if="true" />
+        <DisplayInputNumber v-if="inputDisplay" />
       </transition>
     </CustomPlayer>
   </div>
@@ -51,6 +51,7 @@ export default {
     waitingNextInput: null,
     waitingChannelNumbers: null,
     matchSucces: false,
+    inputDisplay: true,
   }),
 
   methods: {
@@ -103,9 +104,15 @@ export default {
       let regInput = new RegExp("^[0-9]+$");
 
       if (regInput.test(e.key)) {
+        this.inputDisplay = true;
         this.stopInfoLight();
       }
       // Impleter ici la condition de priorité de l'InfoLight
+
+      // Genere bug d'apparition de la 1ere inputNumber
+      // if (e.key == "PageUp" || e.key == "PageDown") {
+      //   this.inputDisplay = false;
+      // }
     },
 
     //////////////////////////////////////////////////////////////////
