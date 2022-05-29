@@ -3,10 +3,12 @@
 </template>
 
 <script>
+import Store from "@/store";
 export default {
   methods:{
         returnToMainPage: function () {
-            this.$router.push('/');
+            //this.$router.push('/');
+            Store.commit('HideInfoMax');
         }
     }
 }

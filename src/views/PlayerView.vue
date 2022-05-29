@@ -4,6 +4,7 @@
     <CustomPlayer :currentFlux="programme[0].sources">
 
       <InfoLight v-if="infoDisplayed"/>
+      <InfoMax v-if="infoMaxDisplayed"/>
     </CustomPlayer>
   </div>
 </template>
@@ -29,6 +30,8 @@ export default {
     document.addEventListener("keydown", (e) => this.showInfoLight(e));
      // changement de chaine par num //
     document.addEventListener("keydown", (e) => this.ChannelChangeWithNumKey(e));
+    // display de l'info max
+    document.addEventListener("keydown", (e) => this.showInfoMax(e));
   },
 
   computed: {
@@ -37,6 +40,7 @@ export default {
     channels: () => Store.getters.getChannels,
     newIndex: () => Store.getters.getNewIndex,
     changeSrc: () => Store.getters.getChangeSrc,
+    infoMaxDisplayed: () =>Store.state.defaultDisplayInfoMax
   },
   
   data: () => ({
@@ -89,7 +93,18 @@ export default {
       }
     },
 //////////////////////////////////////////////////////////////////
-    
+
+//// Gestion InfoMax ////
+      
+      DisplayInfoMax(){
+        Store.commit('DisplayInfoMax');
+      },
+      showInfoMax(e){
+        if(e.key === "i") {
+        this.DisplayInfoMax();
+      }
+      
+      },
 //// ici gestion des changement de chaîne par num ////
     
     // manageTabOfInput() a pour but de transformer le contenu du tableau tabOfInput en nombre exploitable
