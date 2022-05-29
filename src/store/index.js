@@ -26,7 +26,6 @@ export default createStore({
     },
     getErrorMessage(state) {
       return state.errorMessage
-
     },
     getChangeSrc(state) {
       return state.changeSrc
@@ -42,6 +41,22 @@ export default createStore({
     },
     getVideoIsOnPause(state) {
       return state.videoIsOnPause
+    },
+    getPreviousChannel (state) {
+      let indexPrecedant = state.currentIndex - 1
+      if(state.currentIndex === 0){
+        return state.Channels[29]
+      } else {
+        state.Channels[indexPrecedant]
+      }
+    },
+    getNextChannel (state) {
+      let indexSuivant = state.currentIndex + 1
+      if(state.currentIndex === 29){
+        return state.Channels[0]
+      } else {
+        state.Channels[indexSuivant]
+      }
     }
   },
   mutations: {

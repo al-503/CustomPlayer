@@ -55,7 +55,7 @@ export default {
   width: 37px;
   height: 32px;
   position: relative;
-    top: 8%;
+    bottom: 90%;
     left: 85%;
 }
 .slide-text {
