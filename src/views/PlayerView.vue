@@ -51,6 +51,7 @@ export default {
       if (e.key == "PageUp") {
         if (Store.state.currentIndex === 29) {
           Store.state.currentIndex = 0;
+          this.DisplayedInfoLight();
         } else {
           // console.log(Store.state.currentIndex = Store.state.currentIndex + 1)
           Store.commit("KeyLeft");
@@ -60,6 +61,7 @@ export default {
         if (Store.state.currentIndex === 0) {
           // si currentIndex = 0 alors faire current index = array.length
           Store.state.currentIndex = 29;
+          this.DisplayedInfoLight();
         } else {
           //console.log(Store.state.currentIndex = Store.state.currentIndex - 1)
           Store.commit("KeyRight");
