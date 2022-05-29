@@ -13,6 +13,7 @@
       </transition>
       <InfoMax v-if="true && !videoIsOnPause" />
       <ErrorMessage v-if="showErrorMessage && !videoIsOnPause" />
+      <Carrousel/>
     </CustomPlayer>
   </div>
 </template>
@@ -25,6 +26,7 @@ import InfoLight from "@/components/InfoLight.vue";
 import InfoMax from "@/components/InfoMax.vue";
 import DisplayInputNumber from "@/components/DisplayInputNumber.vue";
 import ErrorMessage from "@/components/ErrorMessage.vue";
+import Carrousel from '@/components/Carrousel.vue';
 
 export default {
   components: {
@@ -33,6 +35,7 @@ export default {
     InfoMax,
     DisplayInputNumber,
     ErrorMessage,
+    Carrousel,
   },
 
   created() {
@@ -42,15 +45,12 @@ export default {
     document.addEventListener("keydown", (e) => this.showInfoLight(e));
     // display de l'info max
     document.addEventListener("keydown", (e) => this.showInfoMax(e));
-
     // changement de chaine par num //
-    document.addEventListener("keydown", (e) =>
-      this.ChannelChangeWithNumKey(e)
-    );
+    document.addEventListener("keydown", (e) => this.ChannelChangeWithNumKey(e));
     // disparition de l'infoLight pour InputNumber //
-
     document.addEventListener("keydown", (e) => this.switchDisplay(e));
   },
+  
   mounted() {
     setTimeout(() => {
       this.$store.commit("SET_DISPLAY_INFOLIGHT_ARRIVAL", false);
