@@ -3,6 +3,9 @@
     <router-view />
     <CustomPlayer :currentFlux="programme[0].sources">
       <InfoLight v-if="infoDisplayed" />
+      <transition name="fading">
+        <DisplayInputNumber v-if="true" />
+      </transition>
     </CustomPlayer>
   </div>
 </template>
@@ -12,11 +15,13 @@ import Store from "@/store";
 
 import CustomPlayer from "@/components/CustomPlayer.vue";
 import InfoLight from "@/components/InfoLight.vue";
+import DisplayInputNumber from "@/components/DisplayInputNumber.vue";
 
 export default {
   components: {
     CustomPlayer,
     InfoLight,
+    DisplayInputNumber,
   },
 
   created() {
@@ -28,6 +33,8 @@ export default {
     document.addEventListener("keydown", (e) =>
       this.ChannelChangeWithNumKey(e)
     );
+    // disparition de l'infoLight pour InputNumber //
+    // document.addEventListener("keydown", (e) => this.switchDisplay(e));
   },
 
   computed: {
@@ -89,6 +96,17 @@ export default {
         this.DisplayedInfoLight();
       }
     },
+
+    //// ici les fonctions pour faire disparaitre l'info light ////
+    ////            si apparition de l'InputNumber             ////
+    // switchDisplay(e) {
+    //   let regInput = new RegExp("^[0-9]+$");
+
+    //   if (regInput.test(e.key)) {
+    //     stopInfoLight();
+    //   }
+    // },
+
     //////////////////////////////////////////////////////////////////
 
     //// ici gestion des changement de chaîne par num ////
