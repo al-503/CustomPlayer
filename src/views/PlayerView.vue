@@ -84,9 +84,9 @@ export default {
         this.infoLightVisible = setTimeout(this.stopInfoLight, 4000);
       }
     },
-    //////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
     
-  //// ici gestion des changement de chaîne par num ////
+//// ici gestion des changement de chaîne par num ////
     
     // manageTabOfInput() a pour but de transformer le contenu du tableau tabOfInput en nombre exploitable
     manageTabOfInput() {
