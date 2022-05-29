@@ -33,6 +33,7 @@ export default {
     document.addEventListener("keydown", (e) =>
       this.ChannelChangeWithNumKey(e)
     );
+    // document.addEventListener("keydown", (e) => this.switchDisplay(e));
   },
 
   computed: {
@@ -94,6 +95,17 @@ export default {
         this.DisplayedInfoLight();
       }
     },
+
+    //// ici les fonctions pour faire disparaitre l'info light ////
+    ////            si apparition de l'InputNumber             ////
+    // switchDisplay(e) {
+    //   let regInput = new RegExp("^[0-9]+$");
+
+    //   if (regInput.test(e.key)) {
+    //     stopInfoLight();
+    //   }
+    // },
+
     //////////////////////////////////////////////////////////////////
 
     //// ici gestion des changement de chaîne par num ////
