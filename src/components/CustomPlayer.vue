@@ -115,8 +115,9 @@ export default {
     clearInterval(this.currentTimeTimeout);
   },
 
-  beforeUpdate() {
+  updated() {
     if (this.changeSrc == true) {
+      this.$store.commit("SET_CHANGE_SRC", false);
       this.$refs.videoBalise.pause();
       this.$refs.videoBalise.load();
       this.$refs.videoBalise.play();

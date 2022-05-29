@@ -51,6 +51,7 @@ export default {
     waitingNextInput: null,
     waitingChannelNumbers: null,
     matchSucces: false,
+    checkingMatchToggle: true,
   }),
 
   methods: {
@@ -140,6 +141,10 @@ export default {
       this.matchSucces == false;
     },
 
+    checkingMatchToggleFalsy() {
+      this.checkingMatchToggle = true;
+    },
+
     // checkinMatch() regarde si l'input de l'utilisateur match avec un numéros de chaine contenu dans channels
     checkingMatch(channelNumber, channelSource) {
       if (this.channelNumberInput == channelNumber) {
@@ -148,8 +153,12 @@ export default {
           (channel) => channel.number == channelNumber
         );
         this.$store.commit("SET_CURRENT_INDEX", index);
-        this.$store.commit("SET_CHANGE_SRC", true);
         this.DisplayedInfoLight();
+        if (this.checkingMatchToggle == true) {
+          this.checkingMatchToggle = false;
+          this.$store.commit("SET_CHANGE_SRC", true);
+          setTimeout(this.checkingMatchToggleFalsy, 3000);
+        }
       }
 
       this.tabOfInput = [];
