@@ -1,7 +1,8 @@
 <template>
 <CurrentHour class="currentHour"/>
 	<div class="infoMaxMainDiv">
-     
+  <!--Animation-->
+    <transition name="infoMaxAnimation">
 		<div class="infoMaxBody">
 			<CurrentChannelLogo :logo="currentChannel.logo" id="logoChannel" />
             <p class="titleInfoMax">{{programme[0].title}}</p>
@@ -9,6 +10,7 @@
             <p class="descriptionInfoMax">{{programme[0].description}}</p>
             <ExitButton class="exitButton"/>
 		</div>
+    </transition> 
 	</div>
 </template>
 
@@ -108,5 +110,14 @@ margin-right: 10px;
   left: 10%;
   bottom: 4%;
   position: absolute;
+}
+/*Animation*/
+.infoMaxAnimation-enter-active, .infoMaxAnimation-leave-active{
+  transition: all, 5s;
+}
+.infoMaxAnimation-enter, .infoMaxAnimation-leave-to{
+ 
+  opacity: 0;
+  transform: translateX(-100px);
 }
 </style>
