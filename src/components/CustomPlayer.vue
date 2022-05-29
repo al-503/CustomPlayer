@@ -177,12 +177,13 @@ export default {
       }
     },
 
-    ///////////
-    // Audio //
-    //////////
+
+//////////////// Audio /////////////////////////////
+
     myStopFunction() {
       clearTimeout(this.barSoundVisible);
     },
+
     disparition() {
       this.toggleBarSoundDisplay = false;
     },
@@ -225,9 +226,8 @@ export default {
       }
       this.currentVolumeLevel = this.$refs.videoBalise.volume;
     },
-    /**
-     * ---------- Time management -------------
-     */
+//////////////////// Time management /////////////////////////////
+
     removeTimeBar() {
       this.timeManageTimeBarDisplay = false;
     },
@@ -235,12 +235,14 @@ export default {
     clearTimeBarVisibleTimeOut() {
       clearTimeout(this.timeBarVisible);
     },
+
     videoCurrentTimerefresh() {
       if (this.$refs.videoBalise != null) {
         this.videoCurrentTime = this.$refs.videoBalise.currentTime;
         this.videoDuration = this.$refs.videoBalise.duration;
       }
     },
+
     timeManagement(e) {
       if (e.key == "p" || e.key == "n") {
         this.timeManageTimeBarDisplay = true;

@@ -64,7 +64,7 @@ export default {
     rgba(0, 0, 0, 0.75) 100%
   );
   border-radius: 2px;
-  top: -28%;
+  top: 0%;
 }
 .info-light-bottom {
   position: absolute;
@@ -74,14 +74,6 @@ export default {
   backdrop-filter: blur(20px);
   color:white;
   display: flex;
-  bottom: -20%;
-}
-
-.bottom-show {
   bottom: 0%;
-}
-
-.top-show {
-  top: 0%;
 }
 </style>

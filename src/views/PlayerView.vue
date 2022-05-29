@@ -52,6 +52,7 @@ export default {
         } else {
           // console.log(Store.state.currentIndex = Store.state.currentIndex + 1)
           Store.commit("KeyLeft");
+          this.DisplayedInfoLight();
         }
       } else if (e.key == "PageDown") {
         if (Store.state.currentIndex === 0) {
@@ -60,14 +61,19 @@ export default {
         } else {
           //console.log(Store.state.currentIndex = Store.state.currentIndex - 1)
           Store.commit("KeyRight");
+          this.DisplayedInfoLight();
         }
       }
     },
 
 //// ici les fonctions pour faire apparaître l'info light ////
 
-    ResetTimeoutInfoLight() {
-      clearTimeout(this.infoLightVisible);
+    DisplayedInfoLight() {
+      Store.commit('LightInfoDisplay');
+      if(this.infoLightVisible != null){
+        clearTimeout(this.infoLightVisible);
+      }
+      this.infoLightVisible = setTimeout(this.stopInfoLight, 4000);
     },
 
     stopInfoLight() {
@@ -76,17 +82,12 @@ export default {
 
     showInfoLight (e) {
       if(e.key === "ArrowUp") {
-        Store.commit('LightInfoDisplay');
-        if( this.infoLightVisible != null) {
-          console.log("info light" + this.infoLightVisible)
-          this.ResetTimeoutInfoLight();
-        }
-        this.infoLightVisible = setTimeout(this.stopInfoLight, 4000);
+        this.DisplayedInfoLight();
       }
     },
-    //////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
     
-  //// ici gestion des changement de chaîne par num ////
+//// ici gestion des changement de chaîne par num ////
     
     // manageTabOfInput() a pour but de transformer le contenu du tableau tabOfInput en nombre exploitable
     manageTabOfInput() {
