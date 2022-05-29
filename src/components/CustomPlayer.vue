@@ -225,7 +225,7 @@ export default {
         if (this.barSoundVisible != null) {
           this.myStopFunction();
         }
-        this.barSoundVisible = setTimeout(this.disparition, 3000);
+        this.barSoundVisible = setTimeout(this.disparition, 2000);
       }
       if (e.key === "+") {
         this.alterVolume("+");
