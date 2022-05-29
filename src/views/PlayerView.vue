@@ -34,7 +34,7 @@ export default {
       this.ChannelChangeWithNumKey(e)
     );
     // disparition de l'infoLight pour InputNumber //
-    // document.addEventListener("keydown", (e) => this.switchDisplay(e));
+    document.addEventListener("keydown", (e) => this.switchDisplay(e));
   },
 
   computed: {
@@ -99,13 +99,14 @@ export default {
 
     //// ici les fonctions pour faire disparaitre l'info light ////
     ////            si apparition de l'InputNumber             ////
-    // switchDisplay(e) {
-    //   let regInput = new RegExp("^[0-9]+$");
+    switchDisplay(e) {
+      let regInput = new RegExp("^[0-9]+$");
 
-    //   if (regInput.test(e.key)) {
-    //     stopInfoLight();
-    //   }
-    // },
+      if (regInput.test(e.key)) {
+        this.stopInfoLight();
+      }
+      // Impleter ici la condition de priorité de l'InfoLight
+    },
 
     //////////////////////////////////////////////////////////////////
 
