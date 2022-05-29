@@ -33,6 +33,7 @@ export default {
     document.addEventListener("keydown", (e) =>
       this.ChannelChangeWithNumKey(e)
     );
+    // disparition de l'infoLight pour InputNumber //
     // document.addEventListener("keydown", (e) => this.switchDisplay(e));
   },
 
