@@ -3,6 +3,9 @@
     <router-view />
     <CustomPlayer :currentFlux="programme[0].sources">
       <InfoLight v-if="infoDisplayed" />
+      <transition name="fading">
+        <DisplayInputNumber v-if="true" />
+      </transition>
     </CustomPlayer>
   </div>
 </template>
@@ -12,11 +15,13 @@ import Store from "@/store";
 
 import CustomPlayer from "@/components/CustomPlayer.vue";
 import InfoLight from "@/components/InfoLight.vue";
+import DisplayInputNumber from "@/components/DisplayInputNumber.vue";
 
 export default {
   components: {
     CustomPlayer,
     InfoLight,
+    DisplayInputNumber,
   },
 
   created() {
