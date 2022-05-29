@@ -18,14 +18,19 @@
       :videoDuration="videoDuration"
     />
   </div>
-  <div v-if="this.toggleBarSoundDisplay">
-    <div class="audioControls">
-      <AudioControls
-        :currentVolumeLevel="currentVolumeLevel"
-        :maxVolumeLevel="maxVolumeLevel"
-      />
+  <transition name="fading">
+    <div v-if="this.toggleBarSoundDisplay">
+      <div class="audio-icon-container">
+        <AudioIcons :volumeIcon="volumeIcon" />
+      </div>
+      <div class="audioControls">
+        <AudioControls
+          :currentVolumeLevel="currentVolumeLevel"
+          :maxVolumeLevel="maxVolumeLevel"
+        />
+      </div>
     </div>
-  </div>
+  </transition>
   <div v-if="timeManageTimeBarDisplay">
     <TimeManaging />
   </div>
@@ -38,6 +43,7 @@ import Pause from "./Pause.vue";
 import Play from "./Play.vue";
 import TimeBar from "./TimeBar.vue";
 import AudioControls from "@/components/AudioControls.vue";
+import AudioIcons from "@/components/AudioIcons.vue";
 import TimeManaging from "@/components/TimeManaging.vue";
 
 export default {
@@ -46,6 +52,7 @@ export default {
     Play,
     TimeBar,
     AudioControls,
+    AudioIcons,
     TimeManaging,
   },
   props: {
@@ -75,6 +82,7 @@ export default {
     isPlaying: false,
     isPlayAgain: false,
     iconName: null,
+    volumeIcon: null,
     videoBalise: null,
     replay: false,
     showing: true,
@@ -119,7 +127,6 @@ export default {
   computed: {
     changeSrc: () => Store.getters.getChangeSrc,
   },
-
 
   methods: {
     // la méthode show fait un Call back de la méthode hide au bout de 0.5 secondes
@@ -177,8 +184,7 @@ export default {
       }
     },
 
-
-//////////////// Audio /////////////////////////////
+    //////////////// Audio /////////////////////////////
 
     myStopFunction() {
       clearTimeout(this.barSoundVisible);
@@ -189,7 +195,6 @@ export default {
     },
 
     alterVolume(dir) {
-      // const currentVolume = Math.floor(this.$refs.videoBalise.volume * 10) / 10;
       const currentVolume = parseFloat(this.$refs.videoBalise.volume).toFixed(
         2
       );
@@ -197,14 +202,18 @@ export default {
       if (dir === "+") {
         if (currentVolume < 0.95) {
           this.$refs.videoBalise.volume += 0.05;
+          this.iconDisplay(this.$refs.videoBalise.volume);
         } else if (currentVolume == 0.95) {
           this.$refs.videoBalise.volume = 1;
+          this.iconDisplay(this.$refs.videoBalise.volume);
         }
       } else if (dir === "-") {
         if (currentVolume > 0.05) {
           this.$refs.videoBalise.volume -= 0.05;
+          this.iconDisplay(this.$refs.videoBalise.volume);
         } else if (currentVolume == 0.05) {
           this.$refs.videoBalise.volume = 0;
+          this.iconDisplay(this.$refs.videoBalise.volume);
         }
       }
       console.log(this.$refs.videoBalise.volume);
@@ -216,7 +225,7 @@ export default {
         if (this.barSoundVisible != null) {
           this.myStopFunction();
         }
-        this.barSoundVisible = setTimeout(this.disparition, 3000);
+        this.barSoundVisible = setTimeout(this.disparition, 2000);
       }
       if (e.key === "+") {
         this.alterVolume("+");
@@ -226,7 +235,21 @@ export default {
       }
       this.currentVolumeLevel = this.$refs.videoBalise.volume;
     },
-//////////////////// Time management /////////////////////////////
+    iconDisplay(value) {
+      if (value < 0.05) {
+        this.volumeIcon = "volume-xmark";
+      }
+      if (value >= 0.05 && value < 0.3) {
+        this.volumeIcon = "volume-off";
+      }
+      if (value >= 0.3 && value < 0.75) {
+        this.volumeIcon = "volume-low";
+      }
+      if (value >= 0.75) {
+        this.volumeIcon = "volume-high";
+      }
+    },
+    //////////////////// Time management /////////////////////////////
 
     removeTimeBar() {
       this.timeManageTimeBarDisplay = false;

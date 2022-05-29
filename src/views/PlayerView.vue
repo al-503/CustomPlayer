@@ -2,7 +2,7 @@
   <div class="player-view">
     <router-view />
     <CustomPlayer :currentFlux="programme[0].sources">
-      <InfoLight v-if="infoDisplayed"/>
+      <InfoLight v-if="infoDisplayed" />
     </CustomPlayer>
   </div>
 </template>
@@ -20,12 +20,14 @@ export default {
   },
 
   created() {
-     // changement de chaine et des infos //
+    // changement de chaine et des infos //
     document.addEventListener("keydown", (e) => this.ChannelChange(e));
-     // display de l'info light //
+    // display de l'info light //
     document.addEventListener("keydown", (e) => this.showInfoLight(e));
-     // changement de chaine par num //
-    document.addEventListener("keydown", (e) => this.ChannelChangeWithNumKey(e));
+    // changement de chaine par num //
+    document.addEventListener("keydown", (e) =>
+      this.ChannelChangeWithNumKey(e)
+    );
   },
 
   computed: {
@@ -35,7 +37,7 @@ export default {
     newIndex: () => Store.getters.getNewIndex,
     changeSrc: () => Store.getters.getChangeSrc,
   },
-  
+
   data: () => ({
     tabOfInput: [],
     channelNumberInput: null,
@@ -66,29 +68,29 @@ export default {
       }
     },
 
-//// ici les fonctions pour faire apparaître l'info light ////
+    //// ici les fonctions pour faire apparaître l'info light ////
 
     DisplayedInfoLight() {
-      Store.commit('LightInfoDisplay');
-      if(this.infoLightVisible != null){
+      Store.commit("LightInfoDisplay");
+      if (this.infoLightVisible != null) {
         clearTimeout(this.infoLightVisible);
       }
       this.infoLightVisible = setTimeout(this.stopInfoLight, 4000);
     },
 
     stopInfoLight() {
-      Store.commit('LightInfoDefault')
+      Store.commit("LightInfoDefault");
     },
 
-    showInfoLight (e) {
-      if(e.key === "ArrowUp") {
+    showInfoLight(e) {
+      if (e.key === "ArrowUp") {
         this.DisplayedInfoLight();
       }
     },
-//////////////////////////////////////////////////////////////////
-    
-//// ici gestion des changement de chaîne par num ////
-    
+    //////////////////////////////////////////////////////////////////
+
+    //// ici gestion des changement de chaîne par num ////
+
     // manageTabOfInput() a pour but de transformer le contenu du tableau tabOfInput en nombre exploitable
     manageTabOfInput() {
       if (this.tabOfInput.length == 3) {
@@ -150,3 +152,12 @@ export default {
   },
 };
 </script>
+<style lang="scss" scope>
+.fading-leave-active {
+  transition: opacity 0.25s;
+}
+.fading-enter,
+.fading-leave-to {
+  opacity: 0;
+}
+</style>
