@@ -90,6 +90,14 @@ export default {
     
     // manageTabOfInput() a pour but de transformer le contenu du tableau tabOfInput en nombre exploitable
     manageTabOfInput() {
+      if (this.tabOfInput.length == 3) {
+        this.channelNumberInput =
+          this.tabOfInput[0] +
+          "" +
+          this.tabOfInput[1] +
+          "" +
+          this.tabOfInput[2];
+      }
       if (this.tabOfInput.length == 2) {
         this.channelNumberInput = this.tabOfInput[0] + "" + this.tabOfInput[1];
       } else if (this.tabOfInput.length == 1) {
@@ -113,8 +121,13 @@ export default {
     checkingMatch(channelNumber, channelSource) {
       if (this.channelNumberInput == channelNumber) {
         this.matchSucces = true;
-        this.$store.commit("SET_CURRENT_INDEX", this.channelNumberInput);
+        let index = this.channels.findIndex(
+          (channel) => channel.number == channelNumber
+        );
+        this.$store.commit("SET_CURRENT_INDEX", index);
         this.$store.commit("SET_CHANGE_SRC", true);
+
+        //  /!\ récupérer l'index dans channel
       }
 
       this.tabOfInput = [];
@@ -124,7 +137,7 @@ export default {
       // on regarde si l'input reçu est de type Number, si oui, on rentre
       if (!isNaN(e.key)) {
         // On regarde si le tableau tabOfInput contient moin de 2 elements, si oui on rentre
-        if (this.tabOfInput.length < 2) {
+        if (this.tabOfInput.length < 3) {
           // on met la clé de l'input reçu dans le tableau tabOfInput
           this.tabOfInput.push(e.key);
 
