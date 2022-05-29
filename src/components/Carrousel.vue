@@ -1,13 +1,31 @@
 <template>
   <div class="carrousel">
     <div class="carrousel-slides">
-      <CarrouselSlide v-for="channel in channels"
+      <!-- <CarrouselSlide v-for="channel in channels"
                       :key="channel.id"
                       :logo="channel.logo"
                       :thumb="channel.programme[0].thumb"
                       :title="channel.programme[0].title"
                       :startTime="channel.programme[0].startTime"
-                      :endTime="channel.programme[0].endTime" />
+                      :endTime="channel.programme[0].endTime" /> -->
+
+      <CarrouselSlide :logo="previous.logo"
+                      :thumb="previous.programme[0].thumb"
+                      :title="previous.programme[0].title"
+                      :startTime="previous.programme[0].startTime"
+                      :endTime="previous.programme[0].endTime"/>
+
+      <CarrouselSlide :logo="channel.logo"
+                      :thumb="channel.programme[0].thumb"
+                      :title="channel.programme[0].title"
+                      :startTime="channel.programme[0].startTime"
+                      :endTime="channel.programme[0].endTime"/>
+
+      <!-- <CarrouselSlide :logo="next.logo"
+                      :thumb="next.programme[0].thumb"
+                      :title="next.programme[0].title"
+                      :startTime="next.programme[0].startTime"
+                      :endTime="next.programme[0].endTime"/> -->
   </div>
 </div>
 </template>
@@ -22,15 +40,17 @@ export default {
     CarrouselSlide
   },
   computed: {
-    channels: () => Store.getters.getChannels,
-  }
+    channel: () => Store.getters.getCurrentChannel,
+    previous: () => Store.getters.getPreviousChannel,
+    next: () => Store.getters.getNextChannel
+  },
 }
 </script>
 
 <style lang="scss">
 .carrousel {
   width: 50%;
-  height: 100%;
+  height: 100vh;
   overflow: hidden;
 
   background: linear-gradient(
