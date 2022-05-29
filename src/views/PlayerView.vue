@@ -5,7 +5,7 @@
 
       <InfoLight v-if="infoDisplayed" />
       <transition name="fading">
-        <DisplayInputNumber v-if="true" />
+        <DisplayInputNumber v-if="inputDisplay" />
       </transition>
       <InfoMax v-if="infoMaxDisplayed"/>
 
@@ -43,7 +43,8 @@ export default {
       this.ChannelChangeWithNumKey(e)
     );
     // disparition de l'infoLight pour InputNumber //
-    // document.addEventListener("keydown", (e) => this.switchDisplay(e));
+
+    document.addEventListener("keydown", (e) => this.switchDisplay(e));
 
   },
 
@@ -62,6 +63,7 @@ export default {
     waitingNextInput: null,
     waitingChannelNumbers: null,
     matchSucces: false,
+    inputDisplay: true,
   }),
 
   methods: {
@@ -112,13 +114,20 @@ export default {
 
     //// ici les fonctions pour faire disparaitre l'info light ////
     ////            si apparition de l'InputNumber             ////
-    // switchDisplay(e) {
-    //   let regInput = new RegExp("^[0-9]+$");
+    switchDisplay(e) {
+      let regInput = new RegExp("^[0-9]+$");
 
-    //   if (regInput.test(e.key)) {
-    //     stopInfoLight();
-    //   }
-    // },
+      if (regInput.test(e.key)) {
+        this.inputDisplay = true;
+        this.stopInfoLight();
+      }
+      // Impleter ici la condition de priorité de l'InfoLight
+
+      // Genere bug d'apparition de la 1ere inputNumber
+      // if (e.key == "PageUp" || e.key == "PageDown") {
+      //   this.inputDisplay = false;
+      // }
+    },
 
     //////////////////////////////////////////////////////////////////
 
