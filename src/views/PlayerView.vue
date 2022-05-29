@@ -3,6 +3,7 @@
     <router-view />
     <CustomPlayer :currentFlux="programme[0].sources">
       <InfoLight v-if="infoDisplayed"/>
+      <Carrousel/>
     </CustomPlayer>
   </div>
 </template>
@@ -12,11 +13,13 @@ import Store from "@/store";
 
 import CustomPlayer from "@/components/CustomPlayer.vue";
 import InfoLight from "@/components/InfoLight.vue";
+import Carrousel from '@/components/Carrousel.vue';
 
 export default {
   components: {
     CustomPlayer,
     InfoLight,
+    Carrousel,
   },
 
   created() {
