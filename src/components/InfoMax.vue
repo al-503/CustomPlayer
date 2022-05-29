@@ -20,17 +20,36 @@ import CurrentHour from "@/components/CurrentHour.vue"
 import CurrentChannelLogo from '@/components/CurrentChannelLogo.vue'
 
 export default {
+   data() {
+    return {
+      durationHour: 0,
+      durationMinute: 0,
+      ProvisDurationMinute:0
+    };
+   },
   components: {
     CurrentHour,
     CurrentChannelLogo,
     ExitButton
   },
+  created() {
+    this.getTimeDifference();
+  },
   computed: {
     currentChannel: () => Store.getters.getCurrentChannel,
     programme: () => Store.getters.getProgramme,
-    durationHour: () => Number(Store.getters.getProgramme[0].endTime.substr(0,2)) - Number(Store.getters.getProgramme[0].startTime.substr(0,2))
-
-    
+  },
+  methods:{
+    getTimeDifference: function(){
+     this.durationHour = Number(this.programme[0].endTime.substr(0,2))-Number(this.programme[0].startTime.substr(0,2));
+     this.ProvisDurationMinute = Number(this.programme[0].endTime.substr(3))-Number(this.programme[0].startTime.substr(3))
+     if(this.ProvisDurationMinute <= 9){
+       this.durationMinute = String(this.ProvisDurationMinute).padStart(2, 0)
+     } 
+     if(this.ProvisDurationMinute <0){
+       this.durationMinute = 60+this.ProvisDurationMinute;
+     }
+    }
   }
 }  
 
