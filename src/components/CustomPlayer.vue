@@ -18,17 +18,19 @@
       :videoDuration="videoDuration"
     />
   </div>
-  <div v-if="this.toggleBarSoundDisplay">
-    <div class="audio-icon-container">
-      <AudioIcons :volumeIcon="volumeIcon" />
+  <transition name="fading">
+    <div v-if="this.toggleBarSoundDisplay">
+      <div class="audio-icon-container">
+        <AudioIcons :volumeIcon="volumeIcon" />
+      </div>
+      <div class="audioControls">
+        <AudioControls
+          :currentVolumeLevel="currentVolumeLevel"
+          :maxVolumeLevel="maxVolumeLevel"
+        />
+      </div>
     </div>
-    <div class="audioControls">
-      <AudioControls
-        :currentVolumeLevel="currentVolumeLevel"
-        :maxVolumeLevel="maxVolumeLevel"
-      />
-    </div>
-  </div>
+  </transition>
   <div v-if="timeManageTimeBarDisplay">
     <TimeManaging />
   </div>
