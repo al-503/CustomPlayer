@@ -3,8 +3,10 @@
     <router-view />
     <CustomPlayer :currentFlux="programme[0].sources">
 
-
-      <InfoLight v-if="infoDisplayed"/>
+      <InfoLight v-if="infoDisplayed" />
+      <transition name="fading">
+        <DisplayInputNumber v-if="true" />
+      </transition>
       <InfoMax v-if="infoMaxDisplayed"/>
 
     </CustomPlayer>
@@ -16,13 +18,15 @@ import Store from "@/store";
 
 import CustomPlayer from "@/components/CustomPlayer.vue";
 import InfoLight from "@/components/InfoLight.vue";
-import InfoMax from "@/components/InfoMax.vue"
+import InfoMax from "@/components/InfoMax.vue";
+import DisplayInputNumber from "@/components/DisplayInputNumber.vue";
 
 export default {
   components: {
     CustomPlayer,
     InfoLight,
-    InfoMax
+    InfoMax,
+    DisplayInputNumber,
   },
 
   created() {
@@ -30,11 +34,16 @@ export default {
     document.addEventListener("keydown", (e) => this.ChannelChange(e));
     // display de l'info light //
     document.addEventListener("keydown", (e) => this.showInfoLight(e));
-
-     // changement de chaine par num //
-    document.addEventListener("keydown", (e) => this.ChannelChangeWithNumKey(e));
     // display de l'info max
     document.addEventListener("keydown", (e) => this.showInfoMax(e));
+
+
+    // changement de chaine par num //
+    document.addEventListener("keydown", (e) =>
+      this.ChannelChangeWithNumKey(e)
+    );
+    // disparition de l'infoLight pour InputNumber //
+    // document.addEventListener("keydown", (e) => this.switchDisplay(e));
 
   },
 
@@ -98,6 +107,21 @@ export default {
         this.DisplayedInfoLight();
       }
     },
+
+
+
+    //// ici les fonctions pour faire disparaitre l'info light ////
+    ////            si apparition de l'InputNumber             ////
+    // switchDisplay(e) {
+    //   let regInput = new RegExp("^[0-9]+$");
+
+    //   if (regInput.test(e.key)) {
+    //     stopInfoLight();
+    //   }
+    // },
+
+    //////////////////////////////////////////////////////////////////
+
 
 //////////////////////////////////////////////////////////////////
 
