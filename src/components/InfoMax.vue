@@ -1,5 +1,8 @@
 <template>
-<CurrentHour class="currentHour"/>
+  <div class="info-max-header">
+    <CurrentHour/>
+  </div>
+
 	<div class="infoMaxMainDiv">
      
 		<div class="infoMaxBody">
@@ -53,8 +56,6 @@ export default {
   }
 }  
 
-
-
 </script>
 
 <style>
@@ -71,6 +72,7 @@ export default {
     flex-direction: column;
     font-family: 'Roboto', sans-serif;
 }
+
 #logoChannel img{
   margin-left: 14%!important;
   top:7%
@@ -108,5 +110,11 @@ export default {
   left: 10%;
   bottom: 4%;
   position: absolute;
+}
+.info-max-header {
+  position: absolute;
+  width: 100%;
+  height: 28%;
+  border-radius: 2px;
 }
 </style>
