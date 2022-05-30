@@ -65,6 +65,7 @@ export default {
     matchSucces: false,
     checkingMatchToggle: true,
     inputDisplay: true,
+    errorMessageNoChannelDisplaySetTimeOut: null,
   }),
 
   methods: {
@@ -162,6 +163,10 @@ export default {
       this.matchSucces = false;
     },
 
+    hidingErrorMessageNoChannel() {
+      this.$store.commit("SET_CHANGE_SHOW_ERROR_MESSAGE", false);
+    },
+
     // forEachChannel est une fonciton qui parcours toutes les channels et qui regarde si l'input de l'utilisateur et appel la fonction checkingMatch
     forEachChannel() {
       this.channels.forEach((channel) =>
@@ -170,6 +175,13 @@ export default {
       if (this.matchSucces == false) {
         this.$store.commit("SET_CHANGE_ERROR_MESSAGE", "Aucune chaîne trouvée");
         this.$store.commit("SET_CHANGE_SHOW_ERROR_MESSAGE", true);
+        if (this.errorMessageNoChannelDisplaySetTimeOut != null) {
+          clearTimeout(this.errorMessageNoChannelDisplaySetTimeOut);
+        }
+        this.errorMessageNoChannelDisplaySetTimeOut = setTimeout(
+          this.hidingErrorMessageNoChannel,
+          3000
+        );
       }
       this.matchSucces == false;
     },
