@@ -28,7 +28,7 @@ export default {
   mounted() {
     this.volumeBar = this.$refs.volumeBar;
     this.currentVolume = this.$refs.currentVolume;
-    this.volumeBar.value = 0.5;
+    this.volumeBar.value = this.currentVolumeLevel;
     document.addEventListener("keyup", (e) => this.volumeKeyListener(e));
   },
 
