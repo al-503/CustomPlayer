@@ -1,12 +1,14 @@
 <template>
-     <input type="submit" value="EXIT" class="exitButtton" v-on:keyup.enter="returnToMainPage" >
+     <input type="submit" value="EXIT" class="exitButtton" v-on:keyup.esc="returnToMainPage" >
 </template>
 
 <script>
+import Store from "@/store";
 export default {
   methods:{
         returnToMainPage: function () {
-            this.$router.push('/');
+            //this.$router.push('/');
+            Store.commit('HideInfoMax');
         }
     }
 }

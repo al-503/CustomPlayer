@@ -2,10 +2,13 @@
   <div class="player-view">
     <router-view />
     <CustomPlayer :currentFlux="programme[0].sources">
+
       <InfoLight v-if="infoDisplayed" />
       <transition name="fading">
         <DisplayInputNumber v-if="inputDisplay" />
       </transition>
+      <InfoMax v-if="infoMaxDisplayed"/>
+
     </CustomPlayer>
   </div>
 </template>
@@ -15,12 +18,14 @@ import Store from "@/store";
 
 import CustomPlayer from "@/components/CustomPlayer.vue";
 import InfoLight from "@/components/InfoLight.vue";
+import InfoMax from "@/components/InfoMax.vue";
 import DisplayInputNumber from "@/components/DisplayInputNumber.vue";
 
 export default {
   components: {
     CustomPlayer,
     InfoLight,
+    InfoMax,
     DisplayInputNumber,
   },
 
@@ -29,12 +34,18 @@ export default {
     document.addEventListener("keydown", (e) => this.ChannelChange(e));
     // display de l'info light //
     document.addEventListener("keydown", (e) => this.showInfoLight(e));
+    // display de l'info max
+    document.addEventListener("keydown", (e) => this.showInfoMax(e));
+
+
     // changement de chaine par num //
     document.addEventListener("keydown", (e) =>
       this.ChannelChangeWithNumKey(e)
     );
     // disparition de l'infoLight pour InputNumber //
+
     document.addEventListener("keydown", (e) => this.switchDisplay(e));
+
   },
 
   computed: {
@@ -43,6 +54,7 @@ export default {
     channels: () => Store.getters.getChannels,
     newIndex: () => Store.getters.getNewIndex,
     changeSrc: () => Store.getters.getChangeSrc,
+    infoMaxDisplayed: () =>Store.state.defaultDisplayInfoMax
   },
 
   data: () => ({
@@ -99,6 +111,8 @@ export default {
       }
     },
 
+
+
     //// ici les fonctions pour faire disparaitre l'info light ////
     ////            si apparition de l'InputNumber             ////
     switchDisplay(e) {
@@ -118,7 +132,22 @@ export default {
 
     //////////////////////////////////////////////////////////////////
 
-    //// ici gestion des changement de chaîne par num ////
+
+//////////////////////////////////////////////////////////////////
+
+//// Gestion InfoMax ////
+      
+      DisplayInfoMax(){
+        Store.commit('DisplayInfoMax');
+      },
+      showInfoMax(e){
+        if(e.key === "i") {
+        this.DisplayInfoMax();
+      }
+      
+      },
+//// ici gestion des changement de chaîne par num ////
+    
 
     // manageTabOfInput() a pour but de transformer le contenu du tableau tabOfInput en nombre exploitable
     manageTabOfInput() {

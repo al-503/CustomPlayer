@@ -7,6 +7,7 @@ export default createStore({
     currentIndex: 0,
     defaultDisplay: false,
     changeSrc: false,
+    defaultDisplayInfoMax: false
   },
   getters: {
     getChangeSrc(state) {
@@ -44,7 +45,16 @@ export default createStore({
     //fait disparaitre info light
     LightInfoDefault(state) {
       return state.defaultDisplay = false
-    }
+    },
+    // display info max
+    DisplayInfoMax(state) {
+      return state.defaultDisplayInfoMax = true
+    },
+    //fait disparaitre info light
+    HideInfoMax(state){
+          return state.defaultDisplayInfoMax = false
+    },
+
   },
   actions: {
   },
