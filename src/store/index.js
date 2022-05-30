@@ -7,9 +7,13 @@ export default createStore({
     currentIndex: 0,
     defaultDisplay: false,
     changeSrc: false,
-    defaultDisplayInfoMax: false
+    defaultDisplayInfoMax: false,
+    videoIsOnPause: false,
   },
   getters: {
+    getVideoIsOnPause(state) {
+      return state.videoIsOnPause
+    },
     getChangeSrc(state) {
       return state.changeSrc
     },
@@ -24,6 +28,9 @@ export default createStore({
     }
   },
   mutations: {
+    SET_VIDEO_IS_ON_PAUSE(state, payload){
+      state.videoIsOnPause = payload
+    },
     SET_CHANGE_SRC(state, payload) {
       state.changeSrc = payload
     },

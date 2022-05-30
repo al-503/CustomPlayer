@@ -117,6 +117,9 @@ export default {
 
   updated() {
     if (this.changeSrc == true) {
+      if (this.videoIsOnPause) {
+        this.toggleVideoPlay();
+      }
       this.$store.commit("SET_CHANGE_SRC", false);
       this.$refs.videoBalise.pause();
       this.$refs.videoBalise.load();
@@ -127,6 +130,7 @@ export default {
 
   computed: {
     changeSrc: () => Store.getters.getChangeSrc,
+    videoIsOnPause: () => Store.getters.getVideoIsOnPause,
   },
 
   methods: {
@@ -145,10 +149,12 @@ export default {
       if (this.$refs?.videoBalise !== null && this.$refs?.videoBalise.paused) {
         this.isPlaying = true;
         this.isPlayAgain = true;
+        this.$store.commit("SET_VIDEO_IS_ON_PAUSE", false);
         this.$refs.videoBalise.play();
         this.show();
       } else {
         this.isPlaying = false;
+        this.$store.commit("SET_VIDEO_IS_ON_PAUSE", true);
         this.isPlayAgain = false;
         this.$refs.videoBalise.pause();
         this.showing = true;
@@ -179,6 +185,9 @@ export default {
     // keyPageTurn gère le changement de la source de la vidéo lorsque l'utilisateur change de chaîne
     keyPageTurn(e) {
       if (e.key == "PageUp" || e.key == "PageDown") {
+        if (this.videoIsOnPause) {
+          this.toggleVideoPlay();
+        }
         this.$refs.videoBalise.pause();
         this.$refs.videoBalise.load();
         this.$refs.videoBalise.play();
