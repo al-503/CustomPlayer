@@ -19,8 +19,10 @@ export default {
   height: 40px;
   color: rgba(255, 255, 255, 1);
   position: absolute;
-  bottom: 20%;
-  left: 1805px;
+  // top: 750px;
+  // bottom: 23%;
+  bottom: 230px;
+  left: 94%;
   z-index: 1;
 }
 </style>
