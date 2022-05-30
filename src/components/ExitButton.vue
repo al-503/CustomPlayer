@@ -13,6 +13,7 @@ export default {
     }
 }
 </script>
+
 <style>
 .exitButtton {
     width: 146px;
