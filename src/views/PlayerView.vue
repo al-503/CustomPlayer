@@ -3,8 +3,12 @@
     <router-view />
     <CustomPlayer :currentFlux="programme[0].sources">
 
-      <InfoLight v-if="infoDisplayed"/>
+      <InfoLight v-if="infoDisplayed" />
+      <transition name="fading">
+        <DisplayInputNumber v-if="inputDisplay" />
+      </transition>
       <InfoMax v-if="infoMaxDisplayed"/>
+
     </CustomPlayer>
   </div>
 </template>
@@ -14,24 +18,34 @@ import Store from "@/store";
 
 import CustomPlayer from "@/components/CustomPlayer.vue";
 import InfoLight from "@/components/InfoLight.vue";
-import InfoMax from "@/components/InfoMax.vue"
+import InfoMax from "@/components/InfoMax.vue";
+import DisplayInputNumber from "@/components/DisplayInputNumber.vue";
 
 export default {
   components: {
     CustomPlayer,
     InfoLight,
-    InfoMax
+    InfoMax,
+    DisplayInputNumber,
   },
 
   created() {
-     // changement de chaine et des infos //
+    // changement de chaine et des infos //
     document.addEventListener("keydown", (e) => this.ChannelChange(e));
-     // display de l'info light //
+    // display de l'info light //
     document.addEventListener("keydown", (e) => this.showInfoLight(e));
-     // changement de chaine par num //
-    document.addEventListener("keydown", (e) => this.ChannelChangeWithNumKey(e));
     // display de l'info max
     document.addEventListener("keydown", (e) => this.showInfoMax(e));
+
+
+    // changement de chaine par num //
+    document.addEventListener("keydown", (e) =>
+      this.ChannelChangeWithNumKey(e)
+    );
+    // disparition de l'infoLight pour InputNumber //
+
+    document.addEventListener("keydown", (e) => this.switchDisplay(e));
+
   },
 
   computed: {
@@ -42,13 +56,14 @@ export default {
     changeSrc: () => Store.getters.getChangeSrc,
     infoMaxDisplayed: () =>Store.state.defaultDisplayInfoMax
   },
-  
+
   data: () => ({
     tabOfInput: [],
     channelNumberInput: null,
     waitingNextInput: null,
     waitingChannelNumbers: null,
     matchSucces: false,
+    inputDisplay: true,
   }),
 
   methods: {
@@ -56,6 +71,7 @@ export default {
       if (e.key == "PageUp") {
         if (Store.state.currentIndex === 29) {
           Store.state.currentIndex = 0;
+          this.DisplayedInfoLight();
         } else {
           // console.log(Store.state.currentIndex = Store.state.currentIndex + 1)
           Store.commit("KeyLeft");
@@ -65,6 +81,7 @@ export default {
         if (Store.state.currentIndex === 0) {
           // si currentIndex = 0 alors faire current index = array.length
           Store.state.currentIndex = 29;
+          this.DisplayedInfoLight();
         } else {
           //console.log(Store.state.currentIndex = Store.state.currentIndex - 1)
           Store.commit("KeyRight");
@@ -73,25 +90,48 @@ export default {
       }
     },
 
-//// ici les fonctions pour faire apparaître l'info light ////
+    //// ici les fonctions pour faire apparaître l'info light ////
 
     DisplayedInfoLight() {
-      Store.commit('LightInfoDisplay');
-      if(this.infoLightVisible != null){
+      Store.commit("LightInfoDisplay");
+      if (this.infoLightVisible != null) {
         clearTimeout(this.infoLightVisible);
       }
       this.infoLightVisible = setTimeout(this.stopInfoLight, 4000);
     },
 
     stopInfoLight() {
-      Store.commit('LightInfoDefault')
+      Store.commit("LightInfoDefault");
     },
 
-    showInfoLight (e) {
-      if(e.key === "ArrowUp") {
+    showInfoLight(e) {
+      if (e.key === "ArrowUp") {
         this.DisplayedInfoLight();
       }
     },
+
+
+
+    //// ici les fonctions pour faire disparaitre l'info light ////
+    ////            si apparition de l'InputNumber             ////
+    switchDisplay(e) {
+      let regInput = new RegExp("^[0-9]+$");
+
+      if (regInput.test(e.key)) {
+        this.inputDisplay = true;
+        this.stopInfoLight();
+      }
+      // Impleter ici la condition de priorité de l'InfoLight
+
+      // Genere bug d'apparition de la 1ere inputNumber
+      // if (e.key == "PageUp" || e.key == "PageDown") {
+      //   this.inputDisplay = false;
+      // }
+    },
+
+    //////////////////////////////////////////////////////////////////
+
+
 //////////////////////////////////////////////////////////////////
 
 //// Gestion InfoMax ////
@@ -107,6 +147,7 @@ export default {
       },
 //// ici gestion des changement de chaîne par num ////
     
+
     // manageTabOfInput() a pour but de transformer le contenu du tableau tabOfInput en nombre exploitable
     manageTabOfInput() {
       if (this.tabOfInput.length == 3) {
@@ -168,3 +209,12 @@ export default {
   },
 };
 </script>
+<style lang="scss" scope>
+.fading-leave-active {
+  transition: opacity 0.25s;
+}
+.fading-enter,
+.fading-leave-to {
+  opacity: 0;
+}
+</style>
