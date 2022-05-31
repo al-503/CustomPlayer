@@ -2,13 +2,12 @@
   <div class="player-view">
     <router-view />
     <CustomPlayer :currentFlux="programme[0].sources">
-
       <InfoLight v-if="infoDisplayed" />
       <transition name="fading">
         <DisplayInputNumber v-if="inputDisplay" />
       </transition>
-      <InfoMax v-if="infoMaxDisplayed"/>
-
+      <InfoMax v-if="infoMaxDisplayed" />
+      <ErrorMessage v-if="showErrorMessage" />
     </CustomPlayer>
   </div>
 </template>
@@ -20,6 +19,7 @@ import CustomPlayer from "@/components/CustomPlayer.vue";
 import InfoLight from "@/components/InfoLight.vue";
 import InfoMax from "@/components/InfoMax.vue";
 import DisplayInputNumber from "@/components/DisplayInputNumber.vue";
+import ErrorMessage from "@/components/ErrorMessage.vue";
 
 export default {
   components: {
@@ -27,6 +27,7 @@ export default {
     InfoLight,
     InfoMax,
     DisplayInputNumber,
+    ErrorMessage,
   },
 
   created() {
@@ -37,7 +38,6 @@ export default {
     // display de l'info max
     document.addEventListener("keydown", (e) => this.showInfoMax(e));
 
-
     // changement de chaine par num //
     document.addEventListener("keydown", (e) =>
       this.ChannelChangeWithNumKey(e)
@@ -45,7 +45,6 @@ export default {
     // disparition de l'infoLight pour InputNumber //
 
     document.addEventListener("keydown", (e) => this.switchDisplay(e));
-
   },
 
   computed: {
@@ -54,7 +53,8 @@ export default {
     channels: () => Store.getters.getChannels,
     newIndex: () => Store.getters.getNewIndex,
     changeSrc: () => Store.getters.getChangeSrc,
-    infoMaxDisplayed: () =>Store.state.defaultDisplayInfoMax
+    infoMaxDisplayed: () => Store.state.defaultDisplayInfoMax,
+    showErrorMessage: () => Store.getters.getShowErrorMessage,
   },
 
   data: () => ({
@@ -65,6 +65,7 @@ export default {
     matchSucces: false,
     checkingMatchToggle: true,
     inputDisplay: true,
+    errorMessageNoChannelDisplaySetTimeOut: null,
   }),
 
   methods: {
@@ -111,8 +112,6 @@ export default {
       }
     },
 
-
-
     //// ici les fonctions pour faire disparaitre l'info light ////
     ////            si apparition de l'InputNumber             ////
     switchDisplay(e) {
@@ -132,22 +131,19 @@ export default {
 
     //////////////////////////////////////////////////////////////////
 
+    //////////////////////////////////////////////////////////////////
 
-//////////////////////////////////////////////////////////////////
+    //// Gestion InfoMax ////
 
-//// Gestion InfoMax ////
-      
-      DisplayInfoMax(){
-        Store.commit('DisplayInfoMax');
-      },
-      showInfoMax(e){
-        if(e.key === "i") {
+    DisplayInfoMax() {
+      Store.commit("DisplayInfoMax");
+    },
+    showInfoMax(e) {
+      if (e.key === "i") {
         this.DisplayInfoMax();
       }
-      
-      },
-//// ici gestion des changement de chaîne par num ////
-    
+    },
+    //// ici gestion des changement de chaîne par num ////
 
     // manageTabOfInput() a pour but de transformer le contenu du tableau tabOfInput en nombre exploitable
     manageTabOfInput() {
@@ -167,13 +163,25 @@ export default {
       this.matchSucces = false;
     },
 
+    hidingErrorMessageNoChannel() {
+      this.$store.commit("SET_CHANGE_SHOW_ERROR_MESSAGE", false);
+    },
+
     // forEachChannel est une fonciton qui parcours toutes les channels et qui regarde si l'input de l'utilisateur et appel la fonction checkingMatch
     forEachChannel() {
       this.channels.forEach((channel) =>
         this.checkingMatch(channel.number, channel.programme[0].sources)
       );
       if (this.matchSucces == false) {
-        console.log("chaine pas trouvée");
+        this.$store.commit("SET_CHANGE_ERROR_MESSAGE", "Aucune chaîne trouvée");
+        this.$store.commit("SET_CHANGE_SHOW_ERROR_MESSAGE", true);
+        if (this.errorMessageNoChannelDisplaySetTimeOut != null) {
+          clearTimeout(this.errorMessageNoChannelDisplaySetTimeOut);
+        }
+        this.errorMessageNoChannelDisplaySetTimeOut = setTimeout(
+          this.hidingErrorMessageNoChannel,
+          3000
+        );
       }
       this.matchSucces == false;
     },

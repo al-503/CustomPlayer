@@ -7,9 +7,17 @@ export default createStore({
     currentIndex: 0,
     defaultDisplay: false,
     changeSrc: false,
-    defaultDisplayInfoMax: false
+    defaultDisplayInfoMax: false,
+    errorMessage: null,
+    showErrorMessage: false,
   },
   getters: {
+    getShowErrorMessage(state) {
+      return state.showErrorMessage
+    },
+    getErrorMessage(state) {
+      return state.errorMessage
+    },
     getChangeSrc(state) {
       return state.changeSrc
     },
@@ -24,6 +32,12 @@ export default createStore({
     }
   },
   mutations: {
+    SET_CHANGE_SHOW_ERROR_MESSAGE(state, payload) {
+      state.showErrorMessage = payload
+    },
+    SET_CHANGE_ERROR_MESSAGE(state, payload) {
+      state.errorMessage = payload
+    },
     SET_CHANGE_SRC(state, payload) {
       state.changeSrc = payload
     },
