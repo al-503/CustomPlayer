@@ -1,5 +1,8 @@
 <template>
-<CurrentHour class="currentHour"/>
+  <div class="info-max-header">
+    <CurrentHour/>
+  </div>
+
 	<div class="infoMaxMainDiv">
      
 		<div class="infoMaxBody">
@@ -53,11 +56,12 @@ export default {
   }
 }  
 
-
-
 </script>
 
 <style>
+*{
+  box-sizing: border-box;
+}
 .infoMaxMainDiv{
     width: 30%;
     height: 100%;
@@ -66,19 +70,17 @@ export default {
     position: absolute;
     display: flex;
     flex-direction: column;
-}
-.currentHour{
-margin-right: 10px;
+    font-family: 'Roboto', sans-serif;
 }
 
 #logoChannel img{
-  margin-left: 15%!important;
+  margin-left: 14%!important;
   top:7%
 }
 .titleInfoMax{
   color: white;
   font-size: 64px;
-  margin-top: 23%;
+  margin-top: 25%;
   margin-left: 10%;
   padding: 0;
   font-weight: bold;
@@ -88,14 +90,14 @@ margin-right: 10px;
   font-weight: bold;
   margin-left: 10%;
   margin-top: 5%;
-  font-size: 33px;
+  font-size: 33px; /*needs TV size correction*/
 }
 .descriptionInfoMax{
   margin-top: 5%; 
   margin-left: 10%;
   margin-right: 10%;
   color: white;
-  font-size: 30px;
+  font-size: 30px; /*needs TV size correction*/
   text-align: justify;
   height: 60%;
   overflow: hidden;
@@ -108,5 +110,11 @@ margin-right: 10px;
   left: 10%;
   bottom: 4%;
   position: absolute;
+}
+.info-max-header {
+  position: absolute;
+  width: 100%;
+  height: 28%;
+  border-radius: 2px;
 }
 </style>

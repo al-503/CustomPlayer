@@ -9,10 +9,16 @@ export default createStore({
     changeSrc: false,
     defaultDisplayInfoMax: false,
     videoIsOnPause: false,
+    errorMessage: null,
+    showErrorMessage: false,
   },
   getters: {
-    getVideoIsOnPause(state) {
-      return state.videoIsOnPause
+    getShowErrorMessage(state) {
+      return state.showErrorMessage
+    },
+    getErrorMessage(state) {
+      return state.errorMessage
+
     },
     getChangeSrc(state) {
       return state.changeSrc
@@ -25,11 +31,20 @@ export default createStore({
     },
     getProgramme (state) {
       return state.Channels[state.currentIndex].programme
+    },
+    getVideoIsOnPause(state) {
+      return state.videoIsOnPause
     }
   },
   mutations: {
     SET_VIDEO_IS_ON_PAUSE(state, payload){
       state.videoIsOnPause = payload
+    },
+    SET_CHANGE_SHOW_ERROR_MESSAGE(state, payload) {
+      state.showErrorMessage = payload
+    },
+    SET_CHANGE_ERROR_MESSAGE(state, payload) {
+      state.errorMessage = payload
     },
     SET_CHANGE_SRC(state, payload) {
       state.changeSrc = payload

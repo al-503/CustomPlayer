@@ -1,6 +1,6 @@
 <template>
   <div class="input-number-container" v-if="this.toggleInputNumberDisplay">
-    <div class="info-light-header">
+    <div class="input-number-header">
       <div class="input-number">{{ inputPressed }}</div>
       <CurrentHour />
     </div>
@@ -59,7 +59,7 @@ export default {
 </script>
 
 <style lang="scss">
-.info-light-header {
+.input-number-header {
   position: absolute;
   width: 100%;
   height: 28%;

@@ -28,7 +28,7 @@ export default {
   mounted() {
     this.volumeBar = this.$refs.volumeBar;
     this.currentVolume = this.$refs.currentVolume;
-    this.volumeBar.value = 0.5;
+    this.volumeBar.value = this.currentVolumeLevel;
     document.addEventListener("keyup", (e) => this.volumeKeyListener(e));
   },
 
@@ -58,8 +58,11 @@ export default {
 <style lang="scss">
 .volumeBarContainer {
   position: absolute;
-  bottom: 50%;
-  right: -150px;
+  bottom: 540px;
+  // top: 470px;
+  // bottom: 54%;
+  // left: 81.5%;
+  right: -7.5%;
 }
 
 .volumeBar {
