@@ -3,7 +3,7 @@
     <router-view />
     <CustomPlayer :currentFlux="programme[0].sources">
       <InfoLight v-if="infoDisplayed"/>
-      <Carrousel v-if="carrouselDisplay"/>
+      <Carrousel v-if="true"/> <!-- param de dev -->
     </CustomPlayer>
   </div>
 </template>
@@ -34,7 +34,6 @@ export default {
   computed: {
     programme: () => Store.getters.getProgramme,
     infoDisplayed: () => Store.state.defaultDisplay,
-    carrouselDisplay: () => Store.state.carrouselDisplay,
     channels: () => Store.getters.getChannels,
     newIndex: () => Store.getters.getNewIndex,
     changeSrc: () => Store.getters.getChangeSrc,

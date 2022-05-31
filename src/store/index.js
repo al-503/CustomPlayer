@@ -62,13 +62,6 @@ export default createStore({
     //fait disparaitre info light
     LightInfoDefault(state) {
       return state.defaultDisplay = false
-    },
-    // method pour le display du carrousel plus tard
-    CarrouselDisplay(state) {
-      return state.carrouselDisplay = true
-    },
-    CarrouselDisplayReset(state) {
-      return state.carrouselDisplay = false
     }
   },
   actions: {
