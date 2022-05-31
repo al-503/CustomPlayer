@@ -1,8 +1,10 @@
 <template>
   <div class="carrousel">
     <div class="carrousel-slides">
-      <CarrouselSlide v-for="channel in channels"
+      <CarrouselSlide v-for="(channel, index) in channels"
                       :key="channel.id"
+                      :index="index"
+                      :focusSlide="focusSlide"
                       :logo="channel.logo"
                       :thumb="channel.programme[0].thumb"
                       :title="channel.programme[0].title"
@@ -15,16 +17,44 @@
 
 <script>
 import Store from "@/store"
-
 import CarrouselSlide from "@/components/CarrouselSlides.vue"
 
 export default {
   components: {
     CarrouselSlide
   },
+  data: () =>({
+     focusSlide: 0 // provisoire pour dev
+  }),
+  created() {
+    // next slide //
+    document.addEventListener("keydown", (e) => this.nextSlide(e));
+  },
   computed: {
     channels: () => Store.getters.getChannels,
+    //focusSlide: () => Store.state.focusSlide,
+    // pour vérifier ma conditions de next
+    carrouselDisplay: () => Store.state.carrouselDisplay,
   },
+  methods: {
+///////// ici previous et next slide ///////////////////
+    nextSlide(e) {
+      if(e.key == "ArrowDown" && this.carrouselDisplay === true){
+        if(this.focusSlide >= this.channels.length -1) {
+          this.focusSlide = 0
+        } else {
+          this.focusSlide++
+        }
+      }
+    },
+
+    // previousSlide() {
+    //   if(e.key == "ArrowUp" && this.carrouselDisplay === true){
+    //     console.log("previous")
+    //   }
+    // },
+////////////////////////////////////////////////////////
+  }
 }
 </script>
 
@@ -44,6 +74,9 @@ export default {
 
 .carrousel-slides {
   width: 50%;
+  position: absolute;
+    top: 40%;
+    left: -12%;
 }
 
 </style>

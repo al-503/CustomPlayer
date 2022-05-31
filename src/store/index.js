@@ -7,6 +7,8 @@ export default createStore({
     currentIndex: 0,
     defaultDisplay: false,
     changeSrc: false,
+    focusSlide: 0,
+    carrouselDisplay: true, // true pour le dev
   },
   getters: {
     getChangeSrc(state) {
@@ -60,6 +62,13 @@ export default createStore({
     //fait disparaitre info light
     LightInfoDefault(state) {
       return state.defaultDisplay = false
+    },
+    // method pour le display du carrousel plus tard
+    CarrouselDisplay(state) {
+      return state.carrouselDisplay = true
+    },
+    CarrouselDisplayReset(state) {
+      return state.carrouselDisplay = false
     }
   },
   actions: {

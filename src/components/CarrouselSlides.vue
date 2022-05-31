@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import Store from "@/store"
 
 export default {
   props: {
@@ -36,13 +37,21 @@ export default {
     endTime: {
       type: String,
       required: true
+    },
+    focusSlide: {
+      type: Number,
+      required: true
+    },
+    index: {
+      type: Number,
+      required: true
     }
   },
-
 }
 </script>
 
 <style lang="scss">
+
 .carrousel-slide {
   margin:0% auto;
   width: 350px;
