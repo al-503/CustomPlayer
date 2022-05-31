@@ -6,7 +6,7 @@
       <transition name="fading">
         <DisplayInputNumber v-if="inputDisplay" />
       </transition>
-      <InfoMax v-if="infoMaxDisplayed" />
+      <InfoMax v-if="infoMaxDisplayed && !videoIsOnPause" />
       <ErrorMessage v-if="showErrorMessage" />
     </CustomPlayer>
   </div>
@@ -55,6 +55,7 @@ export default {
     changeSrc: () => Store.getters.getChangeSrc,
     infoMaxDisplayed: () => Store.state.defaultDisplayInfoMax,
     showErrorMessage: () => Store.getters.getShowErrorMessage,
+    videoIsOnPause: () => Store.getters.getVideoIsOnPause,
   },
 
   data: () => ({
