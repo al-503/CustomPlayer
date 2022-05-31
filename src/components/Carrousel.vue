@@ -23,30 +23,22 @@ export default {
   components: {
     CarrouselSlide
   },
-  data: () =>({
-     focusSlide: 0 // provisoire pour dev
-  }),
-  created() {
-    // next slide //
-    document.addEventListener("keydown", (e) => this.nextSlide(e));
-  },
+
   computed: {
     channels: () => Store.getters.getChannels,
-    //focusSlide: () => Store.state.focusSlide,
-    // pour vérifier ma conditions de next
-    carrouselDisplay: () => Store.state.carrouselDisplay,
+    focusSlide: () => Store.state.focusSlide,
   },
   methods: {
 ///////// ici previous et next slide ///////////////////
-    nextSlide(e) {
-      if(e.key == "ArrowDown" && this.carrouselDisplay === true){
-        if(this.focusSlide >= this.channels.length -1) {
-          this.focusSlide = 0
-        } else {
-          this.focusSlide++
-        }
-      }
-    },
+    // nextSlide(e) {
+    //   if(e.key == "ArrowDown" && this.carrouselDisplay === true){
+    //     if(this.focusSlide >= this.channels.length -1) {
+    //       this.focusSlide = 0
+    //     } else {
+    //       this.focusSlide++
+    //     }
+    //   }
+    // },
 
     // previousSlide() {
     //   if(e.key == "ArrowUp" && this.carrouselDisplay === true){
