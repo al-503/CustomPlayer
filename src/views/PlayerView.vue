@@ -13,7 +13,7 @@
       </transition>
       <InfoMax v-if="true && !videoIsOnPause" />
       <ErrorMessage v-if="showErrorMessage && !videoIsOnPause" />
-      <Carrousel/>
+      <Carrousel v-if="carrouselDisplay"/>
     </CustomPlayer>
   </div>
 </template>
@@ -61,6 +61,7 @@ export default {
     displayInfoLightArrival: () => Store.getters.getdisplayInfoLightArrival,
     programme: () => Store.getters.getProgramme,
     infoDisplayed: () => Store.state.defaultDisplay,
+    carrouselDisplay: () => Store.state.carrouselDisplay,
     channels: () => Store.getters.getChannels,
     newIndex: () => Store.getters.getNewIndex,
     changeSrc: () => Store.getters.getChangeSrc,
@@ -103,8 +104,8 @@ export default {
         }
       }
     },
-
-    //// ici les fonctions pour faire apparaître l'info light ////
+    
+//// ici les fonctions pour faire apparaître l'info light ////
 
     DisplayedInfoLight() {
       Store.commit("LightInfoDisplay");

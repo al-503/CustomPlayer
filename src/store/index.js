@@ -13,6 +13,7 @@ export default createStore({
     showErrorMessage: false,
     assignedStringInputs: ["ArrowUp","ArrowDown","n","i","p","Enter","PageUp","PageDown","+","-","0","1","2","3","4","5","6","7","8","9"],
     displayInfoLightArrival: true,
+    carrouselDisplay: true,
   },
   getters: {
     getAssignedInputs(state) {
@@ -102,7 +103,6 @@ export default createStore({
     HideInfoMax(state){
           return state.defaultDisplayInfoMax = false
     },
-
   },
   actions: {
   },
