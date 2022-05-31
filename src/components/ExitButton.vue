@@ -13,6 +13,7 @@ export default {
     }
 }
 </script>
+
 <style>
 .exitButtton {
     width: 146px;
@@ -22,5 +23,6 @@ export default {
     font-size: 28px;
     color: white;
     font-style: italic;
+    background-color: #3f3f3f;
 }
 </style>
