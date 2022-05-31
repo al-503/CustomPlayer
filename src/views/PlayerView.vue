@@ -2,7 +2,7 @@
   <div class="player-view">
     <router-view />
     <CustomPlayer :currentFlux="programme[0].sources">
-      <InfoLight v-if="infoDisplayed" />
+      <InfoLight v-if="infoDisplayed && !videoIsOnPause" />
       <transition name="fading">
         <DisplayInputNumber v-if="inputDisplay" />
       </transition>
@@ -55,6 +55,7 @@ export default {
     changeSrc: () => Store.getters.getChangeSrc,
     infoMaxDisplayed: () => Store.state.defaultDisplayInfoMax,
     showErrorMessage: () => Store.getters.getShowErrorMessage,
+    videoIsOnPause: () => Store.getters.getVideoIsOnPause,
   },
 
   data: () => ({
