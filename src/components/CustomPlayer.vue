@@ -35,6 +35,7 @@
     <TimeManaging />
   </div>
   <slot></slot>
+  <slot></slot>
 </template>
 
 <script>

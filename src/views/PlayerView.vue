@@ -4,10 +4,7 @@
     <CustomPlayer :currentFlux="programme[0].sources">
       <InfoLight
         v-if="
-          ((infoDisplayed && !videoIsOnPause) || displayInfoLightArrival) &&
-          !infoMaxDisplayed
-        "
-      />
+          ((infoDisplayed && !videoIsOnPause) || displayInfoLightArrival) && !infoMaxDisplayed"/>
       <transition name="fading">
         <DisplayInputNumber v-if="inputDisplay" />
       </transition>
@@ -61,7 +58,6 @@ export default {
     displayInfoLightArrival: () => Store.getters.getdisplayInfoLightArrival,
     programme: () => Store.getters.getProgramme,
     infoDisplayed: () => Store.state.defaultDisplay,
-    carrouselDisplay: () => Store.state.carrouselDisplay,
     channels: () => Store.getters.getChannels,
     newIndex: () => Store.getters.getNewIndex,
     changeSrc: () => Store.getters.getChangeSrc,
