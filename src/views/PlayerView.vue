@@ -56,13 +56,19 @@ export default {
 
   computed: {
     displayInfoLightArrival: () => Store.getters.getdisplayInfoLightArrival,
+    // ajout des programmes //
     programme: () => Store.getters.getProgramme,
+    // pour display l'info ligtht
     infoDisplayed: () => Store.state.defaultDisplay,
+    // fonction forEach channels
     channels: () => Store.getters.getChannels,
+    //display de l'info max //
+    infoMaxDisplayed: () => Store.state.defaultDisplayInfoMax,
+    // display des messages d'erreur //
+    showErrorMessage: () => Store.getters.getShowErrorMessage,
+
     newIndex: () => Store.getters.getNewIndex,
     changeSrc: () => Store.getters.getChangeSrc,
-    infoMaxDisplayed: () => Store.state.defaultDisplayInfoMax,
-    showErrorMessage: () => Store.getters.getShowErrorMessage,
     videoIsOnPause: () => Store.getters.getVideoIsOnPause,
   },
 
