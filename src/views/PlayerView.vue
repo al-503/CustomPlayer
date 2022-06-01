@@ -2,11 +2,11 @@
   <div class="player-view">
     <router-view />
     <CustomPlayer :currentFlux="programme[0].sources">
-      <InfoLight v-if="infoDisplayed" />
+      <InfoLight v-if="infoDisplayed && !videoIsOnPause" />
       <transition name="fading">
         <DisplayInputNumber v-if="inputDisplay" />
       </transition>
-      <InfoMax v-if="infoMaxDisplayed && !videoIsOnPause" />
+      <InfoMax v-if="true" />
       <ErrorMessage v-if="showErrorMessage" />
     </CustomPlayer>
   </div>
