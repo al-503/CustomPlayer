@@ -12,8 +12,12 @@ export default createStore({
     errorMessage: null,
     showErrorMessage: false,
     splashScreenDisplay: true,
+    displayInfoLightArrival: true,
   },
   getters: {
+    getdisplayInfoLightArrival(state) {
+      return state.displayInfoLightArrival
+    },
     getSplashScreenDisplay(state) {
       return state.splashScreenDisplay
     },
@@ -41,6 +45,9 @@ export default createStore({
     }
   },
   mutations: {
+    SET_DISPLAY_INFOLIGHT_ARRIVAL(state, payload){
+      state.displayInfoLightArrival = payload
+    },
     SET_SPLASH_SCREEN_DISPLAY(state, payload){
       state.splashScreenDisplay = payload
     },
