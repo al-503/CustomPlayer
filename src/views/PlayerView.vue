@@ -32,9 +32,13 @@ export default {
   },
 
   computed: {
+    // pour le custom Player // 
     programme: () => Store.getters.getProgramme,
+    // pour display l'info ligtht
     infoDisplayed: () => Store.state.defaultDisplay,
+    // fonction forEach channels
     channels: () => Store.getters.getChannels,
+    //
     newIndex: () => Store.getters.getNewIndex,
     changeSrc: () => Store.getters.getChangeSrc,
   },
