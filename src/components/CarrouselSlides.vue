@@ -1,4 +1,5 @@
 <template>
+
   <div class="carrousel-slide">
     <!-- thumb -->
     <img class="slide-img" :src="require('@/assets/sources/programmeThumb/'+ thumb)" alt="thumb du programme"> 
@@ -11,6 +12,7 @@
       <p class="slide-time">{{ startTime + "-" +  endTime }}</p>
     </div>
   </div>
+
 </template>
 
 <script>
@@ -37,20 +39,29 @@ export default {
       type: String,
       required: true
     },
-    focusSlide: {
-      type: Number,
-      required: true
-    },
     index: {
       type: Number,
       required: true
     }
   },
 }
+// partie de la video d alex mais c'est un slider pas un carrousel //
+    // <div v-show="visibleSlide === index" class="carrousel-slide">
+    //   <!-- thumb -->
+    //   <img class="slide-img" :src="require('@/assets/sources/programmeThumb/'+ thumb)" alt="thumb du programme"> 
+    //   <!-- logo -->
+    //   <img class="slide-logo" :src="require('@/assets/sources/channelsLogo/'+ logo)" alt="logo de la chaîne">
+    //   <!-- titre -->
+    //   <div class="slide-text">
+    //     <h3 class="slide-title">{{ title }}</h3>
+    //     <!-- startTime - endTime -->
+    //     <p class="slide-time">{{ startTime + "-" +  endTime }}</p>
+    //   </div>
+    // </div>
+//////////////////////////////////////////////////////////////////////
 </script>
 
 <style lang="scss">
-
 .carrousel-slide {
   margin:0% auto;
   width: 350px;
