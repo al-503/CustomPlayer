@@ -6,7 +6,7 @@
       <transition name="fading">
         <DisplayInputNumber v-if="inputDisplay" />
       </transition>
-      <InfoMax v-if="infoMaxDisplayed" />
+      <InfoMax v-if="true" />
       <ErrorMessage v-if="showErrorMessage" />
     </CustomPlayer>
   </div>
