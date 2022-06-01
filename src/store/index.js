@@ -12,8 +12,12 @@ export default createStore({
     errorMessage: null,
     showErrorMessage: false,
     splashScreenDisplay: true,
+    assignedStringInputs: ["ArrowUp","ArrowDown","n","i","p","Enter","PageUp","PageDown","+","-"]
   },
   getters: {
+    getAssignedInputs(state) {
+      return state.assignedStringInputs
+    },
     getSplashScreenDisplay(state) {
       return state.splashScreenDisplay
     },
