@@ -60,7 +60,7 @@ export default {
           Math.floor((this.videoCurrentTime / this.videoDuration) * 100) + "%";
         if (this.timePosition != null) {
           this.timePosition.style.left =
-            270 + 1290 * (this.videoCurrentTime / this.videoDuration) + "px";
+            283 + 1290 * (this.videoCurrentTime / this.videoDuration) + "px";
           if (this.toggle == 1) {
             this.timePosition.style.visibility = "visible";
           } else {
