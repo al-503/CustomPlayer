@@ -2,7 +2,7 @@
   <div class="player-view">
     <router-view />
     <CustomPlayer :currentFlux="programme[0].sources">
-      <InfoLight v-if="infoDisplayed" />
+      <InfoLight v-if="true" />
       <transition name="fading">
         <DisplayInputNumber v-if="inputDisplay" />
       </transition>

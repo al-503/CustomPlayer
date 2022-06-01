@@ -11,8 +11,16 @@ export default createStore({
     videoIsOnPause: false,
     errorMessage: null,
     showErrorMessage: false,
+    videoDuration: null,
+    videoCurrentTime: null,
   },
   getters: {
+    getVideoCurrentTime(state) {
+      return state.videoCurrentTime
+    },
+    getVideoDuration(state) {
+      return state.videoDuration
+    },
     getShowErrorMessage(state) {
       return state.showErrorMessage
     },
@@ -37,6 +45,12 @@ export default createStore({
     }
   },
   mutations: {
+    SET_VIDEO_CURRENT_TIME(state, payload){
+      state.videoCurrentTime = payload
+    },
+    SET_VIDEO_DURATION(state, payload){
+      state.videoDuration = payload
+    },
     SET_VIDEO_IS_ON_PAUSE(state, payload){
       state.videoIsOnPause = payload
     },
