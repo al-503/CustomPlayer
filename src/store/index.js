@@ -12,7 +12,7 @@ export default createStore({
     errorMessage: null,
     showErrorMessage: false,
     splashScreenDisplay: true,
-    assignedStringInputs: ["ArrowUp","ArrowDown","n","i","p","Enter","PageUp","PageDown","+","-"]
+    assignedStringInputs: ["ArrowUp","ArrowDown","n","i","p","Enter","PageUp","PageDown","+","-","0","1","2","3","4","5","6","7","8","9"]
   },
   getters: {
     getAssignedInputs(state) {

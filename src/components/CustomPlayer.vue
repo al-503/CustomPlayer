@@ -149,18 +149,19 @@ export default {
       this.assignedStringInputs.forEach((element) => {
         if (e.key == element) {
           inputAssigned = true;
-        } else {
-          this.$store.commit("SET_CHANGE_ERROR_MESSAGE", "Touche non assignée");
-          this.$store.commit("SET_CHANGE_SHOW_ERROR_MESSAGE", true);
-          if (this.errorMessageUnAssignedInputlDisplaySetTimeOut != null) {
-            clearTimeout(this.errorMessageNoChannelDisplaySetTimeOut);
-          }
-          this.errorMessageUnAssignedInputlDisplaySetTimeOut = setTimeout(
-            this.hidingErrorMessageUnassignedInput,
-            3000
-          );
         }
       });
+      if (!inputAssigned) {
+        this.$store.commit("SET_CHANGE_ERROR_MESSAGE", "Touche non assignée");
+        this.$store.commit("SET_CHANGE_SHOW_ERROR_MESSAGE", true);
+        if (this.errorMessageUnAssignedInputlDisplaySetTimeOut != null) {
+          clearTimeout(this.errorMessageNoChannelDisplaySetTimeOut);
+        }
+        this.errorMessageUnAssignedInputlDisplaySetTimeOut = setTimeout(
+          this.hidingErrorMessageUnassignedInput,
+          3000
+        );
+      }
     },
     // la méthode show fait un Call back de la méthode hide au bout de 0.5 secondes
     show() {
