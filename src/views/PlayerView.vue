@@ -8,7 +8,7 @@
         <DisplayInputNumber v-if="inputDisplay" />
       </transition>
       <InfoMax v-if="true && !videoIsOnPause" />
-      <ErrorMessage v-if="showErrorMessage" />
+      <ErrorMessage v-if="showErrorMessage && !videoIsOnPause" />
     </CustomPlayer>
   </div>
 </template>
