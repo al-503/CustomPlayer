@@ -11,8 +11,12 @@ export default createStore({
     videoIsOnPause: false,
     errorMessage: null,
     showErrorMessage: false,
+    splashScreenDisplay: true,
   },
   getters: {
+    getSplashScreenDisplay(state) {
+      return state.splashScreenDisplay
+    },
     getShowErrorMessage(state) {
       return state.showErrorMessage
     },
@@ -37,6 +41,9 @@ export default createStore({
     }
   },
   mutations: {
+    SET_SPLASH_SCREEN_DISPLAY(state, payload){
+      state.splashScreenDisplay = payload
+    },
     SET_VIDEO_IS_ON_PAUSE(state, payload){
       state.videoIsOnPause = payload
     },
