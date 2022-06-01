@@ -21,7 +21,7 @@ export default {
   position: absolute;
   // top: 750px;
   // bottom: 23%;
-  bottom: 230px;
+  bottom: 260px;
   left: 94%;
   z-index: 1;
 }
