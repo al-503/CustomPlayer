@@ -13,6 +13,7 @@ export default {};
 
 <style lang="scss" scope>
 .splashScreen {
+  z-index: 100;
   position: absolute;
   top: 0;
   left: 0;
