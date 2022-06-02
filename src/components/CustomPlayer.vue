@@ -275,10 +275,10 @@ export default {
       this.currentVolumeLevel = this.$refs.videoBalise.volume;
     },
     iconDisplay(value) {
-      if (value < 0.05) {
+      if (value < 0.04) {
         this.volumeIcon = "volume-xmark";
       }
-      if (value >= 0.05 && value < 0.3) {
+      if (value >= 0.04 && value < 0.3) {
         this.volumeIcon = "volume-off";
       }
       if (value >= 0.3 && value < 0.75) {
