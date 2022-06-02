@@ -101,8 +101,8 @@ export default {
 }
 
 .progress {
-  width: 1920px;
-  height: 172px;
+  width: 100%;
+  height: 20%;
   position: absolute;
   left: 0px;
   bottom: 0px;
