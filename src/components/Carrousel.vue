@@ -1,6 +1,6 @@
 <template>
   <div class="carrousel">
-      <div ref="sliders" class="carrousel-slides">
+      <div ref="slider" class="carrousel-slides">
         <CarrouselSlide v-for="(channel, index) in channels"
                         :key="channel.id"
                         :index="index"
@@ -23,6 +23,10 @@ export default {
     CarrouselSlide
   },
 
+  Data:() =>({
+    currentSlide: 0
+  }),
+
   created() {
      // slide vers le bas //
     document.addEventListener("keydown", (e) => this.scrollToBottom(e));
@@ -30,37 +34,54 @@ export default {
     document.addEventListener("keydown", (e) => this.scrollToTop(e));
   },
 
+  mounted() {
+// scrollHeigth mesure tout les élément meme sortant / .length recup du nombre de slide de mon array //
+    this.oneSlide = Math.ceil(this.$refs.slider.scrollHeight / this.channels.length);
+    //init currentslide //
+    this.currentSlide = 0
+  },
+
   computed: {
     channels: () => Store.getters.getChannels,
-    // l'index de la slide qui est show
-    //visibleSlide: () => Store.state.visibleSlide,
   },
+
   methods: {
 ///////// ici previous et next slide ///////////////////
-// on veut la taille du tableaux (30) * la taile en px d'un tuile (250) = 7500 et un clic est égal a 250 et donc 2 clic 500 etc
     scrollToBottom(e) {
       if(e.key === "q"){  // key pour le dev
-      console.log(this.$refs.sliders.scrollTop = 200) // scrollTop defini la position de départ a 0 et peut etre rréatribuer 
-      const scrollbarWidth = this.$refs.sliders.offsetHeight + this.$refs.sliders.clientHeight;
-      console.log(scrollbarWidth)
-        //if(scrollAmount <= this.$refs.sliders.scrollHeigth - this.$refs.sliders.clientHeigth) {
-          this.$refs.sliders.scrollTo({
-            top: 250, // c'est la taille idéale // il faut que cette taille augmente a chaque input
+        if(this.currentSlide >= 0){
+          this.$refs.slider.scrollTo({
+            top: this.currentSlide = this.currentSlide + this.oneSlide,
             behavior: "smooth"
           });
-       // }
+        } else if(this.currentSlide < 0) {
+          this.$refs.slider.scrollTo({
+            top: this.currentSlide = this.oneSlide,
+            behavior: "smooth"
+          });
+        }
       }
     },
 
     scrollToTop(e) { 
       if(e.key === "a"){ // key pour le dev
-        this.$refs.sliders.scrollTo({ // scroll to permet de passer des proprieter css de la scroll bar
-          left: 0,
-          top: -6000,
-          behavior: "smooth"
-        });
-      }
-    },
+      console.log(this.$refs.slider.scrollHeight)
+      console.log(this.$refs.slider.clientHeight)
+        if(this.currentSlide < this.$refs.slider.scrollHeight){ // la taille total en pixel du slider 7111+
+            console.log(this.currentSlide)
+            this.$refs.slider.scrollTo({
+              top: this.currentSlide = this.currentSlide - this.oneSlide,
+              behavior: "smooth"
+            });
+        } else if(this.currentSlide > this.$refs.slider.scrollHeight) {
+          this.$refs.slider.scrollTo({
+            top: this.currentSlide = this.$refs.slider.scrollHeight - this.$refs.slider.clientHeight, // essayer math floor
+            behavior: "smooth"
+          });
+        }
+      } 
+    }
+  },
 ////////////////////////////////////////////////////////
 
 ///// pour la classe focus du carrousel //////
@@ -71,15 +92,14 @@ export default {
 // le carrousel disparaît//
 // la chaîne change // 
 // suite logique l'infolight apparait //
+/////gérer les affichage et prioriter //// 
 ///////////////////////////////////////////////////////////////
-  }
 }
 </script>
 
 <style lang="scss">
 .carrousel-slides {
   height: 100%;
-  padding: 20px;
   position: absolute;
     left: 2%;
 //// defini la scrollbar 
@@ -87,9 +107,9 @@ export default {
   overflow-y: scroll;
   scroll-behavior: autox;
 ////////////////////////
-  // &::-webkit-scrollbar{
-  //   display: none;
-  // }
+  &::-webkit-scrollbar{
+    display: none;
+  }
 }
 .carrousel {
   width: 50%;
