@@ -11,7 +11,6 @@ export default createStore({
     videoIsOnPause: false,
     errorMessage: null,
     showErrorMessage: false,
-    splashScreenDisplay: true,
     assignedStringInputs: ["ArrowUp","ArrowDown","n","i","p","Enter","PageUp","PageDown","+","-","0","1","2","3","4","5","6","7","8","9"],
     displayInfoLightArrival: true,
   },
@@ -21,9 +20,6 @@ export default createStore({
   },
     getdisplayInfoLightArrival(state) {
       return state.displayInfoLightArrival
-    },
-    getSplashScreenDisplay(state) {
-      return state.splashScreenDisplay
     },
     getShowErrorMessage(state) {
       return state.showErrorMessage
@@ -51,9 +47,6 @@ export default createStore({
   mutations: {
     SET_DISPLAY_INFOLIGHT_ARRIVAL(state, payload){
       state.displayInfoLightArrival = payload
-    },
-    SET_SPLASH_SCREEN_DISPLAY(state, payload){
-      state.splashScreenDisplay = payload
     },
     SET_VIDEO_IS_ON_PAUSE(state, payload){
       state.videoIsOnPause = payload
