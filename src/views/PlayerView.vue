@@ -4,7 +4,10 @@
     <router-view />
     <CustomPlayer :currentFlux="programme[0].sources">
       <InfoLight
-        v-if="(infoDisplayed && !videoIsOnPause) || displayInfoLightArrival"
+        v-if="
+          ((infoDisplayed && !videoIsOnPause) || displayInfoLightArrival) &&
+          !infoMaxDisplayed
+        "
       />
       <transition name="fading">
         <DisplayInputNumber v-if="inputDisplay" />
