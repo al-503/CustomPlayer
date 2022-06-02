@@ -37,6 +37,7 @@ export default {
   },
   methods: {
 ///////// ici previous et next slide ///////////////////
+// on veut la taille du tableaux (30) * la taile en px d'un tuile (250) = 7500 et un clic est égal a 250 et donc 2 clic 500 etc
     scrollToBottom(e) {
       if(e.key === "q"){  // key pour le dev
       console.log(this.$refs.sliders.scrollTop = 200) // scrollTop defini la position de départ a 0 et peut etre rréatribuer 
@@ -61,6 +62,16 @@ export default {
       }
     },
 ////////////////////////////////////////////////////////
+
+///// pour la classe focus du carrousel //////
+// ont veut que par défaut l index du carrousel = current index et cette card a la class focus (bord bleu) //
+// si on descend indexCaroussel +1 si ont monte index carroussel -1 //
+// et la classe focus s'enléve et se met sur le nouvel index //
+// quand ont appuis sur enter la cards avec la class focus remplace le current index avec son index // 
+// le carrousel disparaît//
+// la chaîne change // 
+// suite logique l'infolight apparait //
+///////////////////////////////////////////////////////////////
   }
 }
 </script>
