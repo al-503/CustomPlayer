@@ -13,6 +13,7 @@ export default createStore({
     showErrorMessage: false,
     videoDuration: null,
     videoCurrentTime: null,
+    splashScreenDisplay: true,
   },
   getters: {
     getVideoCurrentTime(state) {
@@ -20,6 +21,9 @@ export default createStore({
     },
     getVideoDuration(state) {
       return state.videoDuration
+    },
+    getSplashScreenDisplay(state) {
+      return state.splashScreenDisplay
     },
     getShowErrorMessage(state) {
       return state.showErrorMessage
@@ -50,6 +54,9 @@ export default createStore({
     },
     SET_VIDEO_DURATION(state, payload){
       state.videoDuration = payload
+    },
+    SET_SPLASH_SCREEN_DISPLAY(state, payload){
+      state.splashScreenDisplay = payload
     },
     SET_VIDEO_IS_ON_PAUSE(state, payload){
       state.videoIsOnPause = payload

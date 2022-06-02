@@ -1,39 +1,49 @@
 <template>
-  <div class="info-max-header">
-    <CurrentHour/>
+  <div v-if="infoMaxDisplayed" class="info-max-header">
+    <CurrentHour />
   </div>
-
-	<div class="infoMaxMainDiv">
-     
-		<div class="infoMaxBody">
-			<CurrentChannelLogo :logo="currentChannel.logo" id="logoChannel" />
-            <p class="titleInfoMax">{{programme[0].title}}</p>
-            <p class="genreCreatingTimeInfoMax" >{{programme[0].genre + '  ('+ programme[0].creating + ') -  '+ durationHour + 'h' + durationMinute}}</p>
-            <p class="descriptionInfoMax">{{programme[0].description}}</p>
-            <ExitButton class="exitButton"/>
-		</div>
-	</div>
+  <transition name="slide">
+    <div v-if="infoMaxDisplayed" class="infoMaxMainDiv">
+      <div class="infoMaxBody">
+        <CurrentChannelLogo :logo="currentChannel.logo" id="logoChannel" />
+        <p class="titleInfoMax">{{ programme[0].title }}</p>
+        <p class="genreCreatingTimeInfoMax">
+          {{
+            programme[0].genre +
+            "  (" +
+            programme[0].creating +
+            ") -  " +
+            durationHour +
+            "h" +
+            durationMinute
+          }}
+        </p>
+        <p class="descriptionInfoMax">{{ programme[0].description }}</p>
+        <ExitButton class="exitButton" />
+      </div>
+    </div>
+  </transition>
 </template>
 
 <script>
-import Store from '@/store'
-import ExitButton from '@/components/ExitButton.vue'
+import Store from "@/store";
+import ExitButton from "@/components/ExitButton.vue";
 
-import CurrentHour from "@/components/CurrentHour.vue"
-import CurrentChannelLogo from '@/components/CurrentChannelLogo.vue'
+import CurrentHour from "@/components/CurrentHour.vue";
+import CurrentChannelLogo from "@/components/CurrentChannelLogo.vue";
 
 export default {
-   data() {
+  data() {
     return {
       durationHour: 0,
       durationMinute: 0,
-      ProvisDurationMinute:0
+      ProvisDurationMinute: 0,
     };
-   },
+  },
   components: {
     CurrentHour,
     CurrentChannelLogo,
-    ExitButton
+    ExitButton,
   },
   created() {
     this.getTimeDifference();
@@ -41,43 +51,64 @@ export default {
   computed: {
     currentChannel: () => Store.getters.getCurrentChannel,
     programme: () => Store.getters.getProgramme,
+    infoMaxDisplayed: () => Store.state.defaultDisplayInfoMax,
   },
-  methods:{
-    getTimeDifference: function(){
-     this.durationHour = Number(this.programme[0].endTime.substr(0,2))-Number(this.programme[0].startTime.substr(0,2));
-     this.ProvisDurationMinute = Number(this.programme[0].endTime.substr(3))-Number(this.programme[0].startTime.substr(3))
-     if(this.ProvisDurationMinute <= 9){
-       this.durationMinute = String(this.ProvisDurationMinute).padStart(2, 0)
-     } 
-     if(this.ProvisDurationMinute <0){
-       this.durationMinute = 60+this.ProvisDurationMinute;
-     }
-    }
-  }
-}  
-
+  methods: {
+    getTimeDifference: function () {
+      this.durationHour =
+        Number(this.programme[0].endTime.substr(0, 2)) -
+        Number(this.programme[0].startTime.substr(0, 2));
+      this.ProvisDurationMinute =
+        Number(this.programme[0].endTime.substr(3)) -
+        Number(this.programme[0].startTime.substr(3));
+      if (this.ProvisDurationMinute <= 9) {
+        this.durationMinute = String(this.ProvisDurationMinute).padStart(2, 0);
+      }
+      if (this.ProvisDurationMinute < 0) {
+        this.durationMinute = 60 + this.ProvisDurationMinute;
+      }
+    },
+  },
+};
 </script>
 
 <style>
-*{
+* {
   box-sizing: border-box;
 }
-.infoMaxMainDiv{
-    width: 30%;
-    height: 100%;
-    background-color: #3f3f3f;
-    opacity: 69%;
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    font-family: 'Roboto', sans-serif;
+.slide-enter-active,
+.slide-leave-active {
+  transition: all 1s;
 }
 
-#logoChannel img{
-  margin-left: 14%!important;
-  top:7%
+.slide-enter-to {
+  left: 0;
 }
-.titleInfoMax{
+
+.slide-enter-from,
+.slide-leave-to {
+  left: -100%;
+}
+
+.slide-leave-from {
+  left: 0;
+}
+.infoMaxMainDiv {
+  width: 30%;
+  height: 100%;
+  background-color: #3f3f3f;
+  opacity: 69%;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  font-family: "Roboto", sans-serif;
+}
+
+#logoChannel img {
+  margin-left: 14% !important;
+  top: 7%;
+}
+.titleInfoMax {
   color: white;
   font-size: 64px;
   margin-top: 25%;
@@ -85,15 +116,15 @@ export default {
   padding: 0;
   font-weight: bold;
 }
-.genreCreatingTimeInfoMax{
+.genreCreatingTimeInfoMax {
   color: white;
   font-weight: bold;
   margin-left: 10%;
   margin-top: 5%;
   font-size: 33px; /*needs TV size correction*/
 }
-.descriptionInfoMax{
-  margin-top: 5%; 
+.descriptionInfoMax {
+  margin-top: 5%;
   margin-left: 10%;
   margin-right: 10%;
   color: white;
@@ -103,10 +134,10 @@ export default {
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 16; /*needs TV size correction*/
-	-webkit-box-orient: vertical;
+  -webkit-box-orient: vertical;
   text-overflow: ellipsis;
 }
-.exitButton{
+.exitButton {
   left: 10%;
   bottom: 4%;
   position: absolute;
