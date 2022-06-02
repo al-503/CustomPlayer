@@ -1,10 +1,9 @@
 <template>
   <div class="carrousel">
-      <div class="carrousel-slides">
+      <div ref="sliders" class="carrousel-slides">
         <CarrouselSlide v-for="(channel, index) in channels"
                         :key="channel.id"
                         :index="index"
-                        
                         :logo="channel.logo"
                         :thumb="channel.programme[0].thumb"
                         :title="channel.programme[0].title"
@@ -26,9 +25,9 @@ export default {
 
   created() {
      // slide vers le bas //
-    document.addEventListener("keydown", (e) => this.nextSlide(e));
+    document.addEventListener("keydown", (e) => this.scrollToBottom(e));
     // slide vers le haut // 
-    document.addEventListener("keydown", (e) => this.previousSlide(e));
+    document.addEventListener("keydown", (e) => this.scrollToTop(e));
   },
 
   computed: {
@@ -38,23 +37,27 @@ export default {
   },
   methods: {
 ///////// ici previous et next slide ///////////////////
-    nextSlide(e) {
-      if(e.key == "q"){ // key pour le dev
-        if(this.visibleSlide >= this.channels.length - 1) {
-          this.visibleSlide = 0
-        } else {
-          this.visibleSlide++
-        }
+    scrollToBottom(e) {
+      if(e.key === "q"){  // key pour le dev
+      console.log(this.$refs.sliders.scrollTop = 200) // scrollTop defini la position de départ a 0 et peut etre rréatribuer 
+      const scrollbarWidth = this.$refs.sliders.offsetHeight + this.$refs.sliders.clientHeight;
+      console.log(scrollbarWidth)
+        //if(scrollAmount <= this.$refs.sliders.scrollHeigth - this.$refs.sliders.clientHeigth) {
+          this.$refs.sliders.scrollTo({
+            top: 250, // c'est la taille idéale // il faut que cette taille augmente a chaque input
+            behavior: "smooth"
+          });
+       // }
       }
     },
 
-    previousSlide(e) {
-      if(e.key == "a"){ // key pour le dev
-        if(this.visibleSlide <= 0) {
-          this.visibleSlide = this.channels.length - 1
-        } else {
-          this.visibleSlide--
-        }
+    scrollToTop(e) { 
+      if(e.key === "a"){ // key pour le dev
+        this.$refs.sliders.scrollTo({ // scroll to permet de passer des proprieter css de la scroll bar
+          left: 0,
+          top: -6000,
+          behavior: "smooth"
+        });
       }
     },
 ////////////////////////////////////////////////////////
@@ -71,10 +74,11 @@ export default {
 //// defini la scrollbar 
   overflow-x: hidden;
   overflow-y: scroll;
+  scroll-behavior: autox;
 ////////////////////////
-  &::-webkit-scrollbar{
-    display: none;
-  }
+  // &::-webkit-scrollbar{
+  //   display: none;
+  // }
 }
 .carrousel {
   width: 50%;

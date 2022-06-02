@@ -1,6 +1,6 @@
 <template>
 
-  <div class="carrousel-slide">
+  <div :id="index" class="carrousel-slide">
     <!-- thumb -->
     <img class="slide-img" :src="require('@/assets/sources/programmeThumb/'+ thumb)" alt="thumb du programme"> 
     <!-- logo -->
