@@ -45,6 +45,7 @@ export default {
     }
   },
 }
+
 // partie de la video d alex mais c'est un slider pas un carrousel //
     // <div v-show="visibleSlide === index" class="carrousel-slide">
     //   <!-- thumb -->
@@ -63,12 +64,13 @@ export default {
 
 <style lang="scss">
 .carrousel-slide {
-  margin:0% auto;
-  width: 350px;
-  height: 234px;
+  margin: 4% auto;// pour que les carte ne soit pas couper en remontant
+  width: 100%;
+  height: 27%;
 }
 .slide-img {
   width: 100%;
+  height: 234px; // comme sa box
 }
 .slide-logo {
   width: 37px;
