@@ -25,6 +25,7 @@ export default {
     this.progress = this.$refs.progress;
     this.progressBar = this.$refs.progressbar;
     this.setInterval = setInterval(() => this.setMaxProgress(), 1000);
+    document.addEventListener("keyup", (e) => this.keyListen(e));
   },
   beforeUnmount() {
     clearInterval(this.setInterval);
@@ -37,6 +38,11 @@ export default {
         this.progress.value = this.videoCurrentTime;
         this.progressBar.style.width =
           Math.floor((this.videoCurrentTime / this.videoDuration) * 100) + "%";
+      }
+    },
+    keyListen(e) {
+      if (e.key == "ArrowUp") {
+        this.setMaxProgress();
       }
     },
   },
