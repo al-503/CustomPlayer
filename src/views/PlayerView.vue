@@ -3,7 +3,9 @@
   <div class="player-view">
     <router-view />
     <CustomPlayer :currentFlux="programme[0].sources">
-      <InfoLight v-if="infoDisplayed && !videoIsOnPause" />
+      <InfoLight
+        v-if="(infoDisplayed && !videoIsOnPause) || displayInfoLightArrival"
+      />
       <transition name="fading">
         <DisplayInputNumber v-if="inputDisplay" />
       </transition>
@@ -53,9 +55,13 @@ export default {
     setTimeout(() => {
       this.$store.commit("SET_SPLASH_SCREEN_DISPLAY", false);
     }, 2500);
+    setTimeout(() => {
+      this.$store.commit("SET_DISPLAY_INFOLIGHT_ARRIVAL", false);
+    }, 7500);
   },
 
   computed: {
+    displayInfoLightArrival: () => Store.getters.getdisplayInfoLightArrival,
     SplashScreenDisplay: () => Store.getters.getSplashScreenDisplay,
     programme: () => Store.getters.getProgramme,
     infoDisplayed: () => Store.state.defaultDisplay,
