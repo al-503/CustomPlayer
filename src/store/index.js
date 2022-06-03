@@ -7,9 +7,31 @@ export default createStore({
     currentIndex: 0,
     defaultDisplay: false,
     changeSrc: false,
-    visibleSlide: 0,// slide par défaut
+    defaultDisplayInfoMax: false,
+    videoIsOnPause: false,
+    errorMessage: null,
+    showErrorMessage: false,
+    splashScreenDisplay: true,
+    assignedStringInputs: ["ArrowUp","ArrowDown","n","i","p","Enter","PageUp","PageDown","+","-","0","1","2","3","4","5","6","7","8","9"],
+    displayInfoLightArrival: true,
+
   },
   getters: {
+    getAssignedInputs(state) {
+      return state.assignedStringInputs
+  },
+    getdisplayInfoLightArrival(state) {
+      return state.displayInfoLightArrival
+    },
+    getSplashScreenDisplay(state) {
+      return state.splashScreenDisplay
+    },
+    getShowErrorMessage(state) {
+      return state.showErrorMessage
+    },
+    getErrorMessage(state) {
+      return state.errorMessage
+    },
     getChangeSrc(state) {
       return state.changeSrc
     },
@@ -36,10 +58,27 @@ export default createStore({
         return state.Channels[0]
       } else {
         state.Channels[indexSuivant]
-      }
+      },
+    getVideoIsOnPause(state) {
+      return state.videoIsOnPause
     }
   },
   mutations: {
+    SET_DISPLAY_INFOLIGHT_ARRIVAL(state, payload){
+      state.displayInfoLightArrival = payload
+    },
+    SET_SPLASH_SCREEN_DISPLAY(state, payload){
+      state.splashScreenDisplay = payload
+    },
+    SET_VIDEO_IS_ON_PAUSE(state, payload){
+      state.videoIsOnPause = payload
+    },
+    SET_CHANGE_SHOW_ERROR_MESSAGE(state, payload) {
+      state.showErrorMessage = payload
+    },
+    SET_CHANGE_ERROR_MESSAGE(state, payload) {
+      state.errorMessage = payload
+    },
     SET_CHANGE_SRC(state, payload) {
       state.changeSrc = payload
     },
@@ -61,7 +100,16 @@ export default createStore({
     //fait disparaitre info light
     LightInfoDefault(state) {
       return state.defaultDisplay = false
-    }
+    },
+    // display info max
+    DisplayInfoMax(state) {
+      return state.defaultDisplayInfoMax = true
+    },
+    //fait disparaitre info light
+    HideInfoMax(state){
+          return state.defaultDisplayInfoMax = false
+    },
+
   },
   actions: {
   },

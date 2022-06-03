@@ -18,14 +18,19 @@
       :videoDuration="videoDuration"
     />
   </div>
-  <div v-if="this.toggleBarSoundDisplay">
-    <div class="audioControls">
-      <AudioControls
-        :currentVolumeLevel="currentVolumeLevel"
-        :maxVolumeLevel="maxVolumeLevel"
-      />
+  <transition name="fading">
+    <div v-if="this.toggleBarSoundDisplay">
+      <div class="audio-icon-container">
+        <AudioIcons :volumeIcon="volumeIcon" />
+      </div>
+      <div class="audioControls">
+        <AudioControls
+          :currentVolumeLevel="currentVolumeLevel"
+          :maxVolumeLevel="maxVolumeLevel"
+        />
+      </div>
     </div>
-  </div>
+  </transition>
   <div v-if="timeManageTimeBarDisplay">
     <TimeManaging />
   </div>
@@ -39,6 +44,7 @@ import Pause from "./Pause.vue";
 import Play from "./Play.vue";
 import TimeBar from "./TimeBar.vue";
 import AudioControls from "@/components/AudioControls.vue";
+import AudioIcons from "@/components/AudioIcons.vue";
 import TimeManaging from "@/components/TimeManaging.vue";
 
 export default {
@@ -47,6 +53,7 @@ export default {
     Play,
     TimeBar,
     AudioControls,
+    AudioIcons,
     TimeManaging,
   },
   props: {
@@ -76,6 +83,7 @@ export default {
     isPlaying: false,
     isPlayAgain: false,
     iconName: null,
+    volumeIcon: null,
     videoBalise: null,
     replay: false,
     showing: true,
@@ -87,6 +95,7 @@ export default {
     maxVolumeLevel: null,
     toggleBarSoundDisplay: false,
     timeManageTimeBarDisplay: false,
+    errorMessageUnAssignedInputlDisplaySetTimeOut: null,
   }),
 
   mounted() {
@@ -99,6 +108,10 @@ export default {
     document.addEventListener("keydown", (e) => this.keyPageTurn(e));
     document.addEventListener("keydown", (e) => this.volumeKeyListener(e));
     document.addEventListener("keydown", (e) => this.timeManagement(e));
+    document.addEventListener("keydown", (e) =>
+      this.checkingIfInputGetAssigned(e)
+    );
+
     this.currentTimeTimeout = setInterval(
       () => this.videoCurrentTimerefresh(),
       1000
@@ -108,8 +121,12 @@ export default {
     clearInterval(this.currentTimeTimeout);
   },
 
-  beforeUpdate() {
+  updated() {
     if (this.changeSrc == true) {
+      if (this.videoIsOnPause) {
+        this.toggleVideoPlay();
+      }
+      this.$store.commit("SET_CHANGE_SRC", false);
       this.$refs.videoBalise.pause();
       this.$refs.videoBalise.load();
       this.$refs.videoBalise.play();
@@ -119,10 +136,34 @@ export default {
 
   computed: {
     changeSrc: () => Store.getters.getChangeSrc,
+    videoIsOnPause: () => Store.getters.getVideoIsOnPause,
+    assignedStringInputs: () => Store.getters.getAssignedInputs,
   },
 
-
   methods: {
+    hidingErrorMessageUnassignedInput() {
+      this.$store.commit("SET_CHANGE_SHOW_ERROR_MESSAGE", false);
+    },
+    //méthode qui regarde si l'input est assigné
+    checkingIfInputGetAssigned(e) {
+      let inputAssigned = false;
+      this.assignedStringInputs.forEach((element) => {
+        if (e.key == element) {
+          inputAssigned = true;
+        }
+      });
+      if (!inputAssigned) {
+        this.$store.commit("SET_CHANGE_ERROR_MESSAGE", "Touche non assignée");
+        this.$store.commit("SET_CHANGE_SHOW_ERROR_MESSAGE", true);
+        if (this.errorMessageUnAssignedInputlDisplaySetTimeOut != null) {
+          clearTimeout(this.errorMessageNoChannelDisplaySetTimeOut);
+        }
+        this.errorMessageUnAssignedInputlDisplaySetTimeOut = setTimeout(
+          this.hidingErrorMessageUnassignedInput,
+          3000
+        );
+      }
+    },
     // la méthode show fait un Call back de la méthode hide au bout de 0.5 secondes
     show() {
       this.timeout = setTimeout(this.hide, 500);
@@ -138,10 +179,12 @@ export default {
       if (this.$refs?.videoBalise !== null && this.$refs?.videoBalise.paused) {
         this.isPlaying = true;
         this.isPlayAgain = true;
+        this.$store.commit("SET_VIDEO_IS_ON_PAUSE", false);
         this.$refs.videoBalise.play();
         this.show();
       } else {
         this.isPlaying = false;
+        this.$store.commit("SET_VIDEO_IS_ON_PAUSE", true);
         this.isPlayAgain = false;
         this.$refs.videoBalise.pause();
         this.showing = true;
@@ -172,24 +215,26 @@ export default {
     // keyPageTurn gère le changement de la source de la vidéo lorsque l'utilisateur change de chaîne
     keyPageTurn(e) {
       if (e.key == "PageUp" || e.key == "PageDown") {
+        if (this.videoIsOnPause) {
+          this.toggleVideoPlay();
+        }
         this.$refs.videoBalise.pause();
         this.$refs.videoBalise.load();
         this.$refs.videoBalise.play();
       }
     },
 
-    ///////////
-    // Audio //
-    //////////
+    //////////////// Audio /////////////////////////////
+
     myStopFunction() {
       clearTimeout(this.barSoundVisible);
     },
+
     disparition() {
       this.toggleBarSoundDisplay = false;
     },
 
     alterVolume(dir) {
-      // const currentVolume = Math.floor(this.$refs.videoBalise.volume * 10) / 10;
       const currentVolume = parseFloat(this.$refs.videoBalise.volume).toFixed(
         2
       );
@@ -197,14 +242,18 @@ export default {
       if (dir === "+") {
         if (currentVolume < 0.95) {
           this.$refs.videoBalise.volume += 0.05;
+          this.iconDisplay(this.$refs.videoBalise.volume);
         } else if (currentVolume == 0.95) {
           this.$refs.videoBalise.volume = 1;
+          this.iconDisplay(this.$refs.videoBalise.volume);
         }
       } else if (dir === "-") {
         if (currentVolume > 0.05) {
           this.$refs.videoBalise.volume -= 0.05;
+          this.iconDisplay(this.$refs.videoBalise.volume);
         } else if (currentVolume == 0.05) {
           this.$refs.videoBalise.volume = 0;
+          this.iconDisplay(this.$refs.videoBalise.volume);
         }
       }
       console.log(this.$refs.videoBalise.volume);
@@ -216,7 +265,7 @@ export default {
         if (this.barSoundVisible != null) {
           this.myStopFunction();
         }
-        this.barSoundVisible = setTimeout(this.disparition, 3000);
+        this.barSoundVisible = setTimeout(this.disparition, 2000);
       }
       if (e.key === "+") {
         this.alterVolume("+");
@@ -226,9 +275,22 @@ export default {
       }
       this.currentVolumeLevel = this.$refs.videoBalise.volume;
     },
-    /**
-     * ---------- Time management -------------
-     */
+    iconDisplay(value) {
+      if (value < 0.04) {
+        this.volumeIcon = "volume-xmark";
+      }
+      if (value >= 0.04 && value < 0.3) {
+        this.volumeIcon = "volume-off";
+      }
+      if (value >= 0.3 && value < 0.75) {
+        this.volumeIcon = "volume-low";
+      }
+      if (value >= 0.75) {
+        this.volumeIcon = "volume-high";
+      }
+    },
+    //////////////////// Time management /////////////////////////////
+
     removeTimeBar() {
       this.timeManageTimeBarDisplay = false;
     },
@@ -236,12 +298,14 @@ export default {
     clearTimeBarVisibleTimeOut() {
       clearTimeout(this.timeBarVisible);
     },
+
     videoCurrentTimerefresh() {
       if (this.$refs.videoBalise != null) {
         this.videoCurrentTime = this.$refs.videoBalise.currentTime;
         this.videoDuration = this.$refs.videoBalise.duration;
       }
     },
+
     timeManagement(e) {
       if (e.key == "p" || e.key == "n") {
         this.timeManageTimeBarDisplay = true;

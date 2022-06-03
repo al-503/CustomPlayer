@@ -1,6 +1,6 @@
 <template>
   <div class="progress">
-    <div id="startTime">21H00</div>
+    <div id="startTime">{{ programme[0].startTime }}</div>
     <div ref="time" id="time" :currentTimeSet="this.setCurrentTime()">
       {{ currentTimeSet }}
       <fa class="caret-down" icon="caret-down" />
@@ -8,10 +8,12 @@
     <progress ref="progress" id="progress" value="0" min="0">
       <div ref="progressbar" id="progress-bar"></div>
     </progress>
-    <div id="endTime">22H00</div>
+    <div id="endTime">{{ programme[0].endTime }}</div>
   </div>
 </template>
 <script>
+import Store from "@/store";
+
 export default {
   props: {
     videoCurrentTime: {
@@ -22,6 +24,9 @@ export default {
       type: Number,
       required: false,
     },
+  },
+  computed: {
+    programme: () => Store.getters.getProgramme,
   },
   data: () => ({
     duration: null,
@@ -63,7 +68,7 @@ export default {
           Math.floor((this.videoCurrentTime / this.videoDuration) * 100) + "%";
         if (this.timePosition != null) {
           this.timePosition.style.left =
-            270 + 1290 * (this.videoCurrentTime / this.videoDuration) + "px";
+            283 + 1290 * (this.videoCurrentTime / this.videoDuration) + "px";
           if (this.toggle == 1) {
             this.timePosition.style.visibility = "visible";
           } else {
@@ -96,8 +101,8 @@ export default {
 }
 
 .progress {
-  width: 1920px;
-  height: 172px;
+  width: 100%;
+  height: 20%;
   position: absolute;
   left: 0px;
   bottom: 0px;

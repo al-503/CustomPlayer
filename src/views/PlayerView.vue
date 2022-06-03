@@ -1,54 +1,104 @@
 <template>
+  <SplashScreen v-if="SplashScreenDisplay" />
   <div class="player-view">
     <router-view />
     <CustomPlayer :currentFlux="programme[0].sources">
-      <InfoLight v-if="infoDisplayed"/>
+    
+      <InfoLight
+        v-if="(infoDisplayed && !videoIsOnPause) || displayInfoLightArrival"
+      />
+      
       <Carrousel v-if="true"/> <!-- param de dev -->
+      
+      <transition name="fading">
+        <DisplayInputNumber v-if="inputDisplay" />
+      </transition>
+      <InfoMax v-if="true && !videoIsOnPause" />
+      <ErrorMessage v-if="showErrorMessage && !videoIsOnPause" />
     </CustomPlayer>
   </div>
 </template>
 
 <script>
+import SplashScreen from "@/components/SplashScreen.vue";
+
 import Store from "@/store";
 
 import CustomPlayer from "@/components/CustomPlayer.vue";
 import InfoLight from "@/components/InfoLight.vue";
 import Carrousel from '@/components/Carrousel.vue';
+import InfoMax from "@/components/InfoMax.vue";
+import DisplayInputNumber from "@/components/DisplayInputNumber.vue";
+import ErrorMessage from "@/components/ErrorMessage.vue";
+
 
 export default {
   components: {
+    SplashScreen,
     CustomPlayer,
     InfoLight,
     Carrousel,
+    InfoMax,
+    DisplayInputNumber,
+    ErrorMessage,
   },
 
   created() {
-     // changement de chaine et des infos //
+    // changement de chaine et des infos //
     document.addEventListener("keydown", (e) => this.ChannelChange(e));
-     // display de l'info light //
+    // display de l'info light //
     document.addEventListener("keydown", (e) => this.showInfoLight(e));
-     // changement de chaine par num //
-    document.addEventListener("keydown", (e) => this.ChannelChangeWithNumKey(e));
+    // display de l'info max
+    document.addEventListener("keydown", (e) => this.showInfoMax(e));
+
+    // changement de chaine par num //
+    document.addEventListener("keydown", (e) =>
+      this.ChannelChangeWithNumKey(e)
+    );
+    // disparition de l'infoLight pour InputNumber //
+
+    document.addEventListener("keydown", (e) => this.switchDisplay(e));
+  },
+  mounted() {
+    setTimeout(() => {
+      this.$store.commit("SET_SPLASH_SCREEN_DISPLAY", false);
+    }, 2500);
+    setTimeout(() => {
+      this.$store.commit("SET_DISPLAY_INFOLIGHT_ARRIVAL", false);
+    }, 7500);
   },
 
   computed: {
+
     // pour le custom Player // 
+    displayInfoLightArrival: () => Store.getters.getdisplayInfoLightArrival,
+    // condition du display splash screen
+    SplashScreenDisplay: () => Store.getters.getSplashScreenDisplay,
+    // les programmes // 
     programme: () => Store.getters.getProgramme,
     // pour display l'info ligtht
     infoDisplayed: () => Store.state.defaultDisplay,
     // fonction forEach channels
     channels: () => Store.getters.getChannels,
-    //
     newIndex: () => Store.getters.getNewIndex,
+    // avérif //
     changeSrc: () => Store.getters.getChangeSrc,
+    // consdition de display infoMax //
+    infoMaxDisplayed: () => Store.state.defaultDisplayInfoMax,
+    // consdition de display error msg //
+    showErrorMessage: () => Store.getters.getShowErrorMessage,
+    videoIsOnPause: () => Store.getters.getVideoIsOnPause,
   },
-  
+
   data: () => ({
     tabOfInput: [],
     channelNumberInput: null,
     waitingNextInput: null,
     waitingChannelNumbers: null,
     matchSucces: false,
+    checkingMatchToggle: true,
+    inputDisplay: true,
+    errorMessageNoChannelDisplaySetTimeOut: null,
   }),
 
   methods: {
@@ -56,47 +106,88 @@ export default {
       if (e.key == "PageUp") {
         if (Store.state.currentIndex === 29) {
           Store.state.currentIndex = 0;
+          this.DisplayedInfoLight();
         } else {
           // console.log(Store.state.currentIndex = Store.state.currentIndex + 1)
           Store.commit("KeyLeft");
+          this.DisplayedInfoLight();
         }
       } else if (e.key == "PageDown") {
         if (Store.state.currentIndex === 0) {
           // si currentIndex = 0 alors faire current index = array.length
           Store.state.currentIndex = 29;
+          this.DisplayedInfoLight();
         } else {
           //console.log(Store.state.currentIndex = Store.state.currentIndex - 1)
           Store.commit("KeyRight");
+          this.DisplayedInfoLight();
         }
       }
     },
-    
-//// ici les fonctions pour faire apparaître l'info light ////
 
-    ResetTimeoutInfoLight() {
-      clearTimeout(this.infoLightVisible);
+ //// ici les fonctions pour faire apparaître l'info light ////
+
+    DisplayedInfoLight() {
+      Store.commit("LightInfoDisplay");
+      if (this.infoLightVisible != null) {
+        clearTimeout(this.infoLightVisible);
+      }
+      this.infoLightVisible = setTimeout(this.stopInfoLight, 4000);
     },
 
     stopInfoLight() {
-      Store.commit('LightInfoDefault')
+      Store.commit("LightInfoDefault");
     },
 
-    showInfoLight (e) {
-      if(e.key === "ArrowUp") {
-        Store.commit('LightInfoDisplay');
-        if( this.infoLightVisible != null) {
-          console.log("info light" + this.infoLightVisible)
-          this.ResetTimeoutInfoLight();
-        }
-        this.infoLightVisible = setTimeout(this.stopInfoLight, 4000);
+    showInfoLight(e) {
+      if (e.key === "ArrowUp") {
+        this.DisplayedInfoLight();
       }
     },
+
+    //// ici les fonctions pour faire disparaitre l'info light ////
+    ////            si apparition de l'InputNumber             ////
+    switchDisplay(e) {
+      let regInput = new RegExp("^[0-9]+$");
+
+      if (regInput.test(e.key)) {
+        this.inputDisplay = true;
+        this.stopInfoLight();
+      }
+      // Impleter ici la condition de priorité de l'InfoLight
+
+      // Genere bug d'apparition de la 1ere inputNumber
+      // if (e.key == "PageUp" || e.key == "PageDown") {
+      //   this.inputDisplay = false;
+      // }
+    },
+
     //////////////////////////////////////////////////////////////////
-    
-  //// ici gestion des changement de chaîne par num ////
-    
+
+    //////////////////////////////////////////////////////////////////
+
+    //// Gestion InfoMax ////
+
+    DisplayInfoMax() {
+      Store.commit("DisplayInfoMax");
+    },
+    showInfoMax(e) {
+      if (e.key === "i") {
+        this.DisplayInfoMax();
+      }
+    },
+    //// ici gestion des changement de chaîne par num ////
+
     // manageTabOfInput() a pour but de transformer le contenu du tableau tabOfInput en nombre exploitable
     manageTabOfInput() {
+      if (this.tabOfInput.length == 3) {
+        this.channelNumberInput =
+          this.tabOfInput[0] +
+          "" +
+          this.tabOfInput[1] +
+          "" +
+          this.tabOfInput[2];
+      }
       if (this.tabOfInput.length == 2) {
         this.channelNumberInput = this.tabOfInput[0] + "" + this.tabOfInput[1];
       } else if (this.tabOfInput.length == 1) {
@@ -105,23 +196,47 @@ export default {
       this.matchSucces = false;
     },
 
+    hidingErrorMessageNoChannel() {
+      this.$store.commit("SET_CHANGE_SHOW_ERROR_MESSAGE", false);
+    },
+
     // forEachChannel est une fonciton qui parcours toutes les channels et qui regarde si l'input de l'utilisateur et appel la fonction checkingMatch
     forEachChannel() {
       this.channels.forEach((channel) =>
         this.checkingMatch(channel.number, channel.programme[0].sources)
       );
       if (this.matchSucces == false) {
-        console.log("chaine pas trouvée");
+        this.$store.commit("SET_CHANGE_ERROR_MESSAGE", "Aucune chaîne trouvée");
+        this.$store.commit("SET_CHANGE_SHOW_ERROR_MESSAGE", true);
+        if (this.errorMessageNoChannelDisplaySetTimeOut != null) {
+          clearTimeout(this.errorMessageNoChannelDisplaySetTimeOut);
+        }
+        this.errorMessageNoChannelDisplaySetTimeOut = setTimeout(
+          this.hidingErrorMessageNoChannel,
+          3000
+        );
       }
       this.matchSucces == false;
+    },
+
+    checkingMatchToggleFalsy() {
+      this.checkingMatchToggle = true;
     },
 
     // checkinMatch() regarde si l'input de l'utilisateur match avec un numéros de chaine contenu dans channels
     checkingMatch(channelNumber, channelSource) {
       if (this.channelNumberInput == channelNumber) {
         this.matchSucces = true;
-        this.$store.commit("SET_CURRENT_INDEX", this.channelNumberInput);
-        this.$store.commit("SET_CHANGE_SRC", true);
+        let index = this.channels.findIndex(
+          (channel) => channel.number == channelNumber
+        );
+        this.$store.commit("SET_CURRENT_INDEX", index);
+        this.DisplayedInfoLight();
+        if (this.checkingMatchToggle == true) {
+          this.checkingMatchToggle = false;
+          this.$store.commit("SET_CHANGE_SRC", true);
+          setTimeout(this.checkingMatchToggleFalsy, 3000);
+        }
       }
 
       this.tabOfInput = [];
@@ -131,7 +246,7 @@ export default {
       // on regarde si l'input reçu est de type Number, si oui, on rentre
       if (!isNaN(e.key)) {
         // On regarde si le tableau tabOfInput contient moin de 2 elements, si oui on rentre
-        if (this.tabOfInput.length < 2) {
+        if (this.tabOfInput.length < 3) {
           // on met la clé de l'input reçu dans le tableau tabOfInput
           this.tabOfInput.push(e.key);
 
@@ -143,3 +258,12 @@ export default {
   },
 };
 </script>
+<style lang="scss" scope>
+.fading-leave-active {
+  transition: opacity 0.25s;
+}
+.fading-enter,
+.fading-leave-to {
+  opacity: 0;
+}
+</style>
