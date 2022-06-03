@@ -73,10 +73,10 @@ export default {
   height: 234px; // comme sa box
 }
 .slide-logo {
-  width: 37px;
-  height: 32px;
+  width: 10%;
+  height: 16%;
   position: relative;
-    bottom: 90%;
+    bottom: 78%;
     left: 85%;
 }
 .slide-text {
