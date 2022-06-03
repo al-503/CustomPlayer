@@ -86,8 +86,10 @@ export default {
     },
   }
 ////////////////////////////////////////////////////////
+//// a faire ////
+// display le bloque avec la fleche gauche et enlever avec la flèche droite //
 
-///// pour la classe focus du carrousel //////
+///// pour la class focus du carrousel //////
 // ont veut que par défaut l index du carrousel = current index et cette card a la class focus (bord bleu) //
 // si on descend indexCaroussel +1 si ont monte index carroussel -1 //
 // et la classe focus s'enléve et se met sur le nouvel index //
