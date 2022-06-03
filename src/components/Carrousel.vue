@@ -47,6 +47,28 @@ export default {
 
   methods: {
 ///////// ici previous et next slide ///////////////////
+  scrollToTop(e) { 
+      if(e.key === "a"){ // key pour le dev
+      //console.log(this.$refs.slider.scrollHeight)
+      //console.log(this.$refs.slider.clientHeight)
+        if(this.currentSlide < this.$refs.slider.scrollHeight){
+            //console.log(this.currentSlide)
+            this.$refs.slider.scrollTo({
+              top: this.currentSlide = this.currentSlide - this.oneSlide,
+              behavior: "smooth"
+            });
+        } else if(this.currentSlide > this.$refs.slider.scrollHeight) {
+          // console.log(this.$refs.slider.scrollHeight)
+          // console.log(this.$refs.slider.clientHeight)
+          // console.log(this.$refs.slider.scrollHeight - (this.$refs.slider.clientHeight + this.oneSlide))// 490 c'est les margin 
+            this.$refs.slider.scrollTo({
+              top: this.currentSlide = this.$refs.slider.scrollHeight - (this.$refs.slider.clientHeight + this.oneSlide), // essayer math floor car je doit etre vers les 6111 - onSlide et pas 7111
+              behavior: "smooth"
+            });
+        }
+      } 
+    },
+
     scrollToBottom(e) {
       if(e.key === "q"){  // key pour le dev
         if(this.currentSlide >= 0){
@@ -62,26 +84,7 @@ export default {
         }
       }
     },
-
-    scrollToTop(e) { 
-      if(e.key === "a"){ // key pour le dev
-      console.log(this.$refs.slider.scrollHeight)
-      console.log(this.$refs.slider.clientHeight)
-        if(this.currentSlide < this.$refs.slider.scrollHeight){ // la taille total en pixel du slider 7111+
-            console.log(this.currentSlide)
-            this.$refs.slider.scrollTo({
-              top: this.currentSlide = this.currentSlide - this.oneSlide,
-              behavior: "smooth"
-            });
-        } else if(this.currentSlide > this.$refs.slider.scrollHeight) {
-          this.$refs.slider.scrollTo({
-            top: this.currentSlide = this.$refs.slider.scrollHeight - this.$refs.slider.clientHeight, // essayer math floor
-            behavior: "smooth"
-          });
-        }
-      } 
-    }
-  },
+  }
 ////////////////////////////////////////////////////////
 
 ///// pour la classe focus du carrousel //////
@@ -105,7 +108,6 @@ export default {
 //// defini la scrollbar 
   overflow-x: hidden;
   overflow-y: scroll;
-  scroll-behavior: autox;
 ////////////////////////
   &::-webkit-scrollbar{
     display: none;
