@@ -58,9 +58,9 @@ export default {
               behavior: "smooth"
             });
         } else if(this.currentSlide > this.$refs.slider.scrollHeight) {
-          // console.log(this.$refs.slider.scrollHeight)
-          // console.log(this.$refs.slider.clientHeight)
-          // console.log(this.$refs.slider.scrollHeight - (this.$refs.slider.clientHeight + this.oneSlide))// 490 c'est les margin 
+          console.log(this.$refs.slider.scrollHeight)
+          console.log(this.$refs.slider.clientHeight)
+          console.log(this.$refs.slider.scrollHeight - (this.$refs.slider.clientHeight + this.oneSlide))// 490 c'est les margin 
             this.$refs.slider.scrollTo({
               top: this.currentSlide = this.$refs.slider.scrollHeight - (this.$refs.slider.clientHeight + this.oneSlide), // essayer math floor car je doit etre vers les 6111 - onSlide et pas 7111
               behavior: "smooth"
