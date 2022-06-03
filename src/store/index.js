@@ -14,6 +14,8 @@ export default createStore({
     videoDuration: null,
     videoCurrentTime: null,
     splashScreenDisplay: true,
+    assignedStringInputs: ["ArrowUp","ArrowDown","n","i","p","Enter","PageUp","PageDown","+","-","0","1","2","3","4","5","6","7","8","9"],
+    displayInfoLightArrival: true,
   },
   getters: {
     getVideoCurrentTime(state) {
@@ -21,6 +23,12 @@ export default createStore({
     },
     getVideoDuration(state) {
       return state.videoDuration
+    },
+    getAssignedInputs(state) {
+      return state.assignedStringInputs
+  },
+    getdisplayInfoLightArrival(state) {
+      return state.displayInfoLightArrival
     },
     getSplashScreenDisplay(state) {
       return state.splashScreenDisplay
@@ -54,6 +62,9 @@ export default createStore({
     },
     SET_VIDEO_DURATION(state, payload){
       state.videoDuration = payload
+    },
+    SET_DISPLAY_INFOLIGHT_ARRIVAL(state, payload){
+      state.displayInfoLightArrival = payload
     },
     SET_SPLASH_SCREEN_DISPLAY(state, payload){
       state.splashScreenDisplay = payload

@@ -58,16 +58,16 @@ export default {
 <style lang="scss">
 .volumeBarContainer {
   position: absolute;
-  bottom: 540px;
+  bottom: 560px;
   // top: 470px;
   // bottom: 54%;
   // left: 81.5%;
-  right: -7.5%;
+  right: -7.3%;
 }
 
 .volumeBar {
   position: relative;
-  width: 500px;
+  width: 475px;
   border: solid 3px rgb(255, 255, 255);
   border-radius: 15px;
   transform: rotate(270deg);

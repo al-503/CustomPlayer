@@ -91,6 +91,7 @@ export default {
     maxVolumeLevel: null,
     toggleBarSoundDisplay: false,
     timeManageTimeBarDisplay: false,
+    errorMessageUnAssignedInputlDisplaySetTimeOut: null,
   }),
 
   mounted() {
@@ -103,6 +104,10 @@ export default {
     document.addEventListener("keydown", (e) => this.keyPageTurn(e));
     document.addEventListener("keydown", (e) => this.volumeKeyListener(e));
     document.addEventListener("keydown", (e) => this.timeManagement(e));
+    document.addEventListener("keydown", (e) =>
+      this.checkingIfInputGetAssigned(e)
+    );
+
     this.currentTimeTimeout = setInterval(
       () => this.videoCurrentTimerefresh(),
       1000
@@ -128,9 +133,33 @@ export default {
   computed: {
     changeSrc: () => Store.getters.getChangeSrc,
     videoIsOnPause: () => Store.getters.getVideoIsOnPause,
+    assignedStringInputs: () => Store.getters.getAssignedInputs,
   },
 
   methods: {
+    hidingErrorMessageUnassignedInput() {
+      this.$store.commit("SET_CHANGE_SHOW_ERROR_MESSAGE", false);
+    },
+    //méthode qui regarde si l'input est assigné
+    checkingIfInputGetAssigned(e) {
+      let inputAssigned = false;
+      this.assignedStringInputs.forEach((element) => {
+        if (e.key == element) {
+          inputAssigned = true;
+        }
+      });
+      if (!inputAssigned) {
+        this.$store.commit("SET_CHANGE_ERROR_MESSAGE", "Touche non assignée");
+        this.$store.commit("SET_CHANGE_SHOW_ERROR_MESSAGE", true);
+        if (this.errorMessageUnAssignedInputlDisplaySetTimeOut != null) {
+          clearTimeout(this.errorMessageNoChannelDisplaySetTimeOut);
+        }
+        this.errorMessageUnAssignedInputlDisplaySetTimeOut = setTimeout(
+          this.hidingErrorMessageUnassignedInput,
+          3000
+        );
+      }
+    },
     // la méthode show fait un Call back de la méthode hide au bout de 0.5 secondes
     show() {
       this.timeout = setTimeout(this.hide, 500);
@@ -243,10 +272,10 @@ export default {
       this.currentVolumeLevel = this.$refs.videoBalise.volume;
     },
     iconDisplay(value) {
-      if (value < 0.05) {
+      if (value < 0.04) {
         this.volumeIcon = "volume-xmark";
       }
-      if (value >= 0.05 && value < 0.3) {
+      if (value >= 0.04 && value < 0.3) {
         this.volumeIcon = "volume-off";
       }
       if (value >= 0.3 && value < 0.75) {
