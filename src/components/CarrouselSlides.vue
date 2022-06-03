@@ -64,7 +64,7 @@ export default {
 
 <style lang="scss">
 .carrousel-slide {
-  margin: 4% auto;// pour que les carte ne soit pas couper en remontant
+  margin: 0 auto;// pour que les carte ne soit pas couper en remontant
   width: 100%;
   height: 27%;
 }
