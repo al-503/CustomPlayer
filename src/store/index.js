@@ -7,7 +7,6 @@ export default createStore({
     currentIndex: 0,
     defaultDisplay: false,
     changeSrc: false,
-    visibleSlide: 0,// slide par défaut
   },
   getters: {
     getChangeSrc(state) {
