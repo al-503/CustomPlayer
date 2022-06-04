@@ -48,7 +48,7 @@ export default {
 h1 {
   color: #ffffff;
   font-size: 125px;
-  font-family: "Roboto", "Open Sans", sans-serif;
+  font-family: "RobotoItalic", "Open Sans", sans-serif;
   text-transform: uppercase;
   text-shadow: 1px 1px 15px black;
 }

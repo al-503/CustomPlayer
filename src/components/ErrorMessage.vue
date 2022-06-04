@@ -32,6 +32,8 @@ export default {
 }
 
 .errorMessageText {
+  font-family: "Roboto", "Open Sans", sans-serif;
+  text-transform: capitalize;
   color: white;
   font-weight: bold;
   font-size: 48px;
