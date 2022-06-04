@@ -1,5 +1,5 @@
 <template>
-  <transition name="enter"> <!---left-hide--->
+  <transition name="slide">
     <div class="carrousel">
         <div ref="slider" class="carrousel-slides">
           <CarrouselSlide v-for="(channel, index) in channels"
@@ -24,6 +24,11 @@ export default {
     CarrouselSlide
   },
 
+  computed: {
+    channels: () => Store.getters.getChannels,
+    carrouselDisplay: () => Store.state.carrouselDisplay
+  },
+
   Data:() =>({
     currentSlide: 0
   }),
@@ -36,15 +41,12 @@ export default {
   },
 
   mounted() {
-// scrollHeigth mesure tout les élément meme sortant / .length recup du nombre de slide de mon array //
+    // scrollHeigth mesure tout les élément meme sortant / .length recup du nombre de slide de mon array //
     this.oneSlide = Math.ceil(this.$refs.slider.scrollHeight / this.channels.length);
     //init currentslide //
     this.currentSlide = 0
   },
 
-  computed: {
-    channels: () => Store.getters.getChannels,
-  },
 
   methods: {
 ///////// ici previous et next slide ///////////////////
@@ -111,6 +113,7 @@ export default {
   }
 }
 .carrousel {
+  position : absolute;
   width: 50%;
   height: 100vh;
   overflow: hidden;
@@ -123,15 +126,22 @@ export default {
   );
 }
 
-.enter-from {
-  opacity: 0;
-}
-.enter-to {
-  opacity: 1;
+.slide-enter-active,
+.slide-leave-active {
+  transition: all 3s;
 }
 
-.enter-active {
-  transition: opacity 2s ease;
+.slide-enter-to {
+  left: 0;
+}
+
+.slide-enter-from,
+.slide-leave-to {
+  left: -100%;
+}
+
+.slide-leave-from {
+  left: 0;
 }
 
 </style>

@@ -116,7 +116,7 @@ export default createStore({
     },
     //fait disparaitre info light
     HideInfoMax(state){
-          return state.defaultDisplayInfoMax = false
+      return state.defaultDisplayInfoMax = false
     },
     CarrouselShow(state) {
       return state.carrouselDisplay = true
