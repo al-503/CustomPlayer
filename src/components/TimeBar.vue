@@ -147,7 +147,7 @@ export default {
 
 #time {
   color: rgb(255, 255, 255);
-  font-size: 25px;
+  font-size: 125%;
   font-family: "Inter", sans-serif;
   font-weight: 500;
   z-index: 1000;
