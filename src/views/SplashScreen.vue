@@ -4,7 +4,7 @@
       class="splashScreenImg"
       :src="require('@/assets/sources/logoWiztiteam/logo.png')"
     />
-    <h1>wiztiteam</h1>
+    <h1 class="projectName">wiztiteam</h1>
   </div>
 </template>
 <script>
@@ -45,7 +45,7 @@ export default {
   position: relative;
   padding-bottom: 50px;
 }
-h1 {
+.projectName {
   color: #ffffff;
   font-size: 125px;
   font-family: "Roboto", "Open Sans", sans-serif;
