@@ -6,42 +6,46 @@
       <!-- bouton info+ -->
       <div class="info-plus">INFO +</div>
     </div>
-    <p class="time">{{ startAt + " - "+  endAt }}</p>
-    <!-- progress bar  -->
+    <p class="time">{{ startAt + " - " + endAt }}</p>
+    <MiniTimeBar />
   </div>
 </template>
 
 <script>
-export default  {
+import MiniTimeBar from "@/components/MiniTimeBar.vue";
+export default {
+  components: {
+    MiniTimeBar,
+  },
   props: {
     title: {
       type: String,
-      required: true
+      required: true,
     },
     gender: {
       type: String,
-      required: true
+      required: true,
     },
     startAt: {
       type: String,
-      required: true
+      required: true,
     },
     endAt: {
       type: String,
-      required: true
-    }
-  }
-}
+      required: true,
+    },
+  },
+};
 </script>
 
 <style langue="scss">
-.current-info{
+.current-info {
   font-family: "Inter", sans-serif;
   width: 80%;
   display: flex;
 }
 
-.info-text{
+.info-text {
   margin-top: 2%;
   margin-left: 3%;
 }
@@ -58,7 +62,8 @@ export default  {
   -webkit-box-orient: vertical;
 }
 
-.gender,.time {
+.gender,
+.time {
   font-size: 31px;
   margin: 1.5%;
 }

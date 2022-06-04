@@ -1,55 +1,56 @@
 <template>
   <div class="info-light">
-
     <div class="info-light-header top-show">
       <!-----ici heure courante: ------->
-      <CurrentHour/>
+      <CurrentHour />
       <!-----ici logo courante: ------->
-      <CurrentChannelLogo :logo="currentChannel.logo"/>
+      <CurrentChannelLogo :logo="currentChannel.logo" />
     </div>
 
     <div class="info-light-bottom bottom-show">
       <!-- ici info en cours: -->
-      <CurrentProgrammeInfo :title="programme[0].title"
-                            :gender="programme[0].genre" 
-                            :startAt="programme[0].startTime" 
-                            :endAt="programme[0].endTime" /> 
-      <!-- les index ici sont en dur car pas de gestions des heures --> 
+      <CurrentProgrammeInfo
+        :title="programme[0].title"
+        :gender="programme[0].genre"
+        :startAt="programme[0].startTime"
+        :endAt="programme[0].endTime"
+      />
+      <!-- les index ici sont en dur car pas de gestions des heures -->
       <!-- des programme donc pas utile de refaire une fonction juste pour -->
       <!-- changer un index sur une chaine qui n'a que 2 programes fixe -->
       <!-- ici info suivante: -->
-      <NextProgrammeInfo :title="programme[1].title"
-                         :startAt="programme[1].startTime" 
-                         :endAt="programme[1].endTime" 
-                         :resume="programme[1].description" 
-                         :thumb="programme[1].thumb"/>
+      <NextProgrammeInfo
+        :title="programme[1].title"
+        :startAt="programme[1].startTime"
+        :endAt="programme[1].endTime"
+        :resume="programme[1].description"
+        :thumb="programme[1].thumb"
+      />
     </div>
   </div>
 </template>
 
 <script>
+import Store from "@/store";
 
-import Store from '@/store'
-
-import CurrentHour from "@/components/CurrentHour.vue"
-import CurrentChannelLogo from '@/components/CurrentChannelLogo.vue'
-import CurrentProgrammeInfo from '@/components/CurrentProgammeInfo.vue'
-import NextProgrammeInfo from '@/components/NextProgrammeInfo.vue'
+import CurrentHour from "@/components/CurrentHour.vue";
+import CurrentChannelLogo from "@/components/CurrentChannelLogo.vue";
+import CurrentProgrammeInfo from "@/components/CurrentProgammeInfo.vue";
+import NextProgrammeInfo from "@/components/NextProgrammeInfo.vue";
 
 export default {
   components: {
     CurrentHour,
     CurrentChannelLogo,
     CurrentProgrammeInfo,
-    NextProgrammeInfo
+    NextProgrammeInfo,
   },
 
   computed: {
     currentChannel: () => Store.getters.getCurrentChannel,
     programme: () => Store.getters.getProgramme,
   },
-}
-
+};
 </script>
 
 <style lang="scss">
@@ -72,7 +73,7 @@ export default {
   height: 20%;
   background: rgba(63, 62, 62, 0.69);
   backdrop-filter: blur(20px);
-  color:white;
+  color: white;
   display: flex;
   bottom: 0%;
 }

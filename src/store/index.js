@@ -11,11 +11,20 @@ export default createStore({
     videoIsOnPause: false,
     errorMessage: null,
     showErrorMessage: false,
+    videoDuration: null,
+    videoCurrentTime: null,
+    splashScreenDisplay: true,
     assignedStringInputs: ["ArrowUp","ArrowDown","ArrowLeft","n","i","p","Enter","PageUp","PageDown","+","-","0","1","2","3","4","5","6","7","8","9"],
     displayInfoLightArrival: true,
     carrouselDisplay: false,
   },
   getters: {
+    getVideoCurrentTime(state) {
+      return state.videoCurrentTime
+    },
+    getVideoDuration(state) {
+      return state.videoDuration
+    },
     getAssignedInputs(state) {
       return state.assignedStringInputs
   },
@@ -61,6 +70,12 @@ export default createStore({
     }
   },
   mutations: {
+    SET_VIDEO_CURRENT_TIME(state, payload){
+      state.videoCurrentTime = payload
+    },
+    SET_VIDEO_DURATION(state, payload){
+      state.videoDuration = payload
+    },
     SET_DISPLAY_INFOLIGHT_ARRIVAL(state, payload){
       state.displayInfoLightArrival = payload
     },

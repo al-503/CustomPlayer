@@ -15,18 +15,10 @@
 import Store from "@/store";
 
 export default {
-  props: {
-    videoCurrentTime: {
-      type: Number,
-      required: false,
-    },
-    videoDuration: {
-      type: Number,
-      required: false,
-    },
-  },
   computed: {
     programme: () => Store.getters.getProgramme,
+    videoDuration: () => Store.getters.getVideoDuration,
+    videoCurrentTime: () => Store.getters.getVideoCurrentTime,
   },
   data: () => ({
     duration: null,

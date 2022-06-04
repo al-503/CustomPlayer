@@ -13,10 +13,7 @@
     </transition>
   </div>
   <div v-if="(!isPlaying && replay) || timeManageTimeBarDisplay">
-    <TimeBar
-      :videoCurrentTime="videoCurrentTime"
-      :videoDuration="videoDuration"
-    />
+    <TimeBar />
   </div>
   <transition name="fading">
     <div v-if="this.toggleBarSoundDisplay">
@@ -301,8 +298,15 @@ export default {
 
     videoCurrentTimerefresh() {
       if (this.$refs.videoBalise != null) {
-        this.videoCurrentTime = this.$refs.videoBalise.currentTime;
-        this.videoDuration = this.$refs.videoBalise.duration;
+        this.$store.commit(
+          "SET_VIDEO_CURRENT_TIME",
+          this.$refs.videoBalise.currentTime
+        );
+
+        this.$store.commit(
+          "SET_VIDEO_DURATION",
+          this.$refs.videoBalise.duration
+        );
       }
     },
 
