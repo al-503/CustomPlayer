@@ -1,17 +1,18 @@
 <template>
-  <div class="carrousel">
-      <div ref="slider" class="carrousel-slides">
-        <CarrouselSlide v-for="(channel, index) in channels"
-                        :key="channel.id"
-                        :index="index"
-                        :logo="channel.logo"
-                        :thumb="channel.programme[0].thumb"
-                        :title="channel.programme[0].title"
-                        :startTime="channel.programme[0].startTime"
-                        :endTime="channel.programme[0].endTime" />
-      </div>                 
-  </div>
-
+  <transition name="enter"> <!---left-hide--->
+    <div class="carrousel">
+        <div ref="slider" class="carrousel-slides">
+          <CarrouselSlide v-for="(channel, index) in channels"
+                          :key="channel.id"
+                          :index="index"
+                          :logo="channel.logo"
+                          :thumb="channel.programme[0].thumb"
+                          :title="channel.programme[0].title"
+                          :startTime="channel.programme[0].startTime"
+                          :endTime="channel.programme[0].endTime" />
+        </div>                 
+    </div>
+  </transition>
 </template>
 
 <script>
@@ -120,6 +121,17 @@ export default {
     rgba(69, 69, 69, 0.5) 51.56%,
     rgba(0, 0, 0, 0.75) 100%
   );
+}
+
+.enter-from {
+  opacity: 0;
+}
+.enter-to {
+  opacity: 1;
+}
+
+.enter-active {
+  transition: opacity 2s ease;
 }
 
 </style>
