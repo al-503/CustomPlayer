@@ -46,6 +46,8 @@ export default {
     document.addEventListener("keydown", (e) => this.ChannelChangeWithNumKey(e));
     // disparition de l'infoLight pour InputNumber //
     document.addEventListener("keydown", (e) => this.switchDisplay(e));
+    // apparition du carrousel //
+    document.addEventListener("keydown", (e) => this.showCarrousel(e));
   },
   
   mounted() {
@@ -55,6 +57,7 @@ export default {
   },
 
   computed: {
+    // display de l info light a l'arriver //
     displayInfoLightArrival: () => Store.getters.getdisplayInfoLightArrival,
     // ajout des programmes //
     programme: () => Store.getters.getProgramme,
@@ -66,6 +69,8 @@ export default {
     infoMaxDisplayed: () => Store.state.defaultDisplayInfoMax,
     // display des messages d'erreur //
     showErrorMessage: () => Store.getters.getShowErrorMessage,
+    //pour display le carrousel //
+    carrouselDisplay: () => Store.state.carrouselDisplay,
 
     newIndex: () => Store.getters.getNewIndex,
     changeSrc: () => Store.getters.getChangeSrc,
@@ -146,8 +151,6 @@ export default {
 
     //////////////////////////////////////////////////////////////////
 
-    //////////////////////////////////////////////////////////////////
-
     //// Gestion InfoMax ////
 
     DisplayInfoMax() {
@@ -158,9 +161,26 @@ export default {
         this.DisplayInfoMax();
       }
     },
-    //// ici gestion des changement de chaîne par num ////
 
-    // manageTabOfInput() a pour but de transformer le contenu du tableau tabOfInput en nombre exploitable
+// ici fonction pour display le carrousel //
+
+    showCarrousel(e) {
+      if(!this.carrouselDisplay) {
+        if(e.key === "ArrowLeft") {
+          Store.commit('CarrouselShow')
+        }
+      } else if(this.carrouselDisplay){
+          if(e.key === "ArrowLeft") {
+            Store.commit('CarrouselHide')
+          }
+      }
+    },
+
+////////////////////////////////////////////
+    
+//// ici gestion des changement de chaîne par num ////
+    
+  // manageTabOfInput() a pour but de transformer le contenu du tableau tabOfInput en nombre exploitable //
     manageTabOfInput() {
       if (this.tabOfInput.length == 3) {
         this.channelNumberInput =
@@ -182,7 +202,7 @@ export default {
       this.$store.commit("SET_CHANGE_SHOW_ERROR_MESSAGE", false);
     },
 
-    // forEachChannel est une fonciton qui parcours toutes les channels et qui regarde si l'input de l'utilisateur et appel la fonction checkingMatch
+    // forEachChannel est une fonciton qui parcours toutes les channels et qui regarde si l'input de l'utilisateur et appel la fonction checkingMatch //
     forEachChannel() {
       this.channels.forEach((channel) =>
         this.checkingMatch(channel.number, channel.programme[0].sources)
@@ -205,7 +225,7 @@ export default {
       this.checkingMatchToggle = true;
     },
 
-    // checkinMatch() regarde si l'input de l'utilisateur match avec un numéros de chaine contenu dans channels
+    // checkinMatch() regarde si l'input de l'utilisateur match avec un numéros de chaine contenu dans channels //
     checkingMatch(channelNumber, channelSource) {
       if (this.channelNumberInput == channelNumber) {
         this.matchSucces = true;

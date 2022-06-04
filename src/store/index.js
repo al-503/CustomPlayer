@@ -103,6 +103,12 @@ export default createStore({
     HideInfoMax(state){
           return state.defaultDisplayInfoMax = false
     },
+    CarrouselShow(state) {
+      return state.carrouselDisplay = true
+    },
+    CarrouselHide(state) {
+      return state.carrouselDisplay = false
+    },
   },
   actions: {
   },
