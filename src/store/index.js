@@ -30,9 +30,6 @@ export default createStore({
     getdisplayInfoLightArrival(state) {
       return state.displayInfoLightArrival
     },
-    getSplashScreenDisplay(state) {
-      return state.splashScreenDisplay
-    },
     getShowErrorMessage(state) {
       return state.showErrorMessage
     },
@@ -65,9 +62,6 @@ export default createStore({
     },
     SET_DISPLAY_INFOLIGHT_ARRIVAL(state, payload){
       state.displayInfoLightArrival = payload
-    },
-    SET_SPLASH_SCREEN_DISPLAY(state, payload){
-      state.splashScreenDisplay = payload
     },
     SET_VIDEO_IS_ON_PAUSE(state, payload){
       state.videoIsOnPause = payload

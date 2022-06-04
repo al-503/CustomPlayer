@@ -8,7 +8,24 @@
   </div>
 </template>
 <script>
-export default {};
+import { useRouter } from "vue-router";
+
+export default {
+  setup() {
+    const router = useRouter();
+    return { router };
+  },
+
+  mounted() {
+    setTimeout(this.toPlayerView, 2500);
+  },
+
+  methods: {
+    toPlayerView() {
+      this.$router.push({ path: "/player" });
+    },
+  },
+};
 </script>
 
 <style lang="scss" scope>

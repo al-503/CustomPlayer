@@ -1,5 +1,4 @@
 <template>
-  <SplashScreen v-if="SplashScreenDisplay" />
   <div class="player-view">
     <router-view />
     <CustomPlayer :currentFlux="programme[0].sources">
@@ -16,7 +15,6 @@
 </template>
 
 <script>
-import SplashScreen from "@/components/SplashScreen.vue";
 import Store from "@/store";
 
 import CustomPlayer from "@/components/CustomPlayer.vue";
@@ -27,7 +25,6 @@ import ErrorMessage from "@/components/ErrorMessage.vue";
 
 export default {
   components: {
-    SplashScreen,
     CustomPlayer,
     InfoLight,
     InfoMax,
@@ -53,16 +50,12 @@ export default {
   },
   mounted() {
     setTimeout(() => {
-      this.$store.commit("SET_SPLASH_SCREEN_DISPLAY", false);
-    }, 2500);
-    setTimeout(() => {
       this.$store.commit("SET_DISPLAY_INFOLIGHT_ARRIVAL", false);
     }, 7500);
   },
 
   computed: {
     displayInfoLightArrival: () => Store.getters.getdisplayInfoLightArrival,
-    SplashScreenDisplay: () => Store.getters.getSplashScreenDisplay,
     programme: () => Store.getters.getProgramme,
     infoDisplayed: () => Store.state.defaultDisplay,
     channels: () => Store.getters.getChannels,
