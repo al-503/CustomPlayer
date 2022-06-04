@@ -127,11 +127,12 @@ export default {
     },
 
     showInfoLight(e) {
-      if (e.key === "ArrowUp") {
-        this.DisplayedInfoLight();
+      if(!this.carrouselDisplay) {
+        if (e.key === "ArrowUp") {
+          this.DisplayedInfoLight();
+        }
       }
     },
-
     //// ici les fonctions pour faire disparaitre l'info light ////
     ////            si apparition de l'InputNumber             ////
     switchDisplay(e) {
@@ -163,19 +164,17 @@ export default {
     },
 
 // ici fonction pour display le carrousel //
-
     showCarrousel(e) {
-      if(!this.carrouselDisplay) {
+      if(!this.carrouselDisplay && !this.infoDisplayed) {
         if(e.key === "ArrowLeft") {
           Store.commit('CarrouselShow')
         }
       } else if(this.carrouselDisplay){
           if(e.key === "ArrowLeft") {
-            Store.commit('CarrouselHide')
-          }
+          Store.commit('CarrouselHide')
+        }
       }
     },
-
 ////////////////////////////////////////////
     
 //// ici gestion des changement de chaîne par num ////

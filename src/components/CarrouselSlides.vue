@@ -53,6 +53,7 @@ export default {
   margin: 0 auto;// pour que les carte ne soit pas couper en remontant
   width: 100%;
   height: 27%;
+  margin-top: 2%;// pour ne pas être coller en hut de l'écran
 }
 .slide-img {
   width: 100%;
