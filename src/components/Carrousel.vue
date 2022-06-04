@@ -48,7 +48,7 @@ export default {
   methods: {
 ///////// ici previous et next slide ///////////////////
   scrollToTop(e) { 
-      if(e.key === "a"){ // key pour le dev
+      if(e.key === "ArrowUp"){ // key pour le dev
       //console.log(this.$refs.slider.scrollHeight)
       //console.log(this.$refs.slider.clientHeight)
         if(this.currentSlide < this.$refs.slider.scrollHeight){
@@ -70,7 +70,7 @@ export default {
     },
 
     scrollToBottom(e) {
-      if(e.key === "q"){  // key pour le dev
+      if(e.key === "ArrowDown"){  // key pour le dev
         if(this.currentSlide >= 0){
           this.$refs.slider.scrollTo({
             top: this.currentSlide = this.currentSlide + this.oneSlide,

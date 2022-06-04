@@ -86,34 +86,31 @@ export default {
     },
 
     showInfoLight (e) {
-      if(e.key === "ArrowUp") {
+      if(!this.carrouselDisplay) {
+         if(e.key === "ArrowUp") {
         Store.commit('LightInfoDisplay');
         if( this.infoLightVisible != null) {
           console.log("info light" + this.infoLightVisible)
           this.ResetTimeoutInfoLight();
         }
         this.infoLightVisible = setTimeout(this.stopInfoLight, 4000);
+        }
       }
     },
     //////////////////////////////////////////////////////////////////
 
 // ici fonction pour display le carrousel //
-
     showCarrousel(e) {
-      if(!this.carrouselDisplay) {
+      if(!this.carrouselDisplay && !this.infoDisplayed) {
         if(e.key === "ArrowLeft") {
           Store.commit('CarrouselShow')
         }
       } else if(this.carrouselDisplay){
           if(e.key === "ArrowLeft") {
-            Store.commit('CarrouselHide')
-          }
+          Store.commit('CarrouselHide')
+        }
       }
     },
-
-    // hideCarrousel(e) {
-
-    // },
 ////////////////////////////////////////////
     
   //// ici gestion des changement de chaîne par num ////
