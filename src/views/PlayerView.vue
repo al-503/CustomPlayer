@@ -3,7 +3,7 @@
     <router-view />
     <CustomPlayer :currentFlux="programme[0].sources">
       <InfoLight v-if="infoDisplayed"/>
-      <Carrousel v-if="true"/> <!-- param de dev -->
+      <Carrousel v-if="carrouselDisplay"/> <!-- param de dev -->
     </CustomPlayer>
   </div>
 </template>
@@ -29,6 +29,8 @@ export default {
     document.addEventListener("keydown", (e) => this.showInfoLight(e));
      // changement de chaine par num //
     document.addEventListener("keydown", (e) => this.ChannelChangeWithNumKey(e));
+    // apparition du carrousel //
+    document.addEventListener("keydown", (e) => this.showCarrousel(e));
   },
 
   computed: {
@@ -38,6 +40,8 @@ export default {
     infoDisplayed: () => Store.state.defaultDisplay,
     // fonction forEach channels
     channels: () => Store.getters.getChannels,
+    //pour display le carrousel //
+    carrouselDisplay: () => Store.state.carrouselDisplay,
     //
     newIndex: () => Store.getters.getNewIndex,
     changeSrc: () => Store.getters.getChangeSrc,
@@ -92,6 +96,25 @@ export default {
       }
     },
     //////////////////////////////////////////////////////////////////
+
+// ici fonction pour display le carrousel //
+
+    showCarrousel(e) {
+      if(!this.carrouselDisplay) {
+        if(e.key === "ArrowLeft") {
+          Store.commit('CarrouselShow')
+        }
+      } else if(this.carrouselDisplay){
+          if(e.key === "ArrowLeft") {
+            Store.commit('CarrouselHide')
+          }
+      }
+    },
+
+    // hideCarrousel(e) {
+
+    // },
+////////////////////////////////////////////
     
   //// ici gestion des changement de chaîne par num ////
     
