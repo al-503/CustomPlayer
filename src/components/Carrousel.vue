@@ -48,21 +48,15 @@ export default {
   methods: {
 ///////// ici previous et next slide ///////////////////
   scrollToTop(e) { 
-      if(e.key === "ArrowUp"){ // key pour le dev
-      //console.log(this.$refs.slider.scrollHeight)
-      //console.log(this.$refs.slider.clientHeight)
+      if(e.key === "ArrowUp"){
         if(this.currentSlide < this.$refs.slider.scrollHeight){
-            //console.log(this.currentSlide)
-            this.$refs.slider.scrollTo({
-              top: this.currentSlide = this.currentSlide - this.oneSlide,
-              behavior: "smooth"
-            });
+          this.$refs.slider.scrollTo({
+            top: this.currentSlide = this.currentSlide - this.oneSlide,
+            behavior: "smooth"
+          });
         } else if(this.currentSlide > this.$refs.slider.scrollHeight) {
-          console.log(this.$refs.slider.scrollHeight)
-          console.log(this.$refs.slider.clientHeight)
-          console.log(this.$refs.slider.scrollHeight - (this.$refs.slider.clientHeight + this.oneSlide))// 490 c'est les margin 
             this.$refs.slider.scrollTo({
-              top: this.currentSlide = this.$refs.slider.scrollHeight - (this.$refs.slider.clientHeight + this.oneSlide), // essayer math floor car je doit etre vers les 6111 - onSlide et pas 7111
+              top: this.currentSlide = this.$refs.slider.scrollHeight - (this.$refs.slider.clientHeight + this.oneSlide),
               behavior: "smooth"
             });
         }
@@ -70,7 +64,7 @@ export default {
     },
 
     scrollToBottom(e) {
-      if(e.key === "ArrowDown"){  // key pour le dev
+      if(e.key === "ArrowDown"){
         if(this.currentSlide >= 0){
           this.$refs.slider.scrollTo({
             top: this.currentSlide = this.currentSlide + this.oneSlide,
@@ -87,7 +81,6 @@ export default {
   }
 ////////////////////////////////////////////////////////
 //// a faire ////
-// display le bloque avec la fleche gauche et enlever avec la flèche droite //
 
 ///// pour la class focus du carrousel //////
 // ont veut que par défaut l index du carrousel = current index et cette card a la class focus (bord bleu) //
@@ -96,6 +89,7 @@ export default {
 // quand ont appuis sur enter la cards avec la class focus remplace le current index avec son index // 
 // le carrousel disparaît//
 // la chaîne change // 
+
 // suite logique l'infolight apparait //
 /////gérer les affichage et prioriter //// 
 ///////////////////////////////////////////////////////////////
