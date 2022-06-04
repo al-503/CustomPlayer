@@ -57,7 +57,7 @@ export default {
   },
 
   computed: {
-    // display de l info light a l'arriver //
+    // display de l info light a l'arriver sur la chaîne //
     displayInfoLightArrival: () => Store.getters.getdisplayInfoLightArrival,
     // ajout des programmes //
     programme: () => Store.getters.getProgramme,
@@ -165,7 +165,7 @@ export default {
 
 // ici fonction pour display le carrousel //
     showCarrousel(e) {
-      if(!this.carrouselDisplay && !this.infoDisplayed) {
+      if(!this.carrouselDisplay && !this.infoDisplayed && !this.displayInfoLightArrival) {
         if(e.key === "ArrowLeft") {
           Store.commit('CarrouselShow')
         }
