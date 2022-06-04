@@ -49,7 +49,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scope>
+<style lang="scss" scoped>
 .contenerProgress {
   width: 387px;
   height: 29px;
