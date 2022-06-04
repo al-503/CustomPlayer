@@ -24,7 +24,7 @@ export default {
   mounted() {
     this.progress = this.$refs.progress;
     this.progressBar = this.$refs.progressbar;
-    this.setInterval = setInterval(() => this.setMaxProgress(), 1000);
+    this.setInterval = setInterval(() => this.setMaxProgress(), 100);
     document.addEventListener("keyup", (e) => this.keyListen(e));
   },
   beforeUnmount() {
