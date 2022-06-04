@@ -13,7 +13,11 @@
 <style lang="scss">
 // ici le style commun à tout les composants
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100&display=swap");
-
+@font-face {
+  font-family: "Roboto";
+  src: local("Roboto-BlackItalic"),
+    url(./assets/fonts/Roboto/Roboto-BlackItalic.ttf) format("truetype");
+}
 * {
   padding: 0px;
   margin: 0px;

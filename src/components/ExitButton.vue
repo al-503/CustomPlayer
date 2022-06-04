@@ -1,16 +1,19 @@
 <template>
-     <input type="submit" value="EXIT" class="exitButtton" v-on:keyup.enter="returnToMainPage" >
+     <input type="submit" value="EXIT" class="exitButtton" v-on:keyup.esc="returnToMainPage" >
 </template>
 
 <script>
+import Store from "@/store";
 export default {
   methods:{
         returnToMainPage: function () {
-            this.$router.push('/');
+            //this.$router.push('/');
+            Store.commit('HideInfoMax');
         }
     }
 }
 </script>
+
 <style>
 .exitButtton {
     width: 146px;
@@ -20,5 +23,6 @@ export default {
     font-size: 28px;
     color: white;
     font-style: italic;
+    background-color: #3f3f3f;
 }
 </style>

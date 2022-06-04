@@ -4,7 +4,6 @@
       <progress class="volumeBar" ref="volumeBar" value="0" min="0" max="1">
         <span class="currentVolume" ref="currentVolume"></span>
       </progress>
-      <!-- <fa class="volume-icon" icon="volume-high" /> -->
     </div>
   </div>
   <div class="greyBackground"></div>
@@ -13,10 +12,6 @@
 <script>
 export default {
   props: {
-    // volumeIcon: {
-    //   type: String,
-    //   required: true,
-    // },
     currentVolumeLevel: {
       type: Number,
       required: false,
@@ -27,17 +22,13 @@ export default {
     },
   },
   data: () => ({
-    // iconTheme1: "volume-high",
-    // iconTheme2: "volume",
-    // iconTheme3: "volume-low",
-    // iconTheme4: "volume-slash",
     volumeBar: null,
     currentVolume: null,
   }),
   mounted() {
     this.volumeBar = this.$refs.volumeBar;
     this.currentVolume = this.$refs.currentVolume;
-    this.volumeBar.value = 0.5;
+    this.volumeBar.value = this.currentVolumeLevel;
     document.addEventListener("keyup", (e) => this.volumeKeyListener(e));
   },
 
@@ -53,12 +44,6 @@ export default {
           Math.floor((this.currentVolumeLevel / this.maxVolumeLevel) * 100) +
           "%";
       }
-      // if (this.currentVolume.style.width >= 95 + "%") {
-      //   this.currentVolume.style.width = 100 + "%";
-      // }
-      // if (this.currentVolume.style.width <= 5.5 + "%") {
-      //   this.currentVolume.style.width = 0 + "%";
-      // }
     },
 
     volumeKeyListener(e) {
@@ -73,14 +58,16 @@ export default {
 <style lang="scss">
 .volumeBarContainer {
   position: absolute;
-  bottom: 50%;
-  right: -150px;
-  // z-index: 1;
+  bottom: 560px;
+  // top: 470px;
+  // bottom: 54%;
+  // left: 81.5%;
+  right: -7.3%;
 }
 
 .volumeBar {
   position: relative;
-  width: 500px;
+  width: 475px;
   border: solid 3px rgb(255, 255, 255);
   border-radius: 15px;
   transform: rotate(270deg);
@@ -129,6 +116,4 @@ export default {
   );
   border-radius: 2px;
 }
-// .volume-icon {
-// }
 </style>
