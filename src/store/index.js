@@ -11,8 +11,9 @@ export default createStore({
     videoIsOnPause: false,
     errorMessage: null,
     showErrorMessage: false,
-    assignedStringInputs: ["ArrowUp","ArrowDown","n","i","p","Enter","PageUp","PageDown","+","-","0","1","2","3","4","5","6","7","8","9"],
+    assignedStringInputs: ["ArrowUp","ArrowDown","ArrowLeft","n","i","p","Enter","PageUp","PageDown","+","-","0","1","2","3","4","5","6","7","8","9"],
     displayInfoLightArrival: true,
+    carrouselDisplay: false,
   },
   getters: {
     getAssignedInputs(state) {
@@ -26,7 +27,6 @@ export default createStore({
     },
     getErrorMessage(state) {
       return state.errorMessage
-
     },
     getChangeSrc(state) {
       return state.changeSrc
@@ -42,6 +42,22 @@ export default createStore({
     },
     getVideoIsOnPause(state) {
       return state.videoIsOnPause
+    },
+    getPreviousChannel (state) {
+      let indexPrecedant = state.currentIndex - 1
+      if(state.currentIndex === 0){
+        return state.Channels[29]
+      } else {
+        state.Channels[indexPrecedant]
+      }
+    },
+    getNextChannel (state) {
+      let indexSuivant = state.currentIndex + 1
+      if(state.currentIndex === 29){
+        return state.Channels[0]
+      } else {
+        state.Channels[indexSuivant]
+      }
     }
   },
   mutations: {
@@ -87,7 +103,12 @@ export default createStore({
     HideInfoMax(state){
           return state.defaultDisplayInfoMax = false
     },
-
+    CarrouselShow(state) {
+      return state.carrouselDisplay = true
+    },
+    CarrouselHide(state) {
+      return state.carrouselDisplay = false
+    },
   },
   actions: {
   },

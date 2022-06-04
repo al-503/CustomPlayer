@@ -4,15 +4,13 @@
     <CustomPlayer :currentFlux="programme[0].sources">
       <InfoLight
         v-if="
-          ((infoDisplayed && !videoIsOnPause) || displayInfoLightArrival) &&
-          !infoMaxDisplayed
-        "
-      />
+          ((infoDisplayed && !videoIsOnPause) || displayInfoLightArrival) && !infoMaxDisplayed"/>
       <transition name="fading">
         <DisplayInputNumber v-if="inputDisplay" />
       </transition>
       <InfoMax v-if="true && !videoIsOnPause" />
       <ErrorMessage v-if="showErrorMessage && !videoIsOnPause" />
+      <Carrousel v-if="carrouselDisplay"/>
     </CustomPlayer>
   </div>
 </template>
@@ -25,6 +23,7 @@ import InfoLight from "@/components/InfoLight.vue";
 import InfoMax from "@/components/InfoMax.vue";
 import DisplayInputNumber from "@/components/DisplayInputNumber.vue";
 import ErrorMessage from "@/components/ErrorMessage.vue";
+import Carrousel from '@/components/Carrousel.vue';
 
 export default {
   components: {
@@ -33,6 +32,7 @@ export default {
     InfoMax,
     DisplayInputNumber,
     ErrorMessage,
+    Carrousel,
   },
 
   created() {
@@ -42,15 +42,14 @@ export default {
     document.addEventListener("keydown", (e) => this.showInfoLight(e));
     // display de l'info max
     document.addEventListener("keydown", (e) => this.showInfoMax(e));
-
     // changement de chaine par num //
-    document.addEventListener("keydown", (e) =>
-      this.ChannelChangeWithNumKey(e)
-    );
+    document.addEventListener("keydown", (e) => this.ChannelChangeWithNumKey(e));
     // disparition de l'infoLight pour InputNumber //
-
     document.addEventListener("keydown", (e) => this.switchDisplay(e));
+    // apparition du carrousel //
+    document.addEventListener("keydown", (e) => this.showCarrousel(e));
   },
+  
   mounted() {
     setTimeout(() => {
       this.$store.commit("SET_DISPLAY_INFOLIGHT_ARRIVAL", false);
@@ -58,14 +57,23 @@ export default {
   },
 
   computed: {
+    // display de l info light a l'arriver sur la chaîne //
     displayInfoLightArrival: () => Store.getters.getdisplayInfoLightArrival,
+    // ajout des programmes //
     programme: () => Store.getters.getProgramme,
+    // pour display l'info ligtht
     infoDisplayed: () => Store.state.defaultDisplay,
+    // fonction forEach channels
     channels: () => Store.getters.getChannels,
+    //display de l'info max //
+    infoMaxDisplayed: () => Store.state.defaultDisplayInfoMax,
+    // display des messages d'erreur //
+    showErrorMessage: () => Store.getters.getShowErrorMessage,
+    //pour display le carrousel //
+    carrouselDisplay: () => Store.state.carrouselDisplay,
+
     newIndex: () => Store.getters.getNewIndex,
     changeSrc: () => Store.getters.getChangeSrc,
-    infoMaxDisplayed: () => Store.state.defaultDisplayInfoMax,
-    showErrorMessage: () => Store.getters.getShowErrorMessage,
     videoIsOnPause: () => Store.getters.getVideoIsOnPause,
   },
 
@@ -103,8 +111,8 @@ export default {
         }
       }
     },
-
-    //// ici les fonctions pour faire apparaître l'info light ////
+    
+//// ici les fonctions pour faire apparaître l'info light ////
 
     DisplayedInfoLight() {
       Store.commit("LightInfoDisplay");
@@ -119,11 +127,12 @@ export default {
     },
 
     showInfoLight(e) {
-      if (e.key === "ArrowUp") {
-        this.DisplayedInfoLight();
+      if(!this.carrouselDisplay) {
+        if (e.key === "ArrowUp") {
+          this.DisplayedInfoLight();
+        }
       }
     },
-
     //// ici les fonctions pour faire disparaitre l'info light ////
     ////            si apparition de l'InputNumber             ////
     switchDisplay(e) {
@@ -143,8 +152,6 @@ export default {
 
     //////////////////////////////////////////////////////////////////
 
-    //////////////////////////////////////////////////////////////////
-
     //// Gestion InfoMax ////
 
     DisplayInfoMax() {
@@ -155,9 +162,24 @@ export default {
         this.DisplayInfoMax();
       }
     },
-    //// ici gestion des changement de chaîne par num ////
 
-    // manageTabOfInput() a pour but de transformer le contenu du tableau tabOfInput en nombre exploitable
+// ici fonction pour display le carrousel //
+    showCarrousel(e) {
+      if(!this.carrouselDisplay && !this.infoDisplayed && !this.displayInfoLightArrival) {
+        if(e.key === "ArrowLeft") {
+          Store.commit('CarrouselShow')
+        }
+      } else if(this.carrouselDisplay){
+          if(e.key === "ArrowLeft") {
+          Store.commit('CarrouselHide')
+        }
+      }
+    },
+////////////////////////////////////////////
+    
+//// ici gestion des changement de chaîne par num ////
+    
+  // manageTabOfInput() a pour but de transformer le contenu du tableau tabOfInput en nombre exploitable //
     manageTabOfInput() {
       if (this.tabOfInput.length == 3) {
         this.channelNumberInput =
@@ -179,7 +201,7 @@ export default {
       this.$store.commit("SET_CHANGE_SHOW_ERROR_MESSAGE", false);
     },
 
-    // forEachChannel est une fonciton qui parcours toutes les channels et qui regarde si l'input de l'utilisateur et appel la fonction checkingMatch
+    // forEachChannel est une fonciton qui parcours toutes les channels et qui regarde si l'input de l'utilisateur et appel la fonction checkingMatch //
     forEachChannel() {
       this.channels.forEach((channel) =>
         this.checkingMatch(channel.number, channel.programme[0].sources)
@@ -202,7 +224,7 @@ export default {
       this.checkingMatchToggle = true;
     },
 
-    // checkinMatch() regarde si l'input de l'utilisateur match avec un numéros de chaine contenu dans channels
+    // checkinMatch() regarde si l'input de l'utilisateur match avec un numéros de chaine contenu dans channels //
     checkingMatch(channelNumber, channelSource) {
       if (this.channelNumberInput == channelNumber) {
         this.matchSucces = true;
