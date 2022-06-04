@@ -147,12 +147,12 @@ export default {
 
 #time {
   color: rgb(255, 255, 255);
-  font-size: 20px;
+  font-size: 125%;
   font-family: "Inter", sans-serif;
   font-weight: 500;
   z-index: 1000;
   position: absolute;
-  top: 19px;
+  top: 40px;
   left: 0px;
   display: flex;
   flex-direction: column;
