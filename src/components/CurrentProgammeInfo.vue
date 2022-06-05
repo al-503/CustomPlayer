@@ -4,7 +4,8 @@
       <h1 class="current-title">{{ title }}</h1>
       <p class="gender">{{ gender }}</p>
       <!-- bouton info+ -->
-      <div class="info-plus">INFO +</div>
+      <!--<div class="info-plus">INFO +</div>-->
+      <InfoButton />
     </div>
     <p class="time">{{ startAt + " - " + endAt }}</p>
     <MiniTimeBar />
@@ -13,9 +14,12 @@
 
 <script>
 import MiniTimeBar from "@/components/MiniTimeBar.vue";
+import InfoButton from "@/components/InfoButton.vue";
+
 export default {
   components: {
     MiniTimeBar,
+    InfoButton
   },
   props: {
     title: {

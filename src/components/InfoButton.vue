@@ -1,5 +1,5 @@
 <template>
-     <input type="submit" value="INFO" class="infoButtton" v-on:keyup.esc="returnToMainPage" >
+     <input type="submit" value="INFO+" class="infoButton" v-on:keyup.enter="hideInfoLightAndShowInfoMax" >
 </template>
 
 <script>
@@ -8,13 +8,15 @@ export default {
   methods:{
         hideInfoLightAndShowInfoMax: function () {
           
+          Store.commit('LightInfoDefault');
+          Store.commit('DisplayInfoMax');
         }
     }
 }
 </script>
 
 <style>
-.infoButtton {
+.infoButton {
     width: 146px;
     height: 47px;
     border-radius: 15px;
