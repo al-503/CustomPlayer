@@ -100,6 +100,8 @@ export default {
   mounted() {
     // Timer démarrant au montage de la vue (en secondes)
     this.timer();
+    // this.keepTimePassed();
+
     // Lorsque l'élément est monté, la source de la vidéo puis on met la vidéo en play
     this.$refs.videoBalise.play();
     this.$refs.videoBalise.muted = !this.$refs.videoBalise.muted; //cette ligne empeche de lancer la vidéo en autoplay
@@ -134,6 +136,7 @@ export default {
       this.$refs.videoBalise.load();
       this.$refs.videoBalise.play();
       this.$store.commit("SET_CHANGE_SRC", false);
+      // this.keepTimePassed();
     }
   },
 
@@ -141,7 +144,7 @@ export default {
     changeSrc: () => Store.getters.getChangeSrc,
     videoIsOnPause: () => Store.getters.getVideoIsOnPause,
     assignedStringInputs: () => Store.getters.getAssignedInputs,
-    checkCurrentTime: () => Store.getters.getVideoCurrentTime,
+    //checkCurrentTime: () => Store.getters.getVideoCurrentTime,
   },
 
   methods: {
@@ -346,16 +349,16 @@ export default {
     timer() {
       this.timeInSeconds = setInterval(this.timePassing, 1000);
     },
+    changeTime() {
+      this.$refs.videoBalise.currentTime = this.timePassed;
+    },
     keepTimePassed(e) {
       let regInput = new RegExp("^[0-9]+$");
       if (e.key == "PageUp" || e.key == "PageDown") {
-        this.$refs.videoBalise.currentTime = this.timePassed;
+        this.changeTime();
       }
       if (regInput.test(e.key)) {
-        setTimeout(
-          (this.$refs.videoBalise.currentTime = this.timePassed),
-          3000
-        );
+        setTimeout(this.changeTime(), 3000);
       }
     },
   },
