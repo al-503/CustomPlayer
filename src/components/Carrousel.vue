@@ -103,7 +103,7 @@ export default {
 .carrousel-slides {
   height: 100%;
   position: absolute;
-    left: 2%;
+    left: 6%;
 //// defini la scrollbar 
   overflow-x: hidden;
   overflow-y: scroll;
@@ -113,7 +113,7 @@ export default {
   }
 }
 .carrousel {
-  position : absolute;
+  position: absolute;
   width: 50%;
   height: 100vh;
   overflow: hidden;
@@ -124,24 +124,6 @@ export default {
     rgba(69, 69, 69, 0.5) 51.56%,
     rgba(0, 0, 0, 0.75) 100%
   );
-}
-
-.slide-enter-active,
-.slide-leave-active {
-  transition: all 3s;
-}
-
-.slide-enter-to {
-  left: 0;
-}
-
-.slide-enter-from,
-.slide-leave-to {
-  left: -100%;
-}
-
-.slide-leave-from {
-  left: 0;
 }
 
 </style>
