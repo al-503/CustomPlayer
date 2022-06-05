@@ -1,18 +1,16 @@
 <template>
-  <transition name="slide">
-    <div class="carrousel">
-        <div ref="slider" class="carrousel-slides">
-          <CarrouselSlide v-for="(channel, index) in channels"
-                          :key="channel.id"
-                          :index="index"
-                          :logo="channel.logo"
-                          :thumb="channel.programme[0].thumb"
-                          :title="channel.programme[0].title"
-                          :startTime="channel.programme[0].startTime"
-                          :endTime="channel.programme[0].endTime" />
-        </div>                 
-    </div>
-  </transition>
+  <div class="carrousel">
+      <div ref="slider" class="carrousel-slides">
+        <CarrouselSlide v-for="(channel, index) in channels"
+                        :key="channel.id"
+                        :index="index"
+                        :logo="channel.logo"
+                        :thumb="channel.programme[0].thumb"
+                        :title="channel.programme[0].title"
+                        :startTime="channel.programme[0].startTime"
+                        :endTime="channel.programme[0].endTime" />
+      </div>                 
+  </div>
 </template>
 
 <script>
@@ -114,7 +112,7 @@ export default {
 }
 .carrousel {
   position: absolute;
-  width: 50%;
+  width: 35%;
   height: 100vh;
   overflow: hidden;
 
