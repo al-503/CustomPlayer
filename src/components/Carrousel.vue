@@ -122,7 +122,7 @@ export default {
 }
 .carrousel {
   position: absolute;
-  width: 50%;
+  width: 35%;
   height: 100vh;
   overflow: hidden;
 
