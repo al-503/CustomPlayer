@@ -99,7 +99,14 @@ export default {
     // Lorsque l'élément est monté, la source de la vidéo puis on met la vidéo en play
     this.$refs.videoBalise.play();
     this.$refs.videoBalise.muted = !this.$refs.videoBalise.muted; //cette ligne empeche de lancer la vidéo en autoplay
-    this.$refs.videoBalise.volume = 0.5;
+
+    //On vérifie si la première chaîne de la liste est bloquée. Si oui - son =0;
+    if(this.isVideoAdult == true){
+      this.$refs.videoBalise.volume =0;
+    } else{
+      this.$refs.videoBalise.volume =0.5;
+    }
+    //this.$refs.videoBalise.volume =  0.5;
     // On écoute ici l'ensemble des touches du clavier et on appelle la fonction qui KeyListenner qui regarde quelle touche a été appuyée
     document.addEventListener("keydown", (e) => this.keyListenner(e));
     document.addEventListener("keydown", (e) => this.keyPageTurn(e));
@@ -113,6 +120,7 @@ export default {
       () => this.videoCurrentTimerefresh(),
       1000
     );
+    
   },
   beforeDestroy() {
     clearInterval(this.currentTimeTimeout);
@@ -129,15 +137,23 @@ export default {
       this.$refs.videoBalise.play();
       this.$store.commit("SET_CHANGE_SRC", false);
     }
+    ////On vérifie si la chaîne est bloquée. Si oui - son =0;
+    if(this.isVideoAdult == true){
+      this.$refs.videoBalise.volume =0;
+    } else{
+      this.$refs.videoBalise.volume =0.5;
+    }
   },
 
   computed: {
     changeSrc: () => Store.getters.getChangeSrc,
     videoIsOnPause: () => Store.getters.getVideoIsOnPause,
     assignedStringInputs: () => Store.getters.getAssignedInputs,
+    isVideoAdult :() =>Store.getters.getAdultStatus
   },
 
   methods: {
+      
     hidingErrorMessageUnassignedInput() {
       this.$store.commit("SET_CHANGE_SHOW_ERROR_MESSAGE", false);
     },
@@ -331,6 +347,7 @@ export default {
       }
     },
   },
+
 };
 </script>
 
