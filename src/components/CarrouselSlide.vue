@@ -110,7 +110,6 @@ export default {
           } else {
              this.class.remove("focus")
           }
-        console.log(this.slideIndex)
       }
     },
 
