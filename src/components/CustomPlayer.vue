@@ -328,6 +328,8 @@ export default {
     // },
     consoleLogCurentTime() {
       console.log(this.checkCurrentTime);
+      console.log(typeof checkCurrentTime);
+      this.$refs.videoBalise.currentTime += 60;
       setTimeout(this.consoleLogCurentTime, 10000);
     },
     //     function yourFunction(){
