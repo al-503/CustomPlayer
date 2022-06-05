@@ -105,6 +105,7 @@ export default {
   width: 100%;
   height: 27%;
   margin-top: 4%;// pour ne pas être coller en hut de l'écran
+  border: 1px solid whitesmoke;
 }
 .slide-img {
   width: 100%;
