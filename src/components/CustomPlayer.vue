@@ -93,15 +93,15 @@ export default {
     toggleBarSoundDisplay: false,
     timeManageTimeBarDisplay: false,
     errorMessageUnAssignedInputlDisplaySetTimeOut: null,
+    timePassed: 0,
   }),
 
   mounted() {
-    this.consoleLogCurentTime();
-    // console.log(this.checkCurrentTime);
-    // this.checkEvery10Seconds();
-    //console.log(this.videoCurrentTime);
-    // this.checkEvery10Seconds();
-    // clearInterval(this.checkEvery10Seconds);
+    // this.logCurrentTime();
+    //setInterval(this.timer, 1000);
+    this.timer();
+    //
+    // this.keepTimePassed();
 
     // Lorsque l'élément est monté, la source de la vidéo puis on met la vidéo en play
     this.$refs.videoBalise.play();
@@ -123,6 +123,7 @@ export default {
   },
   beforeDestroy() {
     clearInterval(this.currentTimeTimeout);
+    clearInterval(this.timeInSeconds);
   },
 
   updated() {
@@ -226,6 +227,8 @@ export default {
         this.$refs.videoBalise.pause();
         this.$refs.videoBalise.load();
         this.$refs.videoBalise.play();
+        //
+        this.$refs.videoBalise.currentTime = this.timePassed;
       }
     },
 
@@ -318,41 +321,46 @@ export default {
       }
     },
     //////////////////// Time passed /////////////////////////////
-    // logCurrentTime() {
-    //   console.log(this.videoCurrentTime);
-    // },
-    // checkEvery10Seconds() {
-    //   setInterval(function () {
-    //     this.logCurrentTime();
-    //   }, 10000);
-    // },
-    consoleLogCurentTime() {
+
+    logCurrentTime() {
       console.log(this.checkCurrentTime);
-      console.log(typeof checkCurrentTime);
       this.$refs.videoBalise.currentTime += 60;
-      setTimeout(this.consoleLogCurentTime, 10000);
+      setTimeout(this.logCurrentTime, 10000);
     },
-    //     function yourFunction(){
-    //     // do whatever you like here
+    timePassing() {
+      this.timePassed += 1;
+      console.log(this.timePassed);
+    },
+    timer() {
+      this.timeInSeconds = setInterval(this.timePassing, 1000);
+    },
 
-    //     setTimeout(yourFunction, 5000);
+    // //
+    // this.$refs.videoBalise.currentTime = this.timePassed;
+    // //
+    // keepTimePassed() {
+    //   if (this.changeSrc == true) {
+    //     if (this.timePassed < this.$refs.videoBalise.currentTime) {
+    //       this.$store.commit(
+    //         "SET_VIDEO_CURRENT_TIME",
+    //         (this.$refs.videoBalise.currentTime += this.timePassed)
+    //       );
+    //       // this.$refs.videoBalise.currentTime = this.timePassed;
+    //     }
+    //   }
+    // },
+    // if (this.changeSrc == true) {
+    //   //TimePassed
+    //   if (this.timePassed < this.$refs.videoBalise.currentTime) {
+    //     this.$refs.videoBalise.currentTime = this.timePassed;
+    //   }
     // }
-
-    // yourFunction();
-    // checkCurrentTime() {
-    //   return console.log(this.videoCurrentTime);
+    // this.$refs.videoBalise.currentTime += 30;
+    // timer() {
+    //   this.timePassed += 1;
+    //   console.log(this.timePassed);
     // },
-    // checkEvery10Seconds() {
-    //   setInterval(function () {
-    //     this.checkCurrentTime();
-    //   }, 10000);
-    // },
-    // const interval = setInterval(function() {
-    // // method to be executed;
-    // }, 5000);
-
-    // clearInterval(checkEvery10Seconds)
-
+    //setInterval(this.timer, 1000);
     //faire un Timer
     //const timePassed = Timer()
     //??// this.$refs.videoBalise.currentTime = timePassed //???//
