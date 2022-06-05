@@ -309,6 +309,15 @@ export default {
         );
       }
     },
+    //////////////////// Time passed /////////////////////////////
+
+    //faire un Timer
+    //const timePassed = Timer()
+    //??// this.$refs.videoBalise.currentTime = timePassed //???//
+    /////////////////////      OU      ///////////////////////////
+    //??// timePassed = this.$refs.videoBalise.currentTime //???//
+
+    //////////////////////////////////////////////////////////////
 
     timeManagement(e) {
       if (e.key == "p" || e.key == "n") {
