@@ -52,7 +52,7 @@ export default createStore({
     getVideoIsOnPause(state) {
       return state.videoIsOnPause
     },
-    getPreviousChannel (state) {
+    getPreviousChannel (state) {{}
       let indexPrecedant = state.currentIndex - 1
       if(state.currentIndex === 0){
         return state.Channels[29]
@@ -67,6 +67,9 @@ export default createStore({
       } else {
         state.Channels[indexSuivant]
       }
+    },
+    getAdultStatus(state){
+      return state.Channels[state.currentIndex].security;
     }
   },
   mutations: {

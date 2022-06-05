@@ -12,6 +12,7 @@
       <ErrorMessage v-if="showErrorMessage && !videoIsOnPause" />
       <Carrousel v-if="carrouselDisplay"/>
     </CustomPlayer>
+    <ContentAdult v-if="isVideoAdult" />
   </div>
 </template>
 
@@ -23,6 +24,7 @@ import InfoLight from "@/components/InfoLight.vue";
 import InfoMax from "@/components/InfoMax.vue";
 import DisplayInputNumber from "@/components/DisplayInputNumber.vue";
 import ErrorMessage from "@/components/ErrorMessage.vue";
+import ContentAdult from "@/components/ContentAdult.vue";
 import Carrousel from '@/components/Carrousel.vue';
 
 export default {
@@ -33,6 +35,7 @@ export default {
     DisplayInputNumber,
     ErrorMessage,
     Carrousel,
+   ContentAdult
   },
 
   created() {
@@ -75,6 +78,7 @@ export default {
     newIndex: () => Store.getters.getNewIndex,
     changeSrc: () => Store.getters.getChangeSrc,
     videoIsOnPause: () => Store.getters.getVideoIsOnPause,
+    isVideoAdult :() =>Store.getters.getAdultStatus
   },
 
   data: () => ({
