@@ -96,6 +96,13 @@ export default {
   }),
 
   mounted() {
+    this.consoleLogCurentTime();
+    // console.log(this.checkCurrentTime);
+    // this.checkEvery10Seconds();
+    //console.log(this.videoCurrentTime);
+    // this.checkEvery10Seconds();
+    // clearInterval(this.checkEvery10Seconds);
+
     // Lorsque l'élément est monté, la source de la vidéo puis on met la vidéo en play
     this.$refs.videoBalise.play();
     this.$refs.videoBalise.muted = !this.$refs.videoBalise.muted; //cette ligne empeche de lancer la vidéo en autoplay
@@ -135,6 +142,7 @@ export default {
     changeSrc: () => Store.getters.getChangeSrc,
     videoIsOnPause: () => Store.getters.getVideoIsOnPause,
     assignedStringInputs: () => Store.getters.getAssignedInputs,
+    checkCurrentTime: () => Store.getters.getVideoCurrentTime,
   },
 
   methods: {
@@ -310,6 +318,38 @@ export default {
       }
     },
     //////////////////// Time passed /////////////////////////////
+    // logCurrentTime() {
+    //   console.log(this.videoCurrentTime);
+    // },
+    // checkEvery10Seconds() {
+    //   setInterval(function () {
+    //     this.logCurrentTime();
+    //   }, 10000);
+    // },
+    consoleLogCurentTime() {
+      console.log(this.checkCurrentTime);
+      setTimeout(this.consoleLogCurentTime, 10000);
+    },
+    //     function yourFunction(){
+    //     // do whatever you like here
+
+    //     setTimeout(yourFunction, 5000);
+    // }
+
+    // yourFunction();
+    // checkCurrentTime() {
+    //   return console.log(this.videoCurrentTime);
+    // },
+    // checkEvery10Seconds() {
+    //   setInterval(function () {
+    //     this.checkCurrentTime();
+    //   }, 10000);
+    // },
+    // const interval = setInterval(function() {
+    // // method to be executed;
+    // }, 5000);
+
+    // clearInterval(checkEvery10Seconds)
 
     //faire un Timer
     //const timePassed = Timer()
