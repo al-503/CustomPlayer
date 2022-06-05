@@ -96,6 +96,8 @@ export default {
 
 // quand ont appuis sur enter la cards avec la class focus remplace le current index avec son index // 
 
+// si la chaine est vérouiller alors dans le carroussel affiche un écran noir avec un cadena ? //
+
 // le carrousel disparaît//
 // la chaîne change // 
 

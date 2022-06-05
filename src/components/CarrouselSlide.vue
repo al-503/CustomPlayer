@@ -45,7 +45,7 @@ export default {
   },
 
   data: () => ({
-    tabIndex: []
+    slideIndex: 0
   }),
 
   created() {
@@ -58,10 +58,14 @@ export default {
   },
 
   mounted() {
-    // met les index en number
+    // met les index en number //
     this.idToNumber = parseInt(this.$refs.carrouselSLide.id); // en number
+    // met les id en string //
     this.idString = this.$refs.carrouselSLide.id // en string pour l id
+    // pour add une class //
     this.class = this.$refs.carrouselSLide.classList
+    // set lindex des slides //
+    this.slideIndex = this.currentChannelIndex
   },
 
   computed: {
@@ -75,23 +79,38 @@ export default {
 
     focusSlideById(e) {
        if(e.key === "ArrowLeft") {
+        console.log(this.slideIndex)
         // console.log(this.tabIndex)// recup de tout les id et les convertis en number
-         if(this.idToNumber === this.currentChannelIndex) { // ça marche
-              console.log(this.class)// carrousel-slide <== renvoie la class 
+         if(this.idToNumber === this.slideIndex) { // ça marche
+            // console.log(this.class)// carrousel-slide <== renvoie la class 
               this.class.add("focus")
          }
       }
     },
 
     slidePrevious(e){
-      if(e.key === "ArrowUp"){
-        console.log('coucou Previous')
+      if(e.key === "ArrowUp" && this.carrouselDisplay){
+        //console.log('coucou Previous')
+        this.slideIndex--
+          if(this.idToNumber === this.slideIndex) {
+            this.class.add("focus")
+          } else {
+             this.class.remove("focus")
+          }
+        //console.log(this.slideIndex)
       }
     },
 
     slideNext(e){
-      if(e.key === "ArrowDown"){
-        console.log('coucou Next')
+      if(e.key === "ArrowDown" && this.carrouselDisplay){
+        //console.log('coucou Next')
+        this.slideIndex++
+          if(this.idToNumber === this.slideIndex) {
+            this.class.add("focus")
+          } else {
+             this.class.remove("focus")
+          }
+        console.log(this.slideIndex)
       }
     },
 
@@ -104,7 +123,7 @@ export default {
   margin: 0 auto;// pour que les carte ne soit pas couper en remontant
   width: 100%;
   height: 27%;
-  margin-top: 4%;// pour ne pas être coller en hut de l'écran
+  margin-top: 5.8%;// pour ne pas être coller en hut de l'écran
   border: 1px solid whitesmoke;
 }
 .slide-img {
