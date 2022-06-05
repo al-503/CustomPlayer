@@ -51,7 +51,10 @@ export default {
   created() {
     // set la function focus //
     document.addEventListener("keyup", (e) => this.focusSlideById(e)); 
-    //this.focusSlideById()
+    // permet de switch +1 focus //
+    document.addEventListener("keyup", (e) => this.slideNext(e))
+    // permet de switch -1 focus //
+    document.addEventListener("keyup", (e) => this.slidePrevious(e))
   },
 
   mounted() {
@@ -69,6 +72,7 @@ export default {
   },
 
   methods: {
+
     focusSlideById(e) {
        if(e.key === "ArrowLeft") {
         // console.log(this.tabIndex)// recup de tout les id et les convertis en number
@@ -77,15 +81,19 @@ export default {
               this.class.add("focus")
          }
       }
+    },
 
+    slidePrevious(e){
+      if(e.key === "ArrowUp"){
+        console.log('coucou Previous')
+      }
+    },
 
-      // if(this.carrouselDisplay){
-      //   // alors ont passe la classe focus sur le composant qui a l'index === aux current index 
-      //   if(this.carrouselIndex === this.currentChannelIndex){
-      //     this.carrouselIndex.classList.add("focus")
-      //   }
-      // }
-    }
+    slideNext(e){
+      if(e.key === "ArrowDown"){
+        console.log('coucou Next')
+      }
+    },
 
   },
 }
@@ -96,17 +104,17 @@ export default {
   margin: 0 auto;// pour que les carte ne soit pas couper en remontant
   width: 100%;
   height: 27%;
-  margin-top: 2%;// pour ne pas être coller en hut de l'écran
+  margin-top: 4%;// pour ne pas être coller en hut de l'écran
 }
 .slide-img {
   width: 100%;
-  height: 90%; // pour avoir une fausse margin qui n'impacte pas les calculs du carrousel
+  height: 100%; // pour avoir une fausse margin qui n'impacte pas les calculs du carrousel
 }
 .slide-logo {
   width: 10%;
   height: 16%;
   position: relative;
-    bottom: 85%;
+    bottom: 95%;
     left: 85%;
 }
 .slide-text {

@@ -89,10 +89,13 @@ export default {
 //// a faire ////
 
 ///// pour la class focus du carrousel //////
-// ont veut que par défaut l index du carrousel = current index et cette card a la class focus (bord bleu) //
+// ont veut que par défaut l index du carrousel = current index et cette card a la class focus (bord bleu) // oui
+
 // si on descend indexCaroussel +1 si ont monte index carroussel -1 //
 // et la classe focus s'enléve et se met sur le nouvel index //
+
 // quand ont appuis sur enter la cards avec la class focus remplace le current index avec son index // 
+
 // le carrousel disparaît//
 // la chaîne change // 
 
