@@ -10,7 +10,9 @@
       </transition>
       <InfoMax v-if="true && !videoIsOnPause" />
       <ErrorMessage v-if="showErrorMessage && !videoIsOnPause" />
-      <Carrousel v-if="carrouselDisplay"/>
+      <transition name="slide">
+        <Carrousel v-if="carrouselDisplay"/>
+      </transition>
     </CustomPlayer>
   </div>
 </template>

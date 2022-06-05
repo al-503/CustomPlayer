@@ -11,7 +11,6 @@
                         :endTime="channel.programme[0].endTime" />
       </div>                 
   </div>
-
 </template>
 
 <script>
@@ -21,6 +20,11 @@ import CarrouselSlide from "@/components/CarrouselSlides.vue"
 export default {
   components: {
     CarrouselSlide
+  },
+
+  computed: {
+    channels: () => Store.getters.getChannels,
+    carrouselDisplay: () => Store.state.carrouselDisplay
   },
 
   Data:() =>({
@@ -35,15 +39,12 @@ export default {
   },
 
   mounted() {
-// scrollHeigth mesure tout les élément meme sortant / .length recup du nombre de slide de mon array //
+    // scrollHeigth mesure tout les élément meme sortant / .length recup du nombre de slide de mon array //
     this.oneSlide = Math.ceil(this.$refs.slider.scrollHeight / this.channels.length);
     //init currentslide //
     this.currentSlide = 0
   },
 
-  computed: {
-    channels: () => Store.getters.getChannels,
-  },
 
   methods: {
 ///////// ici previous et next slide ///////////////////
@@ -100,7 +101,7 @@ export default {
 .carrousel-slides {
   height: 100%;
   position: absolute;
-    left: 2%;
+    left: 6%;
 //// defini la scrollbar 
   overflow-x: hidden;
   overflow-y: scroll;
@@ -110,7 +111,8 @@ export default {
   }
 }
 .carrousel {
-  width: 50%;
+  position: absolute;
+  width: 35%;
   height: 100vh;
   overflow: hidden;
 
