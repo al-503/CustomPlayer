@@ -317,6 +317,14 @@ export default {
     /////////////////////      OU      ///////////////////////////
     //??// timePassed = this.$refs.videoBalise.currentTime //???//
 
+    // Le Timer dans le mounted()
+    // const timePassed = Timer()
+    //
+    // Dans le updated()
+    // if (changeSrc == true) {
+    // this.$refs.videoBalise.currentTime = timePassed
+    //}
+
     //////////////////////////////////////////////////////////////
 
     timeManagement(e) {
