@@ -74,6 +74,7 @@ export default {
     timeout: null, => contient le settime out
     videoDuration: null, => contient la durée totale de la vidéo
     videoCurrentTime: null, => contient l'avancement de la vidéo
+    timePassed: 0, => contient durée en secondes depuis lancement application
    */
 
   data: () => ({
@@ -97,12 +98,8 @@ export default {
   }),
 
   mounted() {
-    // this.logCurrentTime();
-    //setInterval(this.timer, 1000);
+    // Timer démarrant au montage de la vue (en secondes)
     this.timer();
-    //
-    // this.keepTimePassed();
-
     // Lorsque l'élément est monté, la source de la vidéo puis on met la vidéo en play
     this.$refs.videoBalise.play();
     this.$refs.videoBalise.muted = !this.$refs.videoBalise.muted; //cette ligne empeche de lancer la vidéo en autoplay
@@ -115,6 +112,7 @@ export default {
     document.addEventListener("keydown", (e) =>
       this.checkingIfInputGetAssigned(e)
     );
+    document.addEventListener("keydown", (e) => this.keepTimePassed(e));
 
     this.currentTimeTimeout = setInterval(
       () => this.videoCurrentTimerefresh(),
@@ -227,8 +225,6 @@ export default {
         this.$refs.videoBalise.pause();
         this.$refs.videoBalise.load();
         this.$refs.videoBalise.play();
-        //
-        this.$refs.videoBalise.currentTime = this.timePassed;
       }
     },
 
@@ -320,62 +316,6 @@ export default {
         );
       }
     },
-    //////////////////// Time passed /////////////////////////////
-
-    logCurrentTime() {
-      console.log(this.checkCurrentTime);
-      this.$refs.videoBalise.currentTime += 60;
-      setTimeout(this.logCurrentTime, 10000);
-    },
-    timePassing() {
-      this.timePassed += 1;
-      console.log(this.timePassed);
-    },
-    timer() {
-      this.timeInSeconds = setInterval(this.timePassing, 1000);
-    },
-
-    // //
-    // this.$refs.videoBalise.currentTime = this.timePassed;
-    // //
-    // keepTimePassed() {
-    //   if (this.changeSrc == true) {
-    //     if (this.timePassed < this.$refs.videoBalise.currentTime) {
-    //       this.$store.commit(
-    //         "SET_VIDEO_CURRENT_TIME",
-    //         (this.$refs.videoBalise.currentTime += this.timePassed)
-    //       );
-    //       // this.$refs.videoBalise.currentTime = this.timePassed;
-    //     }
-    //   }
-    // },
-    // if (this.changeSrc == true) {
-    //   //TimePassed
-    //   if (this.timePassed < this.$refs.videoBalise.currentTime) {
-    //     this.$refs.videoBalise.currentTime = this.timePassed;
-    //   }
-    // }
-    // this.$refs.videoBalise.currentTime += 30;
-    // timer() {
-    //   this.timePassed += 1;
-    //   console.log(this.timePassed);
-    // },
-    //setInterval(this.timer, 1000);
-    //faire un Timer
-    //const timePassed = Timer()
-    //??// this.$refs.videoBalise.currentTime = timePassed //???//
-    /////////////////////      OU      ///////////////////////////
-    //??// timePassed = this.$refs.videoBalise.currentTime //???//
-
-    // Le Timer dans le mounted()
-    // const timePassed = Timer()
-    //
-    // Dans le updated()
-    // if (changeSrc == true) {
-    // this.$refs.videoBalise.currentTime = timePassed
-    //}
-
-    //////////////////////////////////////////////////////////////
 
     timeManagement(e) {
       if (e.key == "p" || e.key == "n") {
@@ -395,6 +335,27 @@ export default {
       }
       if (e.key == "n") {
         this.$refs.videoBalise.currentTime += 10;
+      }
+    },
+    //////////////////// Keep Time Passed /////////////////////////////
+
+    timePassing() {
+      this.timePassed += 1;
+      console.log(this.timePassed);
+    },
+    timer() {
+      this.timeInSeconds = setInterval(this.timePassing, 1000);
+    },
+    keepTimePassed(e) {
+      let regInput = new RegExp("^[0-9]+$");
+      if (e.key == "PageUp" || e.key == "PageDown") {
+        this.$refs.videoBalise.currentTime = this.timePassed;
+      }
+      if (regInput.test(e.key)) {
+        setTimeout(
+          (this.$refs.videoBalise.currentTime = this.timePassed),
+          3000
+        );
       }
     },
   },
