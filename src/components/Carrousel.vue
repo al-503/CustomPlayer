@@ -11,16 +11,21 @@
                         :endTime="channel.programme[0].endTime" />
       </div>                 
   </div>
-
 </template>
 
 <script>
 import Store from "@/store"
-import CarrouselSlide from "@/components/CarrouselSlides.vue"
+import CarrouselSlide from "@/components/CarrouselSlide.vue"
 
 export default {
   components: {
     CarrouselSlide
+  },
+
+  computed: {
+    channels: () => Store.getters.getChannels,
+    carrouselDisplay: () => Store.state.carrouselDisplay,
+    currentChannelIndex: () => Store.state.currentIndex,
   },
 
   Data:() =>({
@@ -35,15 +40,16 @@ export default {
   },
 
   mounted() {
-// scrollHeigth mesure tout les élément meme sortant / .length recup du nombre de slide de mon array //
+    // scrollHeigth mesure tout les élément meme sortant / .length recup du nombre de slide de mon array //
     this.oneSlide = Math.ceil(this.$refs.slider.scrollHeight / this.channels.length);
+    // calcul currentTop //
+    this.currentSlideTop = this.oneSlide * this.currentChannelIndex;
+    // current top  affiche la slide courrante a la pos en haut de l'écran//
+    this.$refs.slider.scrollTop = this.currentSlideTop
     //init currentslide //
-    this.currentSlide = 0
+    this.currentSlide = this.$refs.slider.scrollTop // permet de bien exécuter le défilement
   },
 
-  computed: {
-    channels: () => Store.getters.getChannels,
-  },
 
   methods: {
 ///////// ici previous et next slide ///////////////////
@@ -70,7 +76,7 @@ export default {
             top: this.currentSlide = this.currentSlide + this.oneSlide,
             behavior: "smooth"
           });
-        } else if(this.currentSlide < 0) {
+        } else if(this.currentSlide < 0){
           this.$refs.slider.scrollTo({
             top: this.currentSlide = this.oneSlide,
             behavior: "smooth"
@@ -100,7 +106,7 @@ export default {
 .carrousel-slides {
   height: 100%;
   position: absolute;
-    left: 2%;
+    left: 6%;
 //// defini la scrollbar 
   overflow-x: hidden;
   overflow-y: scroll;
@@ -110,6 +116,7 @@ export default {
   }
 }
 .carrousel {
+  position: absolute;
   width: 50%;
   height: 100vh;
   overflow: hidden;

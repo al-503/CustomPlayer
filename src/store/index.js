@@ -14,7 +14,7 @@ export default createStore({
     videoDuration: null,
     videoCurrentTime: null,
     splashScreenDisplay: true,
-    assignedStringInputs: ["ArrowUp","ArrowDown","ArrowLeft","n","i","p","Enter","PageUp","PageDown","+","-","0","1","2","3","4","5","6","7","8","9"],
+    assignedStringInputs: ["a","ArrowUp","ArrowDown","ArrowLeft","n","i","p","Enter","PageUp","PageDown","+","-","0","1","2","3","4","5","6","7","8","9"],
     displayInfoLightArrival: true,
     carrouselDisplay: false,
   },
