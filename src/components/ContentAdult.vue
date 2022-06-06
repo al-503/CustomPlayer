@@ -15,13 +15,7 @@ import CurrentChannelLogo from "@/components/CurrentChannelLogo.vue";
 import CurrentHour from "@/components/CurrentHour.vue";
 
 export default {
-   data() {
-    return {
-      durationHour: 0,
-      durationMinute: 0,
-      ProvisDurationMinute: 0,
-    };
-  },
+
   components: {
     CurrentChannelLogo,
     CurrentHour
