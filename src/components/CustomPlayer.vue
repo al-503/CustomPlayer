@@ -347,6 +347,10 @@ export default {
     },
     changeTime() {
       this.$refs.videoBalise.currentTime = this.timePassed;
+      this.$store.commit(
+        "SET_VIDEO_CURRENT_TIME",
+        this.$refs.videoBalise.currentTime
+      );
     },
     keepTimePassed(e) {
       let regInput = new RegExp("^[0-9]+$");
