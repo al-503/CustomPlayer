@@ -340,6 +340,9 @@ export default {
 
     timePassing() {
       this.timePassed += 1;
+      if (this.timePassed > 900) {
+        this.timePassed = 0;
+      }
       // console.log(this.timePassed);
     },
     timer() {
