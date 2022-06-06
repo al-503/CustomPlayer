@@ -13,9 +13,7 @@
       </transition>
       <InfoMax v-if="true && !videoIsOnPause" />
       <ErrorMessage v-if="showErrorMessage && !videoIsOnPause" />
-      <transition name="slide">
-        <Carrousel v-if="carrouselDisplay" />
-      </transition>
+      <Carrousel v-if="carrouselDisplay" />
     </CustomPlayer>
   </div>
 </template>
@@ -82,7 +80,6 @@ export default {
     newIndex: () => Store.getters.getNewIndex,
     changeSrc: () => Store.getters.getChangeSrc,
     videoIsOnPause: () => Store.getters.getVideoIsOnPause,
-    checkCurrentTime: () => Store.getters.getVideoCurrentTime,
   },
 
   data: () => ({

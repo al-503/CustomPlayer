@@ -100,6 +100,7 @@ export default {
   mounted() {
     // Timer démarrant au montage de la vue (en secondes)
     this.timer();
+    // this.changeTime();
     // this.keepTimePassed();
 
     // Lorsque l'élément est monté, la source de la vidéo puis on met la vidéo en play
@@ -131,6 +132,7 @@ export default {
       if (this.videoIsOnPause) {
         this.toggleVideoPlay();
       }
+      // this.changeTime();
       this.$store.commit("SET_CHANGE_SRC", false);
       this.$refs.videoBalise.pause();
       this.$refs.videoBalise.load();
@@ -144,7 +146,7 @@ export default {
     changeSrc: () => Store.getters.getChangeSrc,
     videoIsOnPause: () => Store.getters.getVideoIsOnPause,
     assignedStringInputs: () => Store.getters.getAssignedInputs,
-    //checkCurrentTime: () => Store.getters.getVideoCurrentTime,
+    // checkCurrentTime: () => Store.getters.getVideoCurrentTime,
   },
 
   methods: {
@@ -352,13 +354,17 @@ export default {
     changeTime() {
       this.$refs.videoBalise.currentTime = this.timePassed;
     },
+    help() {
+      console.log("Jeanne   AU SECOURS !!");
+    },
     keepTimePassed(e) {
       let regInput = new RegExp("^[0-9]+$");
       if (e.key == "PageUp" || e.key == "PageDown") {
         this.changeTime();
+        // this.help();
       }
       if (regInput.test(e.key)) {
-        setTimeout(this.changeTime(), 3000);
+        setTimeout(this.changeTime, 3000);
       }
     },
   },
