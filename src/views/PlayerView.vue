@@ -13,7 +13,9 @@
       </transition>
       <InfoMax v-if="true && !videoIsOnPause" />
       <ErrorMessage v-if="showErrorMessage && !videoIsOnPause" />
-      <Carrousel v-if="carrouselDisplay" />
+      <transition name="slide">
+        <Carrousel v-if="carrouselDisplay" />
+      </transition>
     </CustomPlayer>
   </div>
 </template>
@@ -147,12 +149,6 @@ export default {
         this.inputDisplay = true;
         this.stopInfoLight();
       }
-      // Impleter ici la condition de priorité de l'InfoLight
-
-      // Genere bug d'apparition de la 1ere inputNumber
-      // if (e.key == "PageUp" || e.key == "PageDown") {
-      //   this.inputDisplay = false;
-      // }
     },
 
     //////////////////////////////////////////////////////////////////

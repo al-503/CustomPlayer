@@ -100,9 +100,6 @@ export default {
   mounted() {
     // Timer démarrant au montage de la vue (en secondes)
     this.timer();
-    // this.changeTime();
-    // this.keepTimePassed();
-
     // Lorsque l'élément est monté, la source de la vidéo puis on met la vidéo en play
     this.$refs.videoBalise.play();
     this.$refs.videoBalise.muted = !this.$refs.videoBalise.muted; //cette ligne empeche de lancer la vidéo en autoplay
@@ -132,13 +129,11 @@ export default {
       if (this.videoIsOnPause) {
         this.toggleVideoPlay();
       }
-      // this.changeTime();
       this.$store.commit("SET_CHANGE_SRC", false);
       this.$refs.videoBalise.pause();
       this.$refs.videoBalise.load();
       this.$refs.videoBalise.play();
       this.$store.commit("SET_CHANGE_SRC", false);
-      // this.keepTimePassed();
     }
   },
 
@@ -146,7 +141,6 @@ export default {
     changeSrc: () => Store.getters.getChangeSrc,
     videoIsOnPause: () => Store.getters.getVideoIsOnPause,
     assignedStringInputs: () => Store.getters.getAssignedInputs,
-    // checkCurrentTime: () => Store.getters.getVideoCurrentTime,
   },
 
   methods: {
@@ -247,7 +241,7 @@ export default {
       const currentVolume = parseFloat(this.$refs.videoBalise.volume).toFixed(
         2
       );
-      console.log("cur " + currentVolume);
+      // console.log("cur " + currentVolume);
       if (dir === "+") {
         if (currentVolume < 0.95) {
           this.$refs.videoBalise.volume += 0.05;
@@ -265,7 +259,7 @@ export default {
           this.iconDisplay(this.$refs.videoBalise.volume);
         }
       }
-      console.log(this.$refs.videoBalise.volume);
+      // console.log(this.$refs.videoBalise.volume);
     },
 
     volumeKeyListener(e) {
@@ -346,7 +340,7 @@ export default {
 
     timePassing() {
       this.timePassed += 1;
-      console.log(this.timePassed);
+      // console.log(this.timePassed);
     },
     timer() {
       this.timeInSeconds = setInterval(this.timePassing, 1000);
@@ -354,14 +348,10 @@ export default {
     changeTime() {
       this.$refs.videoBalise.currentTime = this.timePassed;
     },
-    help() {
-      console.log("Jeanne   AU SECOURS !!");
-    },
     keepTimePassed(e) {
       let regInput = new RegExp("^[0-9]+$");
       if (e.key == "PageUp" || e.key == "PageDown") {
         this.changeTime();
-        // this.help();
       }
       if (regInput.test(e.key)) {
         setTimeout(this.changeTime, 3000);
