@@ -164,9 +164,19 @@ export default {
     DisplayInfoMax() {
       Store.commit("DisplayInfoMax");
     },
+    HideInfoMax() {
+      Store.commit("HideInfoMax");
+    },
+
     showInfoMax(e) {
       if (e.key === "i") {
-        this.DisplayInfoMax();
+        if (!this.carrouselDisplay) {
+          if (this.infoMaxDisplayed == false) {
+            this.DisplayInfoMax();
+          } else {
+            this.HideInfoMax();
+          }
+        }
       }
     },
 
