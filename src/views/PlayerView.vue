@@ -110,6 +110,7 @@ export default {
         } else {
           // console.log(Store.state.currentIndex = Store.state.currentIndex + 1)
           Store.commit("KeyLeft");
+          this.$store.commit("CarrouselHide")
           this.DisplayedInfoLight();
         }
       } else if (e.key == "PageDown") {
@@ -120,6 +121,7 @@ export default {
         } else {
           //console.log(Store.state.currentIndex = Store.state.currentIndex - 1)
           Store.commit("KeyRight");
+          this.$store.commit("CarrouselHide")
           this.DisplayedInfoLight();
         }
       }
