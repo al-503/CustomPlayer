@@ -1,5 +1,5 @@
 <template>
-     <input type="submit" value="INFO+" class="infoButton" v-on:keyup.enter="hideInfoLightAndShowInfoMax" >
+  <input type="submit" value="INFO+" class="infoButton" v-on:keyup.enter="hideInfoLightAndShowInfoMax">
 </template>
 
 <script>
@@ -15,7 +15,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .infoButton {
     width: 146px;
     height: 47px;

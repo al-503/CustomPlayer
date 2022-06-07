@@ -1,6 +1,6 @@
 <template>
   <div v-if="infoMaxDisplayed" class="info-max-header">
-    <CurrentHour />
+    <CurrentHour/>
   </div>
   <transition name="slide">
     <div v-if="infoMaxDisplayed" class="infoMaxMainDiv">
