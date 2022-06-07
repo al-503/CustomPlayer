@@ -4,9 +4,9 @@
 
 <script>
 ///***** Permet de récup la key d'une touche *******///
-window.addEventListener('keydown', function(e){  ///
-  console.log(e)                                 ///
-});                                              ///
+// window.addEventListener('keydown', function(e){  ///
+//   console.log(e)                                 ///
+// });                                              ///
 ///////////////////////////////////////////////////////
 </script>
 

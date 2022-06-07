@@ -1,3 +1,4 @@
+import { faLessThanEqual } from '@fortawesome/free-solid-svg-icons'
 import { createStore } from 'vuex'
 import Sources from '../assets/sources/channels.json'
 
@@ -14,7 +15,7 @@ export default createStore({
     videoDuration: null,
     videoCurrentTime: null,
     splashScreenDisplay: true,
-    assignedStringInputs: ["F5","F11","ArrowUp","ArrowDown","ArrowLeft","n","i","p","Enter","PageUp","PageDown","+","-","0","1","2","3","4","5","6","7","8","9"],
+    assignedStringInputs: ["a","F5","F11","ArrowUp","ArrowDown","ArrowLeft","n","i","p","Enter","PageUp","PageDown","+","-","0","1","2","3","4","5","6","7","8","9"],
     displayInfoLightArrival: true,
     carrouselDisplay: false,
   },
@@ -47,6 +48,7 @@ export default createStore({
       return state.Channels[state.currentIndex]
     },
     getProgramme (state) {
+      console.debug('message', state.Channels[state.currentIndex].programme)
       return state.Channels[state.currentIndex].programme
     },
     getVideoIsOnPause(state) {
@@ -67,6 +69,9 @@ export default createStore({
       } else {
         state.Channels[indexSuivant]
       }
+    },
+    getAdultStatus(state){
+      return state.Channels[state.currentIndex].security;
     }
   },
   mutations: {
@@ -92,6 +97,10 @@ export default createStore({
       state.changeSrc = payload
     },
     SET_CURRENT_INDEX(state, payload) {
+      state.currentIndex = payload
+    },
+    SET_CARROUSEL_CHANNEL_INDEX(state, payload){
+      console.log(payload)
       state.currentIndex = payload
     },
     // augment le current index de 1

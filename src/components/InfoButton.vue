@@ -1,21 +1,22 @@
 <template>
-     <input type="submit" value="EXIT" class="exitButtton" v-on:keyup.esc="returnToMainPage" >
+  <input type="submit" value="INFO+" class="infoButton" v-on:keyup.enter="hideInfoLightAndShowInfoMax">
 </template>
 
 <script>
 import Store from "@/store";
 export default {
   methods:{
-        returnToMainPage: function () {
-            //this.$router.push('/');
-            Store.commit('HideInfoMax');
+        hideInfoLightAndShowInfoMax: function () {
+          
+          Store.commit('LightInfoDefault');
+          Store.commit('DisplayInfoMax');
         }
     }
 }
 </script>
 
 <style scoped>
-.exitButtton {
+.infoButton {
     width: 146px;
     height: 47px;
     border-radius: 15px;

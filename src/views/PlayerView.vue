@@ -17,6 +17,7 @@
         <Carrousel v-if="carrouselDisplay" />
       </transition>
     </CustomPlayer>
+    <ContentAdult v-if="isVideoAdult" />
   </div>
 </template>
 
@@ -29,6 +30,7 @@ import InfoMax from "@/components/InfoMax.vue";
 import DisplayInputNumber from "@/components/DisplayInputNumber.vue";
 import ErrorMessage from "@/components/ErrorMessage.vue";
 import Carrousel from "@/components/Carrousel.vue";
+import ContentAdult from "@/components/ContentAdult.vue";
 
 export default {
   components: {
@@ -38,6 +40,7 @@ export default {
     DisplayInputNumber,
     ErrorMessage,
     Carrousel,
+   ContentAdult
   },
 
   created() {
@@ -60,14 +63,19 @@ export default {
   mounted() {
     setTimeout(() => {
       this.$store.commit("SET_DISPLAY_INFOLIGHT_ARRIVAL", false);
-    }, 7500);
+    }, 4000);
   },
 
   computed: {
     // display de l info light a l'arriver sur la chaîne //
     displayInfoLightArrival: () => Store.getters.getdisplayInfoLightArrival,
     // ajout des programmes //
-    programme: () => Store.getters.getProgramme,
+    programme: () => {
+      console.log(Store.getters.getProgramme[0].sources)
+    return Store.getters.getProgramme
+    
+    },
+
     // pour display l'info ligtht
     infoDisplayed: () => Store.state.defaultDisplay,
     // fonction forEach channels
@@ -82,6 +90,7 @@ export default {
     newIndex: () => Store.getters.getNewIndex,
     changeSrc: () => Store.getters.getChangeSrc,
     videoIsOnPause: () => Store.getters.getVideoIsOnPause,
+    isVideoAdult :() =>Store.getters.getAdultStatus
   },
 
   data: () => ({
@@ -158,9 +167,19 @@ export default {
     DisplayInfoMax() {
       Store.commit("DisplayInfoMax");
     },
+    HideInfoMax() {
+      Store.commit("HideInfoMax");
+    },
+
     showInfoMax(e) {
       if (e.key === "i") {
-        this.DisplayInfoMax();
+        if (!this.carrouselDisplay) {
+          if (this.infoMaxDisplayed == false) {
+            this.DisplayInfoMax();
+          } else {
+            this.HideInfoMax();
+          }
+        }
       }
     },
 
