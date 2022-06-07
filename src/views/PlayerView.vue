@@ -4,14 +4,17 @@
     <CustomPlayer :currentFlux="programme[0].sources">
       <InfoLight
         v-if="
-          ((infoDisplayed && !videoIsOnPause) || displayInfoLightArrival) && !infoMaxDisplayed"/>
+          ((infoDisplayed && !videoIsOnPause) || displayInfoLightArrival) &&
+          !infoMaxDisplayed
+        "
+      />
       <transition name="fading">
         <DisplayInputNumber v-if="inputDisplay" />
       </transition>
       <InfoMax v-if="true && !videoIsOnPause" />
       <ErrorMessage v-if="showErrorMessage && !videoIsOnPause" />
       <transition name="slide">
-        <Carrousel v-if="carrouselDisplay"/>
+        <Carrousel v-if="carrouselDisplay" />
       </transition>
     </CustomPlayer>
   </div>
@@ -25,7 +28,7 @@ import InfoLight from "@/components/InfoLight.vue";
 import InfoMax from "@/components/InfoMax.vue";
 import DisplayInputNumber from "@/components/DisplayInputNumber.vue";
 import ErrorMessage from "@/components/ErrorMessage.vue";
-import Carrousel from '@/components/Carrousel.vue';
+import Carrousel from "@/components/Carrousel.vue";
 
 export default {
   components: {
@@ -45,13 +48,15 @@ export default {
     // display de l'info max
     document.addEventListener("keydown", (e) => this.showInfoMax(e));
     // changement de chaine par num //
-    document.addEventListener("keydown", (e) => this.ChannelChangeWithNumKey(e));
+    document.addEventListener("keydown", (e) =>
+      this.ChannelChangeWithNumKey(e)
+    );
     // disparition de l'infoLight pour InputNumber //
     document.addEventListener("keydown", (e) => this.switchDisplay(e));
     // apparition du carrousel //
     document.addEventListener("keydown", (e) => this.showCarrousel(e));
   },
-  
+
   mounted() {
     setTimeout(() => {
       this.$store.commit("SET_DISPLAY_INFOLIGHT_ARRIVAL", false);
@@ -113,8 +118,8 @@ export default {
         }
       }
     },
-    
-//// ici les fonctions pour faire apparaître l'info light ////
+
+    //// ici les fonctions pour faire apparaître l'info light ////
 
     DisplayedInfoLight() {
       Store.commit("LightInfoDisplay");
@@ -129,7 +134,7 @@ export default {
     },
 
     showInfoLight(e) {
-      if(!this.carrouselDisplay) {
+      if (!this.carrouselDisplay) {
         if (e.key === "ArrowUp") {
           this.DisplayedInfoLight();
         }
@@ -159,29 +164,43 @@ export default {
     DisplayInfoMax() {
       Store.commit("DisplayInfoMax");
     },
+    HideInfoMax() {
+      Store.commit("HideInfoMax");
+    },
+
     showInfoMax(e) {
       if (e.key === "i") {
-        this.DisplayInfoMax();
+        if (!this.carrouselDisplay) {
+          if (this.infoMaxDisplayed == false) {
+            this.DisplayInfoMax();
+          } else {
+            this.HideInfoMax();
+          }
+        }
       }
     },
 
-// ici fonction pour display le carrousel //
+    // ici fonction pour display le carrousel //
     showCarrousel(e) {
-      if(!this.carrouselDisplay && !this.infoDisplayed && !this.displayInfoLightArrival) {
-        if(e.key === "ArrowLeft") {
-          Store.commit('CarrouselShow')
+      if (
+        !this.carrouselDisplay &&
+        !this.infoDisplayed &&
+        !this.displayInfoLightArrival
+      ) {
+        if (e.key === "ArrowLeft") {
+          Store.commit("CarrouselShow");
         }
-      } else if(this.carrouselDisplay){
-          if(e.key === "ArrowLeft") {
-          Store.commit('CarrouselHide')
+      } else if (this.carrouselDisplay) {
+        if (e.key === "ArrowLeft") {
+          Store.commit("CarrouselHide");
         }
       }
     },
-////////////////////////////////////////////
-    
-//// ici gestion des changement de chaîne par num ////
-    
-  // manageTabOfInput() a pour but de transformer le contenu du tableau tabOfInput en nombre exploitable //
+    ////////////////////////////////////////////
+
+    //// ici gestion des changement de chaîne par num ////
+
+    // manageTabOfInput() a pour but de transformer le contenu du tableau tabOfInput en nombre exploitable //
     manageTabOfInput() {
       if (this.tabOfInput.length == 3) {
         this.channelNumberInput =
