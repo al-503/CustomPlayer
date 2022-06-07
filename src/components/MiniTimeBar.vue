@@ -34,10 +34,15 @@ export default {
     // méthode qui gère la progression de la time bar
     setMaxProgress() {
       if (this.$refs.progress != null) {
-        this.$refs.progress.setAttribute("max", this.videoDuration);
-        this.progress.value = this.videoCurrentTime;
-        this.progressBar.style.width =
-          Math.floor((this.videoCurrentTime / this.videoDuration) * 100) + "%";
+        if (!isNaN(this.videoDuration)) {
+          this.$refs.progress.setAttribute("max", this.videoDuration);
+        }
+        let security1 = this.videoCurrentTime;
+        this.progress.value = security1 || 0;
+        let security2 = Math.floor(
+          (this.videoCurrentTime / this.videoDuration) * 100
+        );
+        this.progressBar.style.width = (security2 = security2 || 1) + "%";
       }
     },
     keyListen(e) {
