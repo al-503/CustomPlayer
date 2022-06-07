@@ -14,7 +14,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .exitButtton {
     width: 146px;
     height: 47px;

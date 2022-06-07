@@ -53,7 +53,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .info-light-header {
   position: absolute;
   width: 100%;

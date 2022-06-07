@@ -70,8 +70,6 @@ export default {
   mounted() {
     // met les index en number //
     this.idToNumber = parseInt(this.$refs.carrouselSLide.id); // en number
-    // met les id en string //
-    this.idString = this.$refs.carrouselSLide.id; // en string pour l id
     // pour add une class //
     this.class = this.$refs.carrouselSLide.classList;
     // set lindex des slides //
@@ -92,11 +90,8 @@ export default {
   methods: {
     focusSlideById(e) {
       if (e.key === "ArrowLeft") {
-        console.log(this.slideIndex);
-        // console.log(this.tabIndex)// recup de tout les id et les convertis en number
+        // console.log(this.slideIndex);
         if (this.idToNumber === this.slideIndex) {
-          // ça marche
-          // console.log(this.class)// carrousel-slide <== renvoie la class
           this.class.add("focus");
         }
       }
@@ -104,17 +99,17 @@ export default {
 
     slidePrevious(e){
       if(e.key === "ArrowUp" && this.carrouselDisplay){
-         if(this.slideIndex > 0){
-            this.slideIndex--
-          } else {
-            this.slideIndex = 0;
-          }
+        if(this.slideIndex > 0){
+          this.slideIndex--
+        } else {
+          this.slideIndex = 0;
+        }
 
-          if(this.idToNumber === this.slideIndex) {
-            this.class.add("focus")
-          } else {
-             this.class.remove("focus")
-          }
+        if(this.idToNumber === this.slideIndex) {
+          this.class.add("focus")
+        } else {
+            this.class.remove("focus")
+        }
       }
     },
 
@@ -137,7 +132,6 @@ export default {
     // ici doit changer de chaîne //
     changeChannelCarrousel(e) {
       if (e.key === "a" && this.carrouselDisplay) {
-        //Store.state.currentIndex = this.slideIndex // la lindex current vaut bien
         // console.log("this.slide " + this.slideIndex);
         this.$store.commit("SET_CARROUSEL_CHANNEL_INDEX", this.slideIndex);
         // this.$store.commit("SET_CARROUSEL_CHANNEL_CHANGE", true);
@@ -148,17 +142,17 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .carrousel-slide {
-  margin: 0 auto; // pour que les carte ne soit pas couper en remontant
+  margin: 0 auto;
   width: 100%;
   height: 27%;
-  margin-top: 5.8%; // pour ne pas être coller en hut de l'écran
+  margin-top: 5.8%; // pour ne pas être coller en haut de l'écran
   border: 1px solid whitesmoke;
 }
 .slide-img {
   width: 100%;
-  height: 100%; // pour avoir une fausse margin qui n'impacte pas les calculs du carrousel
+  height: 100%;
 }
 .slide-logo {
   width: 10%;
@@ -173,7 +167,6 @@ export default {
   position: relative;
   bottom: 38%;
 }
-
 .focus {
   border: 8px solid #00B2F1;
 }

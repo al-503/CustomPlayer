@@ -14,6 +14,7 @@
 
 <script>
 import Store from "@/store";
+
 import CurrentChannelLogo from "@/components/CurrentChannelLogo.vue";
 import CurrentHour from "@/components/CurrentHour.vue";
 

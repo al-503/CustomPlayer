@@ -5,7 +5,7 @@
       <p class="gender">{{ gender }}</p>
       <!-- bouton info+ -->
       <!--<div class="info-plus">INFO +</div>-->
-      <InfoButton />
+      <InfoButton/>
     </div>
     <p class="time">{{ startAt + " - " + endAt }}</p>
     <MiniTimeBar />
@@ -42,18 +42,16 @@ export default {
 };
 </script>
 
-<style langue="scss">
+<style langue="scss" scoped>
 .current-info {
   font-family: "Inter", sans-serif;
   width: 80%;
   display: flex;
 }
-
 .info-text {
   margin-top: 2%;
   margin-left: 3%;
 }
-
 .current-title {
   font-size: 64px;
   font-weight: 900;
@@ -65,18 +63,15 @@ export default {
   -webkit-line-clamp: 1; /* number of lines to show */
   -webkit-box-orient: vertical;
 }
-
 .gender,
 .time {
   font-size: 31px;
   margin: 1.5%;
 }
-
 .time {
   margin-top: 5%;
   text-align: center;
 }
-
 .info-plus {
   margin-top: 2%;
   margin-left: 2%;

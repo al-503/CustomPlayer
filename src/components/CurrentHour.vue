@@ -37,13 +37,12 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .current-hour {
   position: absolute;
   right: 2%;
   top: 6%;
 }
-
 .hour {
   text-align: center;
   font-size: 85px;

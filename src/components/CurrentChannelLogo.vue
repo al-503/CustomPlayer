@@ -18,11 +18,10 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .current-channel-logo {
   width: 50%;
 }
-
 .logo-image {
   position: absolute;
   width: 120px;
