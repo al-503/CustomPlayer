@@ -131,11 +131,13 @@ export default {
 
     // ici doit changer de chaîne //
     changeChannelCarrousel(e) {
-      if (e.key === "a" && this.carrouselDisplay) {
-        // console.log("this.slide " + this.slideIndex);
-        this.$store.commit("SET_CARROUSEL_CHANNEL_INDEX", this.slideIndex);
-        // this.$store.commit("SET_CARROUSEL_CHANNEL_CHANGE", true);
-        this.$store.commit("SET_CHANGE_SRC", true);
+      if(this.carrouselDisplay){
+        if (e.key === "Enter") {
+          // console.log("this.slide " + this.slideIndex);
+          this.$store.commit("SET_CARROUSEL_CHANNEL_INDEX", this.slideIndex);
+          // this.$store.commit("SET_CARROUSEL_CHANNEL_CHANGE", true);
+          this.$store.commit("SET_CHANGE_SRC", true);
+        }
       }
     },
   },
@@ -144,10 +146,11 @@ export default {
 
 <style lang="scss" scoped>
 .carrousel-slide {
-  margin: 0 auto;
+  margin: 2% auto;
   width: 100%;
   height: 27%;
-  margin-top: 5.8%; // pour ne pas être coller en haut de l'écran
+  margin-top: 9%; // pour ne pas être coller en haut de l'écran
+  margin-bottom: 9%;
   border: 1px solid whitesmoke;
 }
 .slide-img {

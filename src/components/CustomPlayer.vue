@@ -151,6 +151,8 @@ export default {
     assignedStringInputs: () => Store.getters.getAssignedInputs,
     isVideoAdult :() =>Store.getters.getAdultStatus,
     carrouselVideoChange: () => Store.getters.getCarrouselVideoChange,
+    // pour savoir si le carrousel est actif //
+    carrouselDisplay: () => Store.state.carrouselDisplay,
   },
 
   methods: {
@@ -218,11 +220,13 @@ export default {
 
     // Cette méthode regarder si la touche "entrée" est down
     keyListenner(e) {
-      if (e.key == "Enter") {
-        // on met à jour les valeurs videoDuration et videoCurrentTime qui sont envoyées par la suite au composant enfant timebar
-        this.videoDuration = this.$refs.videoBalise.duration;
-        // méthode qui gère le "play/pause"
-        this.toggleVideoPlay();
+      if(!this.carrouselDisplay){
+        if (e.key == "Enter") {
+          // on met à jour les valeurs videoDuration et videoCurrentTime qui sont envoyées par la suite au composant enfant timebar
+          this.videoDuration = this.$refs.videoBalise.duration;
+          // méthode qui gère le "play/pause"
+          this.toggleVideoPlay();
+        }
       }
     },
 
