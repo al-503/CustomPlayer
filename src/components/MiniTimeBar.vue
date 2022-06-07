@@ -41,6 +41,7 @@ export default {
       }
     },
     keyListen(e) {
+      console.log(e.key);
       if (e.key == "ArrowUp") {
         this.setMaxProgress();
       }
