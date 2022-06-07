@@ -124,8 +124,13 @@ export default {
       // console.log(Store.state.currentIndex)
       // console.log("-----------")
       //Store.state.currentIndex = this.slideIndex // la lindex current vaut bien 
-      this.$store.commit("SET_CARROUSEL_CHANNEL_CHANGE", true);
-      this.$store.commit("SET_CARROUSEL_CHANNEL_INDEX", this.slideIndex);
+      //this.$store.commit("SET_CARROUSEL_CHANNEL_CHANGE", true);
+      if(this.$store.commit("SET_CARROUSEL_CHANNEL_INDEX", this.slideIndex)){
+        this.$refs.videoBalise.pause();
+        this.$refs.videoBalise.load();
+        this.$refs.videoBalise.play();
+
+      }
      }
     }
   },
