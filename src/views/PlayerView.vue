@@ -67,7 +67,12 @@ export default {
     // display de l info light a l'arriver sur la chaîne //
     displayInfoLightArrival: () => Store.getters.getdisplayInfoLightArrival,
     // ajout des programmes //
-    programme: () => Store.getters.getProgramme,
+    programme: () => {
+      console.log(Store.getters.getProgramme[0].sources)
+    return Store.getters.getProgramme
+    
+    },
+
     // pour display l'info ligtht
     infoDisplayed: () => Store.state.defaultDisplay,
     // fonction forEach channels
