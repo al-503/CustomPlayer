@@ -177,7 +177,7 @@ export default {
     },
 
     showInfoMax(e) {
-      if (e.key === "i") {
+      if (e.key === "i" && !this.carrouselDisplay) {
         if (!this.carrouselDisplay) {
           if (this.infoMaxDisplayed == false) {
             this.DisplayInfoMax();
@@ -190,11 +190,7 @@ export default {
 
     // ici fonction pour display le carrousel //
     showCarrousel(e) {
-      if (
-        !this.carrouselDisplay &&
-        !this.infoDisplayed &&
-        !this.displayInfoLightArrival
-      ) {
+      if ( !this.carrouselDisplay && !this.infoDisplayed && !this.displayInfoLightArrival && !this.infoMaxDisplayed ) {
         if (e.key === "ArrowLeft") {
           Store.commit("CarrouselShow");
         }
