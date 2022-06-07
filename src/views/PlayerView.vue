@@ -17,7 +17,7 @@
         <Carrousel v-if="carrouselDisplay" />
       </transition>
     </CustomPlayer>
-    <ContentAdult v-if="isVideoAdult" />
+    <!-- <ContentAdult v-if="isVideoAdult" /> -->
   </div>
 </template>
 
@@ -30,7 +30,7 @@ import InfoMax from "@/components/InfoMax.vue";
 import DisplayInputNumber from "@/components/DisplayInputNumber.vue";
 import ErrorMessage from "@/components/ErrorMessage.vue";
 import Carrousel from "@/components/Carrousel.vue";
-import ContentAdult from "@/components/ContentAdult.vue";
+// import ContentAdult from "@/components/ContentAdult.vue";
 
 export default {
   components: {
@@ -40,7 +40,7 @@ export default {
     DisplayInputNumber,
     ErrorMessage,
     Carrousel,
-   ContentAdult
+    //  ContentAdult
   },
 
   created() {
@@ -71,9 +71,8 @@ export default {
     displayInfoLightArrival: () => Store.getters.getdisplayInfoLightArrival,
     // ajout des programmes //
     programme: () => {
-      console.log(Store.getters.getProgramme[0].sources)
-    return Store.getters.getProgramme
-    
+      console.log(Store.getters.getProgramme[0].sources);
+      return Store.getters.getProgramme;
     },
 
     // pour display l'info ligtht
@@ -90,7 +89,7 @@ export default {
     newIndex: () => Store.getters.getNewIndex,
     changeSrc: () => Store.getters.getChangeSrc,
     videoIsOnPause: () => Store.getters.getVideoIsOnPause,
-    isVideoAdult :() =>Store.getters.getAdultStatus
+    isVideoAdult: () => Store.getters.getAdultStatus,
   },
 
   data: () => ({
