@@ -175,6 +175,6 @@ export default {
 }
 
 .focus {
-  border: 3px solid blue;
+  border: 8px solid #00B2F1;
 }
 </style>
