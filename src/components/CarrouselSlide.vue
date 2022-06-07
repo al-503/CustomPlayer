@@ -131,7 +131,7 @@ export default {
 
     // ici doit changer de chaîne //
     changeChannelCarrousel(e) {
-      if (e.key === "a") {
+      if (e.key === "Enter") {
         // console.log("this.slide " + this.slideIndex);
         this.$store.commit("SET_CARROUSEL_CHANNEL_INDEX", this.slideIndex);
         // this.$store.commit("SET_CARROUSEL_CHANNEL_CHANGE", true);
