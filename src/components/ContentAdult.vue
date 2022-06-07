@@ -1,14 +1,17 @@
 <template>
-    <div class="contentAdultMain">
-    <CurrentHour class="curentHourAdult" />
-    <CurrentChannelLogo :logo="currentChannel.logo" id="logoChannelAdult" />
+    <div class="content-adult">
+      <div class="adult-content-header">
+        <CurrentHour class="curentHourAdult" />
+        <CurrentChannelLogo :logo="currentChannel.logo" id="logoChannelAdult" />
+      </div>
 
-     <div class="contentAdultDiv">
-    <p class="contentAdultText">Contenu bloqué</p> <br>
-    <fa class="lockIcon" icon="lock" />
-  </div>
+      <div class="content-adult-main">
+        <p class="contentAdultText">Contenu bloqué</p> <br>
+        <fa class="lockIcon" icon="lock" />
+      </div>
     </div >
 </template>
+
 <script>
 import Store from "@/store";
 import CurrentChannelLogo from "@/components/CurrentChannelLogo.vue";
@@ -27,15 +30,22 @@ export default {
   },
 };
 </script>
-<style>
-.contentAdultMain{
+<style scoped>
+.adult-content-header {
+  position: absolute;
+  width: 100%;
+  height: 28%;
+  border-radius: 2px;
+  top: 0%;
+}
+.content-adult{
   position: absolute;
   z-index: 3;
   width: 100%;
   height: 100%;
   background-color: #3f3f3f;
 }
-.contentAdultDiv{
+.content-adult-main{
   border: 3px solid white;
   width: 29%;
   height: 30%;
@@ -62,9 +72,7 @@ export default {
 #logoChannelAdult, .lock-keyhole {
   z-index: 3;
 }
-#logoChannelAdult img{
-  top: 10%;
-}
+
 .lockIcon{
   height: 100px;
   z-index: 4;
