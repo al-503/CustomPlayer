@@ -131,13 +131,13 @@ export default {
 
     // ici doit changer de chaîne //
     changeChannelCarrousel(e) {
-      if(this.carrouselDisplay){
-        if (e.key === "Enter") {
-          // console.log("this.slide " + this.slideIndex);
-          this.$store.commit("SET_CARROUSEL_CHANNEL_INDEX", this.slideIndex);
-          // this.$store.commit("SET_CARROUSEL_CHANNEL_CHANGE", true);
-          this.$store.commit("SET_CHANGE_SRC", true);
-        }
+      if (e.key === "a") {
+        // console.log("this.slide " + this.slideIndex);
+        this.$store.commit("SET_CARROUSEL_CHANNEL_INDEX", this.slideIndex);
+        // this.$store.commit("SET_CARROUSEL_CHANNEL_CHANGE", true);
+        this.$store.commit("SET_CHANGE_SRC", true);
+        // enleve le carrousel
+        this.$store.commit("CarrouselHide")
       }
     },
   },

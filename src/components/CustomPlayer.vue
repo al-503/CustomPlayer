@@ -220,14 +220,12 @@ export default {
 
     // Cette méthode regarder si la touche "entrée" est down
     keyListenner(e) {
-      if(!this.carrouselDisplay){
         if (e.key == "Enter") {
           // on met à jour les valeurs videoDuration et videoCurrentTime qui sont envoyées par la suite au composant enfant timebar
           this.videoDuration = this.$refs.videoBalise.duration;
           // méthode qui gère le "play/pause"
           this.toggleVideoPlay();
         }
-      }
     },
 
     // keyPageTurn gère le changement de la source de la vidéo lorsque l'utilisateur change de chaîne
