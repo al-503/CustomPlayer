@@ -128,9 +128,6 @@ export default {
       this.$refs.videoBalise.load();
       this.$refs.videoBalise.play();
       this.$store.commit("SET_CHANGE_SRC", false);
-      if(this.carrouselVideoChange === true){
-         this.$store.commit("SET_CARROUSEL_CHANNEL_CHANGE", false);
-      }
     }
   },
 
