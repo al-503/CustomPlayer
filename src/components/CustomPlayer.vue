@@ -349,10 +349,13 @@ export default {
       this.timeInSeconds = setInterval(this.timePassing, 1000);
     },
     changeTime() {
-      this.$refs.videoBalise.currentTime = this.timePassed;
+      // this.$refs.videoBalise.currentTime = this.timePassed;
+      //this.$refs.videoBalise.currentTime = 0;
       this.$store.commit(
         "SET_VIDEO_CURRENT_TIME",
-        this.$refs.videoBalise.currentTime
+        (this.$refs.videoBalise.currentTime = this.timePassed)
+        // this.timePassed
+        // this.$refs.videoBalise.currentTime
       );
     },
     keepTimePassed(e) {
