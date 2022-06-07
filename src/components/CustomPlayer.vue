@@ -149,7 +149,8 @@ export default {
     changeSrc: () => Store.getters.getChangeSrc,
     videoIsOnPause: () => Store.getters.getVideoIsOnPause,
     assignedStringInputs: () => Store.getters.getAssignedInputs,
-    isVideoAdult :() =>Store.getters.getAdultStatus
+    isVideoAdult :() =>Store.getters.getAdultStatus,
+    carrouselVideoChange: () => Store.getters.getCarrouselVideoChange,
   },
 
   methods: {
