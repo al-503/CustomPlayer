@@ -11,16 +11,21 @@
                         :endTime="channel.programme[0].endTime" />
       </div>                 
   </div>
-
 </template>
 
 <script>
 import Store from "@/store"
-import CarrouselSlide from "@/components/CarrouselSlides.vue"
+import CarrouselSlide from "@/components/CarrouselSlide.vue"
 
 export default {
   components: {
     CarrouselSlide
+  },
+
+  computed: {
+    channels: () => Store.getters.getChannels,
+    carrouselDisplay: () => Store.state.carrouselDisplay,
+    currentChannelIndex: () => Store.state.currentIndex,
   },
 
   Data:() =>({
@@ -35,15 +40,16 @@ export default {
   },
 
   mounted() {
-// scrollHeigth mesure tout les élément meme sortant / .length recup du nombre de slide de mon array //
+    // scrollHeigth mesure tout les élément meme sortant / .length recup du nombre de slide de mon array //
     this.oneSlide = Math.ceil(this.$refs.slider.scrollHeight / this.channels.length);
+    // calcul currentTop //
+    this.currentSlideTop = this.oneSlide * this.currentChannelIndex;
+    // current top  affiche la slide courrante a la pos en haut de l'écran//
+    this.$refs.slider.scrollTop = this.currentSlideTop
     //init currentslide //
-    this.currentSlide = 0
+    this.currentSlide = this.$refs.slider.scrollTop // permet de bien exécuter le défilement
   },
 
-  computed: {
-    channels: () => Store.getters.getChannels,
-  },
 
   methods: {
 ///////// ici previous et next slide ///////////////////
@@ -70,7 +76,7 @@ export default {
             top: this.currentSlide = this.currentSlide + this.oneSlide,
             behavior: "smooth"
           });
-        } else if(this.currentSlide < 0) {
+        } else if(this.currentSlide < 0){
           this.$refs.slider.scrollTo({
             top: this.currentSlide = this.oneSlide,
             behavior: "smooth"
@@ -83,10 +89,15 @@ export default {
 //// a faire ////
 
 ///// pour la class focus du carrousel //////
-// ont veut que par défaut l index du carrousel = current index et cette card a la class focus (bord bleu) //
+// ont veut que par défaut l index du carrousel = current index et cette card a la class focus (bord bleu) // oui
+
 // si on descend indexCaroussel +1 si ont monte index carroussel -1 //
 // et la classe focus s'enléve et se met sur le nouvel index //
+
 // quand ont appuis sur enter la cards avec la class focus remplace le current index avec son index // 
+
+// si la chaine est vérouiller alors dans le carroussel affiche un écran noir avec un cadena ? //
+
 // le carrousel disparaît//
 // la chaîne change // 
 
@@ -100,7 +111,7 @@ export default {
 .carrousel-slides {
   height: 100%;
   position: absolute;
-    left: 2%;
+    left: 6%;
 //// defini la scrollbar 
   overflow-x: hidden;
   overflow-y: scroll;
@@ -110,7 +121,8 @@ export default {
   }
 }
 .carrousel {
-  width: 50%;
+  position: absolute;
+  width: 35%;
   height: 100vh;
   overflow: hidden;
 
