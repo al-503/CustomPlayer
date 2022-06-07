@@ -69,6 +69,9 @@ export default createStore({
       } else {
         state.Channels[indexSuivant]
       }
+    },
+    getAdultStatus(state){
+      return state.Channels[state.currentIndex].security;
     }
   },
   mutations: {
