@@ -29,9 +29,8 @@ import InfoLight from "@/components/InfoLight.vue";
 import InfoMax from "@/components/InfoMax.vue";
 import DisplayInputNumber from "@/components/DisplayInputNumber.vue";
 import ErrorMessage from "@/components/ErrorMessage.vue";
-
+import Carrousel from "@/components/Carrousel.vue";
 import ContentAdult from "@/components/ContentAdult.vue";
-import Carrousel from '@/components/Carrousel.vue';
 
 export default {
   components: {
@@ -159,12 +158,6 @@ export default {
         this.inputDisplay = true;
         this.stopInfoLight();
       }
-      // Impleter ici la condition de priorité de l'InfoLight
-
-      // Genere bug d'apparition de la 1ere inputNumber
-      // if (e.key == "PageUp" || e.key == "PageDown") {
-      //   this.inputDisplay = false;
-      // }
     },
 
     //////////////////////////////////////////////////////////////////

@@ -74,6 +74,7 @@ export default {
     timeout: null, => contient le settime out
     videoDuration: null, => contient la durée totale de la vidéo
     videoCurrentTime: null, => contient l'avancement de la vidéo
+    timePassed: 0, => contient durée en secondes depuis lancement application
    */
 
   data: () => ({
@@ -93,9 +94,12 @@ export default {
     toggleBarSoundDisplay: false,
     timeManageTimeBarDisplay: false,
     errorMessageUnAssignedInputlDisplaySetTimeOut: null,
+    timePassed: 0,
   }),
 
   mounted() {
+    // Timer démarrant au montage de la vue (en secondes)
+    this.timer();
     // Lorsque l'élément est monté, la source de la vidéo puis on met la vidéo en play
     this.$refs.videoBalise.play();
     this.$refs.videoBalise.muted = !this.$refs.videoBalise.muted; //cette ligne empeche de lancer la vidéo en autoplay
@@ -115,6 +119,7 @@ export default {
     document.addEventListener("keydown", (e) =>
       this.checkingIfInputGetAssigned(e)
     );
+    document.addEventListener("keydown", (e) => this.keepTimePassed(e));
 
     this.currentTimeTimeout = setInterval(
       () => this.videoCurrentTimerefresh(),
@@ -124,6 +129,7 @@ export default {
   },
   beforeDestroy() {
     clearInterval(this.currentTimeTimeout);
+    clearInterval(this.timeInSeconds);
   },
 
   updated() {
@@ -252,7 +258,7 @@ export default {
       const currentVolume = parseFloat(this.$refs.videoBalise.volume).toFixed(
         2
       );
-      console.log("cur " + currentVolume);
+      // console.log("cur " + currentVolume);
       if (dir === "+") {
         if (currentVolume < 0.95) {
           this.$refs.videoBalise.volume += 0.05;
@@ -270,7 +276,7 @@ export default {
           this.iconDisplay(this.$refs.videoBalise.volume);
         }
       }
-      console.log(this.$refs.videoBalise.volume);
+      // console.log(this.$refs.videoBalise.volume);
     },
 
     volumeKeyListener(e) {
@@ -345,6 +351,37 @@ export default {
       }
       if (e.key == "n") {
         this.$refs.videoBalise.currentTime += 10;
+      }
+    },
+    //////////////////// Keep Time Passed /////////////////////////////
+
+    timePassing() {
+      this.timePassed += 1;
+      if (this.timePassed > 900) {
+        this.timePassed = 0;
+      }
+      // console.log(this.timePassed);
+    },
+    timer() {
+      this.timeInSeconds = setInterval(this.timePassing, 1000);
+    },
+    changeTime() {
+      // this.$refs.videoBalise.currentTime = this.timePassed;
+      //this.$refs.videoBalise.currentTime = 0;
+      this.$store.commit(
+        "SET_VIDEO_CURRENT_TIME",
+        (this.$refs.videoBalise.currentTime = this.timePassed)
+        // this.timePassed
+        // this.$refs.videoBalise.currentTime
+      );
+    },
+    keepTimePassed(e) {
+      let regInput = new RegExp("^[0-9]+$");
+      if (e.key == "PageUp" || e.key == "PageDown") {
+        this.changeTime();
+      }
+      if (regInput.test(e.key)) {
+        setTimeout(this.changeTime, 3000);
       }
     },
   },
