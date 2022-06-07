@@ -118,22 +118,6 @@ export default {
       }
     },
 
-    // ici doit changer de chaîne //
-    changeChannelCarrousel(e) {
-      if (e.key === "a" && this.carrouselDisplay) {
-        //&& (this.currentChannelIndex != this.slideIndex)
-        // console.log("-----current index après appui sur a------")
-        // console.log(Store.state.currentIndex)
-        // console.log("-----------")
-        //Store.state.currentIndex = this.slideIndex // la lindex current vaut bien
-        console.log("this.slide " + this.slideIndex);
-        this.$store.commit("SET_CARROUSEL_CHANNEL_INDEX", this.slideIndex);
-        // this.$store.commit("SET_CARROUSEL_CHANNEL_CHANGE", true);
-        this.$store.commit("SET_CHANGE_SRC", true);
-      }
-    },
-  },
-};
     slideNext(e){
       if(e.key === "ArrowDown" && this.carrouselDisplay){
         if(this.slideIndex < (this.channels.length - 1)){
@@ -148,9 +132,20 @@ export default {
           this.class.remove("focus")
         }
       }
-    }
-  }
-}
+    },
+
+    // ici doit changer de chaîne //
+    changeChannelCarrousel(e) {
+      if (e.key === "a" && this.carrouselDisplay) {
+        //Store.state.currentIndex = this.slideIndex // la lindex current vaut bien
+        // console.log("this.slide " + this.slideIndex);
+        this.$store.commit("SET_CARROUSEL_CHANNEL_INDEX", this.slideIndex);
+        // this.$store.commit("SET_CARROUSEL_CHANNEL_CHANGE", true);
+        this.$store.commit("SET_CHANGE_SRC", true);
+      }
+    },
+  },
+};
 </script>
 
 <style lang="scss">
