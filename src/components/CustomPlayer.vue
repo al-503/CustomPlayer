@@ -128,6 +128,9 @@ export default {
       this.$refs.videoBalise.load();
       this.$refs.videoBalise.play();
       this.$store.commit("SET_CHANGE_SRC", false);
+      if(this.carrouselVideoChange === true){
+         this.$store.commit("SET_CARROUSEL_CHANNEL_CHANGE", false);
+      }
     }
   },
 
@@ -135,6 +138,7 @@ export default {
     changeSrc: () => Store.getters.getChangeSrc,
     videoIsOnPause: () => Store.getters.getVideoIsOnPause,
     assignedStringInputs: () => Store.getters.getAssignedInputs,
+    carrouselVideoChange: () => Store.getters.getCarrouselVideoChange,
   },
 
   methods: {

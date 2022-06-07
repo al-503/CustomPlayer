@@ -75,6 +75,8 @@ export default {
     currentChannelIndex: () => Store.state.currentIndex,
     // pour savoir si le carrousel est actif //
     carrouselDisplay: () => Store.state.carrouselDisplay,
+    //  change src //
+    carrouselVideoChange: () => Store.getters.getCarrouselVideoChange
   },
 
   methods: {
@@ -118,10 +120,12 @@ export default {
  // ici doit changer de chaîne // 
     changeChannelCarrousel(e) {
      if(e.key === "a" && this.carrouselDisplay){ //&& (this.currentChannelIndex != this.slideIndex)
-      console.log("-----current index après appui sur a------")
-      console.log(Store.state.currentIndex)
-      console.log("-----------")
-      Store.state.currentIndex = this.slideIndex // la lindex current vaut bien 
+      // console.log("-----current index après appui sur a------")
+      // console.log(Store.state.currentIndex)
+      // console.log("-----------")
+      //Store.state.currentIndex = this.slideIndex // la lindex current vaut bien 
+      this.$store.commit("SET_CARROUSEL_CHANNEL_CHANGE", true);
+      this.$store.commit("SET_CARROUSEL_CHANNEL_INDEX", this.slideIndex);
      }
     }
   },
@@ -156,7 +160,6 @@ export default {
 
 .focus {
   border: 3px solid blue;
-  
 }
 
 </style>

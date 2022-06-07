@@ -1,3 +1,4 @@
+import { faLessThanEqual } from '@fortawesome/free-solid-svg-icons'
 import { createStore } from 'vuex'
 import Sources from '../assets/sources/channels.json'
 
@@ -17,8 +18,12 @@ export default createStore({
     assignedStringInputs: ["a","F5","F11","ArrowUp","ArrowDown","ArrowLeft","n","i","p","Enter","PageUp","PageDown","+","-","0","1","2","3","4","5","6","7","8","9"],
     displayInfoLightArrival: true,
     carrouselDisplay: false,
+    carrouselVideoChange: false,
   },
   getters: {
+    getCarrouselVideoChange(state) {
+      return state.carrouselVideoChange
+    },
     getVideoCurrentTime(state) {
       return state.videoCurrentTime
     },
@@ -47,6 +52,7 @@ export default createStore({
       return state.Channels[state.currentIndex]
     },
     getProgramme (state) {
+      console.debug('message', state.Channels[state.currentIndex].programme)
       return state.Channels[state.currentIndex].programme
     },
     getVideoIsOnPause(state) {
@@ -93,6 +99,13 @@ export default createStore({
     },
     SET_CURRENT_INDEX(state, payload) {
       state.currentIndex = payload
+    },
+    SET_CARROUSEL_CHANNEL_INDEX(state, payload){
+      console.log(payload)
+      state.currentIndex = payload
+    },
+    SET_CARROUSEL_CHANNEL_CHANGE(state, payload){
+      state.getCarrouselVideoChange = payload
     },
     // augment le current index de 1
     KeyLeft(state) {
