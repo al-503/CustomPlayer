@@ -4,7 +4,7 @@
       class="splashScreenImg"
       :src="require('@/assets/sources/logoWiztiteam/logo.png')"
     />
-    <h1 class="projectName">wiztiteam</h1>
+    <h1 class="projectName">wizplayer</h1>
   </div>
 </template>
 <script>
