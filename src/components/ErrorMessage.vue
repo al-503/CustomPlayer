@@ -31,6 +31,7 @@ export default {
     top: 50%;
     transform: translateX(-50%) translateY(-50%);
     padding: 4%;  
+    border-radius: 20px;
 }
 
 .errorMessageText {
@@ -40,6 +41,5 @@ export default {
   font-weight: bold;
   font-size: 48px;
   text-align: center;
-  margin-top: 21%;
 }
 </style>
