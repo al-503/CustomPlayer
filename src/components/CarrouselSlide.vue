@@ -73,6 +73,8 @@ export default {
     currentChannelIndex: () => Store.state.currentIndex,
     // pour savoir si le carrousel est actif //
     carrouselDisplay: () => Store.state.carrouselDisplay,
+    // pour récup la taille des channels // 
+    channels: () => Store.getters.getChannels,
   },
 
   methods: {
@@ -90,8 +92,12 @@ export default {
 
     slidePrevious(e){
       if(e.key === "ArrowUp" && this.carrouselDisplay){
-        //console.log('coucou Previous')
-        this.slideIndex--
+         if(this.slideIndex > 0){
+            this.slideIndex--
+          } else {
+            this.slideIndex = 0;
+          }
+
           if(this.idToNumber === this.slideIndex) {
             this.class.add("focus")
           } else {
@@ -103,17 +109,20 @@ export default {
 
     slideNext(e){
       if(e.key === "ArrowDown" && this.carrouselDisplay){
-        //console.log('coucou Next')
-        this.slideIndex++
-          if(this.idToNumber === this.slideIndex) {
-            this.class.add("focus")
-          } else {
-             this.class.remove("focus")
-          }
-      }
-    },
+        if(this.slideIndex < (this.channels.length - 1)){
+          this.slideIndex++
+        } else {
+          this.slideIndex = (this.channels.length - 1)
+        }
 
-  },
+        if(this.idToNumber === this.slideIndex) {
+          this.class.add("focus")
+        } else {
+          this.class.remove("focus")
+        }
+      }
+    }
+  }
 }
 </script>
 
