@@ -112,6 +112,16 @@ export default {
           }
       }
     },
+ 
+ // ici doit changer de chaîne // 
+    // changeChannelCarrousel(e) {
+    //  if(e.key === "a" && this.carrouselDisplay){ //&& (this.currentChannelIndex != this.slideIndex)
+    //   console.log("-----current index après appui sur a------")
+    //   console.log(Store.state.currentIndex)
+    //   console.log("-----------")
+    //   Store.state.currentIndex = this.slideIndex // la lindex current vaut bien 
+    //  }
+    // }
 
   },
 }
