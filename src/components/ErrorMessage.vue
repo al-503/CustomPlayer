@@ -19,16 +19,18 @@ export default {
 </script>
 
 <style>
-.errorMessageDiv {
-  border: 3px solid white;
-  width: 29%;
-  height: 30%;
-  position: absolute;
-  z-index: 2 !important;
-  background-color: #3f3f3f;
-  opacity: 69%;
-  left: 36%;
-  top: 35%;
+.errorMessageDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid white;
+    position: absolute;
+    background-color: #3f3f3f;
+    opacity: 69%;
+    left:50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    padding: 4%;  
 }
 
 .errorMessageText {
