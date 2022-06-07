@@ -55,6 +55,8 @@ export default {
     document.addEventListener("keyup", (e) => this.slideNext(e))
     // permet de switch -1 focus //
     document.addEventListener("keyup", (e) => this.slidePrevious(e))
+    // pour changer de chaîne //
+    document.addEventListener("keyup", (e) => this.changeChannelCarrousel(e))
   },
 
   mounted() {
@@ -114,15 +116,14 @@ export default {
     },
  
  // ici doit changer de chaîne // 
-    // changeChannelCarrousel(e) {
-    //  if(e.key === "a" && this.carrouselDisplay){ //&& (this.currentChannelIndex != this.slideIndex)
-    //   console.log("-----current index après appui sur a------")
-    //   console.log(Store.state.currentIndex)
-    //   console.log("-----------")
-    //   Store.state.currentIndex = this.slideIndex // la lindex current vaut bien 
-    //  }
-    // }
-
+    changeChannelCarrousel(e) {
+     if(e.key === "a" && this.carrouselDisplay){ //&& (this.currentChannelIndex != this.slideIndex)
+      console.log("-----current index après appui sur a------")
+      console.log(Store.state.currentIndex)
+      console.log("-----------")
+      Store.state.currentIndex = this.slideIndex // la lindex current vaut bien 
+     }
+    }
   },
 }
 </script>
