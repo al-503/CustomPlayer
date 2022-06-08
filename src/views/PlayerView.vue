@@ -70,11 +70,7 @@ export default {
     // display de l info light a l'arriver sur la chaîne //
     displayInfoLightArrival: () => Store.getters.getdisplayInfoLightArrival,
     // ajout des programmes //
-    programme: () => {
-      console.log(Store.getters.getProgramme[0].sources)
-    return Store.getters.getProgramme
-    
-    },
+    programme: () =>  Store.getters.getProgramme,
 
     // pour display l'info ligtht
     infoDisplayed: () => Store.state.defaultDisplay,
@@ -113,6 +109,7 @@ export default {
         } else {
           // console.log(Store.state.currentIndex = Store.state.currentIndex + 1)
           Store.commit("KeyLeft");
+          this.$store.commit("CarrouselHide")
           this.DisplayedInfoLight();
         }
       } else if (e.key == "PageDown") {
@@ -123,6 +120,7 @@ export default {
         } else {
           //console.log(Store.state.currentIndex = Store.state.currentIndex - 1)
           Store.commit("KeyRight");
+          this.$store.commit("CarrouselHide")
           this.DisplayedInfoLight();
         }
       }
@@ -172,7 +170,7 @@ export default {
     },
 
     showInfoMax(e) {
-      if (e.key === "i") {
+      if (e.key === "i" && !this.carrouselDisplay) {
         if (!this.carrouselDisplay) {
           if (this.infoMaxDisplayed == false) {
             this.DisplayInfoMax();
@@ -185,11 +183,7 @@ export default {
 
     // ici fonction pour display le carrousel //
     showCarrousel(e) {
-      if (
-        !this.carrouselDisplay &&
-        !this.infoDisplayed &&
-        !this.displayInfoLightArrival
-      ) {
+      if ( !this.carrouselDisplay && !this.infoDisplayed && !this.displayInfoLightArrival && !this.infoMaxDisplayed ) {
         if (e.key === "ArrowLeft") {
           Store.commit("CarrouselShow");
         }

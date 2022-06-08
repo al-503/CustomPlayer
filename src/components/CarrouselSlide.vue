@@ -64,7 +64,7 @@ export default {
     // permet de switch -1 focus //
     document.addEventListener("keyup", (e) => this.slidePrevious(e));
     // pour changer de chaîne //
-    document.addEventListener("keyup", (e) => this.changeChannelCarrousel(e));
+    document.addEventListener("keydown", (e) => this.changeChannelCarrousel(e));
   },
 
   mounted() {
@@ -131,12 +131,22 @@ export default {
 
     // ici doit changer de chaîne //
     changeChannelCarrousel(e) {
-      if (e.key === "a" && this.carrouselDisplay) {
+      if (e.key === "Enter" && this.carrouselDisplay) {
         // console.log("this.slide " + this.slideIndex);
         this.$store.commit("SET_CARROUSEL_CHANNEL_INDEX", this.slideIndex);
         // this.$store.commit("SET_CARROUSEL_CHANNEL_CHANGE", true);
         this.$store.commit("SET_CHANGE_SRC", true);
+        // enleve le carrousel
+        this.$store.commit("CarrouselHide")
+
+        this.$store.commit("LightInfoDisplay")
+
+        setTimeout(this.stopInfoLight, 4000);
       }
+    },
+
+    stopInfoLight() {
+      Store.commit("LightInfoDefault");
     },
   },
 };
@@ -144,10 +154,11 @@ export default {
 
 <style lang="scss" scoped>
 .carrousel-slide {
-  margin: 0 auto;
+  margin: 2% auto;
   width: 100%;
   height: 27%;
-  margin-top: 5.8%; // pour ne pas être coller en haut de l'écran
+  margin-top: 9%; // pour ne pas être coller en haut de l'écran
+  margin-bottom: 9%;
   border: 1px solid whitesmoke;
 }
 .slide-img {
