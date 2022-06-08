@@ -4,8 +4,7 @@
       <h1 class="current-title">{{ title }}</h1>
       <p class="gender">{{ gender }}</p>
       <!-- bouton info+ -->
-      <!--<div class="info-plus">INFO +</div>-->
-      <InfoButton/>
+      <div class="info-plus">INFO <fa icon="circle-info" /></div>
     </div>
     <p class="time">{{ startAt + " - " + endAt }}</p>
     <MiniTimeBar />
@@ -14,12 +13,10 @@
 
 <script>
 import MiniTimeBar from "@/components/MiniTimeBar.vue";
-import InfoButton from "@/components/InfoButton.vue";
 
 export default {
   components: {
     MiniTimeBar,
-    InfoButton
   },
   props: {
     title: {
@@ -72,16 +69,32 @@ export default {
   margin-top: 5%;
   text-align: center;
 }
+.infoButton {
+  width: 146px;
+  height: 47px;
+  border-radius: 15px;
+  border: 4px solid white;
+  font-size: 28px;
+  color: white;
+  font-style: italic;
+  background-color: #3f3f3f;
+}
 .info-plus {
   margin-top: 2%;
   margin-left: 2%;
+  font-size: 28px;
+  color: white;
   padding: 1%;
-  width: 16%;
-  height: 17%;
-  border: 1px solid white;
-  border-radius: 12px;
+  width: 146px;
+  height: 47px;
+  border: 4px solid white;
+  border-radius: 15px;
   text-align: center;
   font-weight: 900;
   font-style: italic;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
 }
 </style>
