@@ -81,7 +81,7 @@ export default {
 }
 .info-plus {
   margin-top: 2%;
-  margin-left: 2%;
+  margin-left: 1%;
   font-size: 28px;
   color: white;
   padding: 1%;

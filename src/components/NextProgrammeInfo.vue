@@ -64,9 +64,9 @@ export default {
   max-width: 300px;
   //sinon ça fait n'imp pourtant les photo ont les même dimenssions
   min-height: 150px;
-  min-height: 150px;
 
   margin: 1%;
+  margin-top: 2%;
 }
 
 .next-programme-msg {
